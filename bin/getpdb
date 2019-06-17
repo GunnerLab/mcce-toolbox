@@ -3,6 +3,7 @@
 ########################################################################
 #                                 getpdb                               #
 #                        Yanjun Wang, May 04, 2002                     #
+#     Revised by Junjun Mao to work with Python 3, June 17, 2019       #
 #                                                                      #
 # This program downloads pdb files from ftp://ftp.rcsb.org             #
 ########################################################################
@@ -13,7 +14,7 @@ import urllib
 if __name__ == '__main__':
 
    if len(sys.argv) < 2:
-      print 'getpdb pdbID [file]'
+      print("getpdb pdbID [file]")
       print 'This program gets a pdb file from ftp://ftp.rcsb.org.  ---Yanjun'
       sys.exit(0)
 

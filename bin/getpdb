@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 ########################################################################
 #                                 getpdb                               #
@@ -9,17 +9,17 @@
 ########################################################################
 
 import sys, os
-import urllib
+from urllib.request import urlopen
 
 if __name__ == '__main__':
 
    if len(sys.argv) < 2:
       print("getpdb pdbID [file]")
-      print 'This program gets a pdb file from ftp://ftp.rcsb.org.  ---Yanjun'
+      print('This program gets a pdb file from ftp://ftp.rcsb.org.  ---Yanjun')
       sys.exit(0)
 
    if len(sys.argv[1]) < 4:
-      print 'Sorry, but you entered an invalid pdbID.'
+      print('Sorry, but you entered an invalid pdbID.')
       sys.exit(0)
 
    file = sys.argv[1]
@@ -29,29 +29,23 @@ if __name__ == '__main__':
    id_ent = id + '.ent'
    pdb_name = id + '.ent.gz'      # pdb file name
 
-   if len(sys.argv) == 3: 
-      if os.path.exists(sys.argv[2]):
-         if sys.argv[2][-1] == '/':       # get rid of '//'
-            saved_pdb = sys.argv[2] + id.upper() + '.pdb'
-         else:
-            saved_pdb = sys.argv[2] + '/' + id.upper() + '.pdb'
-      else:
-         saved_pdb = sys.argv[2]
-   elif len(sys.argv) == 2:
+   if len(sys.argv) > 2:
+      saved_pdb = sys.argv[2]
+   else:
       saved_pdb = id.upper() + '.pdb'
    remoteaddr = 'ftp://ftp.wwpdb.org/pub/pdb/data/structures/divided/pdb/' +\
 		 f_dir + '/pdb' + pdb_name
 
-   print 'Inquiring the remote file', id.upper()+'.pdb ...'
+   print('Inquiring the remote file', id.upper()+'.pdb ...')
 
    try:
-      remotefile = urllib.urlopen(remoteaddr)
+      remotefile = urlopen(remoteaddr)
    except IOError:
-      print 'This pdb entry does not exist, or the connection lost.'
+      print('This pdb entry does not exist, or the connection lost.')
       sys.exit(0)
 
    localfile = open(pdb_name, 'wb')
-   print 'Saving as', saved_pdb, '...'
+   print('Saving as', saved_pdb, '...')
    localfile.write(remotefile.read())
    localfile.close()
    remotefile.close()
@@ -59,4 +53,4 @@ if __name__ == '__main__':
    os.popen('gunzip ' + pdb_name)
    os.popen('mv ' + id_ent + ' ' + saved_pdb)
 
-   print 'Download completed. '
+   print('Download completed. ')

@@ -11,4 +11,3 @@ Please add your ideas here.
  - [ ] logging module example
  - [ ] Parallel Delphi
  - [ ] Parallel Monte Carlo
- 

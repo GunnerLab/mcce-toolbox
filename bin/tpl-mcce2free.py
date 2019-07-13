@@ -1,9 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """Convert mcce format tpl to free format."""
 
 # bug, single atom residue doesn't have CONNECT in mcce tpl, but should have a CONNECT record in free tpl
 
 import sys
+import logging
 
 mccedb = {}  # parameter database in mcce format
 extra_records = ["EXTRA", "SCALING"] # records that can be directly translated
@@ -17,13 +18,13 @@ def atom_consistency(conf):
             key = ("ATOMNAME", conf, "%4d" % i)
             atomname = "{:<4}".format(mccedb[key][:4])
         except:
-            print "# Error in fetching number %d atom. Check ATOMNAME record of conformer %s" % (i, conf)
+            logging.debug("# Error in fetching number %d atom. Check ATOMNAME record of conformer %s" % (i, conf))
             return passed
         try:
             key = ("IATOM", conf, atomname)
             iatom = int(mccedb[key].strip())
         except:
-            print "# Error in finding index for atom \"%s\" of conformer %s" % (atomname, conf)
+            logging.debug("# Error in finding index for atom \"%s\" of conformer %s" % (atomname, conf))
             return passed
         if iatom == i:
             passed = True
@@ -117,6 +118,7 @@ def make_confparm(conformers):
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.DEBUG, format='%(levelname)-s: %(message)s')
     filename = sys.argv[1]
     lines = open(filename).readlines()
 
@@ -143,14 +145,14 @@ if __name__ == "__main__":
     for k in mccedb.keys():
         if k[0] == "CONFLIST":
             conformers += mccedb[k].split()
-    print "# Detected these conformers: [%s]" % ', '.join(map(str, conformers))
+    logging.debug("# Detected these conformers: [%s]" % ', '.join(map(str, conformers)))
 
     # check consistency between ATOMNAME and IATOM
     for conf in conformers:
         if atom_consistency(conf):      # pased
-            print "# Consistency test passed for ATOM records of conformer %s." % conf
+            logging.debug("# Consistency test passed for ATOM records of conformer %s." % conf)
         else:
-            print "# There are discrepancies in ATOM records of conformer %s shown above." % conf
+            logging.debug("# There are discrepancies in ATOM records of conformer %s shown above." % conf)
 
     # Make conflist
     tplout = []

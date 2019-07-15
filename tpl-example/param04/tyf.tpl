@@ -148,7 +148,7 @@ RXN      TYF01      -2.7
 
 # Y-O
 PROTON   TYF-1      -1
-PKA      TYF-1      10.2
+PKA      TYF-1      8.9
 ELECTRON TYF-1      0
 EM       TYF-1      0.0
 RXN      TYF-1      -19.7
@@ -169,6 +169,9 @@ RXN      TYF02      -2.7
 
 #2.Structure Connectivity
 #23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  TYFBK  N   sp2       -1    C   0     CA  0     H
 CONNECT  TYFBK  H   s         0     N
 CONNECT  TYFBK  CA  sp3       0     N   0     C   0     CB  0     HA

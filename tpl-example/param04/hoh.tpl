@@ -26,8 +26,8 @@ ATOMNAME HOH+1    1 1H
 ATOMNAME HOH+1    2 2H
 ATOMNAME HOH+1    3 3H
 
-RXN      HOH01       -1.8
-RXN      HOH+1       -14.8
+RXN      HOH01       -2.263
+RXN      HOH+1       -25.593
 RXN      HOH-1       -25.5
 RXN      HOHDM        0.0
 PKA      HOH01        0.0
@@ -43,6 +43,9 @@ ELECTRON HOHDM        0
 
 
 #23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  HOH01  O   sp3       0    1H   0    2H
 CONNECT  HOH01 1H   s         0     O
 CONNECT  HOH01 2H   s         0     O

@@ -1,3 +1,5 @@
+###Aspartate
+
 CONFLIST ASP        ASPBK ASP01 ASP02 ASP-1
 
 NATOM    ASPBK      6
@@ -73,12 +75,14 @@ ELECTRON ASP-1      0
 EM       ASP01      0.0
 EM       ASP02      0.0
 EM       ASP-1      0.0
-RXN      ASP01      -2.93
+RXN      ASP01      -2.93 # needs to be averaged with ASP02
 RXN      ASP02      -3.13
 RXN      ASP-1      -20.2
 
 #2.Structure Connectivity
 #23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  ASPBK  N   sp2       -1    C   0     CA  0     H
 CONNECT  ASPBK  H   s         0     N
 CONNECT  ASPBK  CA  sp3       0     N   0     C   0     CB  0     HA

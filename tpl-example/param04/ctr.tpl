@@ -58,6 +58,9 @@ EM       CTR-1        0
 
 #2.Structure Connectivity
 #23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H1$
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  CTR01  C   sp2       -1    CA  0     O   0     OXT
 CONNECT  CTR01  O   sp3       0     C   0     HO 
 CONNECT  CTR01  HO  s         0     O  

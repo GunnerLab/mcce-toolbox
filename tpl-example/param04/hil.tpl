@@ -78,6 +78,9 @@ RXN      HIL02      -4.4
 
 #2.Structure Connectivity
 #23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  HILBK  N   sp2       -1    C   0     CA  0     H
 CONNECT  HILBK  H   s         0     N
 CONNECT  HILBK  CA  sp3       0     N   0     C   0     CB  0     HA
@@ -105,7 +108,7 @@ CONNECT  HIL02  ND1 sp2       0     CG  0     CE1 0     HD1
 CONNECT  HIL02  HD1 s         0     ND1
 CONNECT  HIL02  CE1 sp2       0     ND1 0     NE2 0     HE1
 CONNECT  HIL02  HE1 s         0     CE1
-CONNECT  HIL02  NE2 sp2       0     CE1 0     CD2 0
+CONNECT  HIL02  NE2 sp2       0     CE1 0     CD2 LIG   ?
 CONNECT  HIL02  CD2 sp2       0     NE2 0     CG  0     HD2
 CONNECT  HIL02  HD2 s         0     CD2
 

@@ -55,6 +55,9 @@ RXN      NTG+1      -22.4  # adjusted by jmao
 
 #2.Structure Connectivity
 #23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H1$
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  NTG01  CA  sp3       0     N   +1    C   0    1HA  0    2HA
 CONNECT  NTG01 1HA  s         0     CA
 CONNECT  NTG01 2HA  s         0     CA

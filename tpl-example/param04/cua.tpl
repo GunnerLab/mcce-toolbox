@@ -145,6 +145,9 @@ EM       CUA+1      264.
 RXN      CUA01      -6.016
 RXN      CUA+1      -12.459
 
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  CUA01 CU1  ion       0    CU2  0    aND1 0    cSG  0    dSG
 CONNECT  CUA01 CU2  ion       0    CU1  0    bND1 0    cSG  0    dSG
 CONNECT  CUA01 aCB  sp3       LIG   CA  0    aCG  0    aHB1 0    aHB2

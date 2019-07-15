@@ -6,6 +6,9 @@
 import sys
 import logging
 
+logging.basicConfig(level=logging.INFO, format='%(levelname)-s: %(message)s')
+
+
 mccedb = {}  # parameter database in mcce format
 extra_records = ["EXTRA", "SCALING"] # records that can be directly translated
 
@@ -13,21 +16,24 @@ extra_records = ["EXTRA", "SCALING"] # records that can be directly translated
 def atom_consistency(conf):
     passed = False
     natom = int(mccedb["NATOM", conf, "    "])
-    for i in range(natom):
-        try:
-            key = ("ATOMNAME", conf, "%4d" % i)
-            atomname = "{:<4}".format(mccedb[key][:4])
-        except:
-            logging.debug("# Error in fetching number %d atom. Check ATOMNAME record of conformer %s" % (i, conf))
-            return passed
-        try:
-            key = ("IATOM", conf, atomname)
-            iatom = int(mccedb[key].strip())
-        except:
-            logging.debug("# Error in finding index for atom \"%s\" of conformer %s" % (atomname, conf))
-            return passed
-        if iatom == i:
-            passed = True
+    if natom == 0:
+        passed = True
+    else:
+        for i in range(natom):
+            try:
+                key = ("ATOMNAME", conf, "%4d" % i)
+                atomname = "{:<4}".format(mccedb[key][:4])
+            except:
+                logging.debug("# Error in fetching number %d atom. Check ATOMNAME record of conformer %s" % (i, conf))
+                return passed
+            try:
+                key = ("IATOM", conf, atomname)
+                iatom = int(mccedb[key].strip())
+            except:
+                logging.debug("# Error in finding index for atom \"%s\" of conformer %s" % (atomname, conf))
+                return passed
+            if iatom == i:
+                passed = True
 
     return passed
 
@@ -44,7 +50,7 @@ def make_atom(conf):
         if len(connect[10:]) < 1:
             nconnected = 0
         else:
-            nconnected = len(connect[10:])/10+1
+            nconnected = int(len(connect[10:])/10)+1
         connected_atoms = []
         for j in range(1, nconnected+1):
             if connect[j*10:j*10+5].strip() == "LIG":
@@ -70,7 +76,7 @@ def make_charge(conf):
         key = ("ATOMNAME", conf, "%4d" % i)
         atomname = "{:<4}".format(mccedb[key][:4])
         key = ("CHARGE", conf, atomname)
-        if mccedb.has_key(key):
+        if key in mccedb:
             charge = float(mccedb[key])
         else:
             charge = 0.0
@@ -86,7 +92,7 @@ def make_radius(conf):
         key = ("ATOMNAME", conf, "%4d" % i)
         atomname = "{:<4}".format(mccedb[key][:4])
         key = ("RADIUS", conf[:3], atomname)
-        if mccedb.has_key(key):
+        if key in mccedb:
             radius = float(mccedb[key])
         else:
             radius = 0.0
@@ -102,15 +108,15 @@ def make_confparm(conformers):
     for conf in conformers:
         if conf[-2:] == "BK" or conf[-2:] == "DM": continue
         key = ("PROTON", conf, "    ")
-        nH = int(mccedb[key])
+        nH = int(mccedb[key].strip())
         key = ("ELECTRON", conf, "    ")
-        ne = int(mccedb[key])
+        ne = int(mccedb[key].strip())
         key = ("PKA", conf, "    ")
-        pKa0 = float(mccedb[key])
+        pKa0 = float(mccedb[key].strip())
         key = ("EM", conf, "    ")
-        Em0 = float(mccedb[key])
+        Em0 = float(mccedb[key].strip())
         key = ("RXN", conf, "    ")
-        rxn = float(mccedb[key])
+        rxn = float(mccedb[key].strip())
 
         line = "CONFORMER, %s: Em0=%6.1f, pKa0=%6.2f, ne=%2d, nH=%2d, rxn=%7.3f\n" % (conf, Em0, pKa0, ne, nH, rxn)
         lines.append(line)
@@ -118,7 +124,6 @@ def make_confparm(conformers):
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG, format='%(levelname)-s: %(message)s')
     filename = sys.argv[1]
     lines = open(filename).readlines()
 

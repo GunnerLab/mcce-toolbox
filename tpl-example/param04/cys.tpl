@@ -1,3 +1,8 @@
+#
+# Version 1.1 - 10/18/2006
+# Cf.
+#
+
 CONFLIST CYS        CYSBK CYS01 CYS-1
 
 NATOM    CYSBK      6
@@ -51,6 +56,9 @@ RXN      CYS-1      -18.5
 
 #2.Structure Connectivity
 #23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  CYSBK  N   sp2       -1    C   0     CA  0     H
 CONNECT  CYSBK  H   s         0     N
 CONNECT  CYSBK  CA  sp3       0     N   0     C   0     CB  0     HA
@@ -77,7 +85,7 @@ RADIUS   CYS    C   1.70
 RADIUS   CYS    O   1.40
 RADIUS   CYS    CB  2.00
 RADIUS   CYS   1HB  0.00
-RADIUS   CYS   2HB  2.00
+RADIUS   CYS   2HB  0.00
 RADIUS   CYS    SG  1.85
 RADIUS   CYS    HG  1.00
 

@@ -1,3 +1,5 @@
+###menaquinone, the carbon tail goes up to C45 -Agnes
+
 CONFLIST 7MQ        7MQBK 7MQ01 7MQ-1
 
 NATOM    7MQBK      30
@@ -223,6 +225,9 @@ RXN      7MQ01      -2.397
 RXN      7MQ-1      -13.323
 
 
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  7MQBK  C16 sp3       0     C15 0     C17
 CONNECT  7MQBK  C17 sp2       0     C16 0     C18
 CONNECT  7MQBK  C18 sp2       0     C17 0     C19 0     C20

@@ -21,6 +21,9 @@ ATOMNAME SO4-2    4  O4
 #23456789A123456789B123456789C
 RXN      SO4-2      -62.2
 
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  SO4-2  S   sp3        0    O1   0    O2   0    O3   0    O4
 CONNECT  SO4-2  O1  sp3        0    S
 CONNECT  SO4-2  O2  sp3        0    S

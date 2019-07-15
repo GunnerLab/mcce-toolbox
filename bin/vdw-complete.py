@@ -1,5 +1,7 @@
-#!/usr/bin/python
-# Complete a mcce-tpl RADIUS records with C6 and C12 parameters
+#!/usr/bin/env python
+"""
+Complete a mcce-tpl RADIUS records with C6 and C12 parameters
+"""
 
 import sys
 

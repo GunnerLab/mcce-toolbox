@@ -81,6 +81,9 @@ ATOMNAME NS5BK   36  C35
 ATOMNAME NS5BK   37  C36
 ATOMNAME NS5BK   38  CM3
 ATOMNAME NS5BK   39  CM4
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  NS5BK  C1  ion        0    CM1  0    CM2  0    C2 
 CONNECT  NS5BK  CM1 ion        0    C1 
 CONNECT  NS5BK  CM2 ion        0    C1 

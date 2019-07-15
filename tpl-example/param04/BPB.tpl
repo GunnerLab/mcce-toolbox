@@ -404,6 +404,9 @@ RXN      BPB01      -7.35000
 RXN      BPB-1      -14.6445
 
 
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  BPBBK  C3  sp2       0     C2  0     C4  0     C5
 CONNECT  BPBBK  C4  sp3       0     C3
 CONNECT  BPBBK  C5  sp3       0     C3  0     C6

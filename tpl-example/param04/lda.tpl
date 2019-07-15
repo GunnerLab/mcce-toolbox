@@ -33,6 +33,9 @@ ATOMNAME LDABK   12  C9
 ATOMNAME LDABK   13  C10
 ATOMNAME LDABK   14  C11
 ATOMNAME LDABK   15  C12
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  LDABK  N1  ion        0    O1   0    CM1  0    CM2  0    C1 
 CONNECT  LDABK  O1  ion        0    N1   0    CM2
 CONNECT  LDABK  CM1 ion        0    N1 

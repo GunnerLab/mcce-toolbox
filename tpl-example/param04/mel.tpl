@@ -57,6 +57,9 @@ RXN      MEL02      0.0
 
 #2.Structure Connectivity
 #23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  MELBK  N   sp2       -1    C   0     CA  0     H
 CONNECT  MELBK  H   s         0     N
 CONNECT  MELBK  CA  sp3       0     N   0     C   0     CB  0     HA

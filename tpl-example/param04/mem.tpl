@@ -2004,6 +2004,9 @@ ATOMNAME MEMBK  997 9C97
 ATOMNAME MEMBK  998 9C98
 ATOMNAME MEMBK  999 9C99
 
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  MEMBK 0C00 ion      
 CONNECT  MEMBK 0C01 ion      
 CONNECT  MEMBK 0C02 ion      

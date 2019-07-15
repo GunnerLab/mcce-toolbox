@@ -1,3 +1,5 @@
+### Alanine
+
 CONFLIST ALA        ALABK ALA01
 
 NATOM    ALABK      6
@@ -35,6 +37,9 @@ RXN      ALA01      0.0
 
 #2.Structure Connectivity
 #23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  ALABK  N   sp2       -1    C   0     CA  0     H
 CONNECT  ALABK  H   s         0     N
 CONNECT  ALABK  CA  sp3       0     N   0     C   0     CB  0     HA

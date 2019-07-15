@@ -22,7 +22,9 @@ ATOMNAME BCT-1    1  O3
 
 
 
-
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  BCTBK  C   ion        0    O1   0    O2   0    O3
 CONNECT  BCTBK  O1  ion        0    C
 

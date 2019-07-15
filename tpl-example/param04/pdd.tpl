@@ -93,6 +93,9 @@ RXN      PDD-1      -18.2
 
 #2.Structure Connectivity
 #23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  PDD01  CAD sp3       -2    C3D 0     CBD 0    1HAD 0    2HAD
 CONNECT  PDD01  CBD sp3       0     CAD 0     CGD 0    1HBD 0    2HBD
 CONNECT  PDD01  CGD sp2       0     CBD 0     O1D 0     O2D

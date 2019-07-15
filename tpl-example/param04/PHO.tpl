@@ -716,6 +716,9 @@ RXN      PHO0O      -3.233
 RXN      PHO-O      -13.753
 
 
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  PHOBK  C1  ion       0     O2A 0     C2
 CONNECT  PHOBK  C2  ion       0     C1  0     C3
 CONNECT  PHOBK  C3  ion       0     C2  0     C4  0     C5

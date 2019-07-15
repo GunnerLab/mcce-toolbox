@@ -214,16 +214,19 @@ PROTON   HA001      0
 PKA      HA001      0.0
 ELECTRON HA001      0 
 EM       HA001      0.0
-RXN      HA001      0.0
+RXN      HA001      -0.5 #from hem.tpl
 
 PROTON   HA0+1      0  
 PKA      HA0+1      0.0
 ELECTRON HA0+1      -1
 EM       HA0+1      -120.
-RXN      HA0+1      -9.6
+RXN      HA0+1      -11.1 #from hem.tpl
 
 #2.Structure Connectivity
 #23456789A123456789B123456789C123456789D123456789E123456789F123456789G
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  HA001 FE   sp3d2     0     N A 0     N B 0     N C 0     N D
 CONNECT  HA001  CHA sp2       0     C1A 0     C4D 0     HHA
 CONNECT  HA001  CHB sp2       0     C4A 0     C1B 0     HHB

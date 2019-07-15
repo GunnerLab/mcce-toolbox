@@ -349,6 +349,9 @@ RXN      LHG-1      -23.42
 ###BAK
 #ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn ires conn
 #ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  LHGBK  C9        sp3    0  C8     0  C10    0 1HC9    0 2HC9 
 CONNECT  LHGBK  C10       sp3    0  C9     0  C11    0 1H10    0 2H10 
 CONNECT  LHGBK  C11       sp3    0  C10    0  C12    0 1H11    0 2H11 

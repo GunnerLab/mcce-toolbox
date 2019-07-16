@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 """
-Complete a mcce-tpl RADIUS records with C6 and C12 parameters
+Replace "rxn=" with "rxn__=" in CONFORMER record inline. __ is the dielectric constant in format %02d.
+epsilon = 2 -> rxn02
+epsilon = 4 -> rxn04
+epsilon = 12 -> rxn12
+epsilon = 100 -> rxn100
 """
 
 import sys
@@ -11,6 +15,11 @@ if __name__ == "__main__":
 
     if len(sys.argv) < 3:
         logging.info("Requires two command line arguments for the ftpl file and dielectric constant.")
-        print("rxn-complete.py  <ftpl_file>  <dielectric constant id>")
-        print("Example: rxn-complete.py  tmp.ftpl 04")
+        print("rxn-complete.py  <ftpl_file>  <dielectric constant>")
+        print("Example: rxn-complete.py  tmp.ftpl 4")
         sys.exit()
+
+    lines = open(sys.argv[1]).readlines()
+
+    for line in lines:
+        

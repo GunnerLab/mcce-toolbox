@@ -111,13 +111,16 @@ ATOMNAME HIS-1    9  HD2
 #1.Basic Conformer Information: name, pka, em, rxn.
 #Marilyn 6/11/03
 #23456789A123456789B123456789C
+#pka, rxn for HIS01 and HIS02, and charge changed 5/5/07 Gail Schneider
+#pka ref Tanokura BBA 742,(1983) 576-585
+#With zwitterion can reproduce data found in ref Reynolds JACS 95:2 1/24/73
 PROTON   HIS01      0
 PROTON   HIS02      0
 PROTON   HIS+1      +1
 PROTON   HIS-1      -1
 PKA      HIS01      0.0
 PKA      HIS02      0.0
-PKA      HIS+1      6.5
+PKA      HIS+1      6.98
 PKA      HIS-1      14.4
 ELECTRON HIS01      0
 ELECTRON HIS02      0
@@ -130,14 +133,16 @@ EM       HIS-1      0.0
 #RXN      HIS01      -1.77
 #RXN      HIS02      -1.77
 #RXN      HIS+1      -12.22
-RXN      HIS01      -3.9
-RXN      HIS02      -4.4
-RXN      HIS+1      -16.3
+RXN      HIS01      -4.00  # re-calibrated by Yifan
+RXN      HIS02      -4.00  # re-calibrated by Yifan
+RXN      HIS+1      -16.1  # re-calibrated by Yifan
 #RXN      HIS+1      -15.3 # ajusted by jmao
 RXN      HIS-1      -25.6
 
 #2.Structure Connectivity
 #23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  HISBK  N   sp2       -1    C   0     CA  0     H
 CONNECT  HISBK  H   s         0     N
 CONNECT  HISBK  CA  sp3       0     N   0     C   0     CB  0     HA
@@ -231,13 +236,13 @@ CHARGE   HIS01  CD2  -0.125
 CHARGE   HIS01  HD2   0.125
 
 CHARGE   HIS02  CB    0.125
-CHARGE   HIS02  CG    0.155
+CHARGE   HIS02  CG   -0.125
 CHARGE   HIS02  NE2  -0.560
 CHARGE   HIS02  CE1   0.155
 CHARGE   HIS02  HE1   0.125
 CHARGE   HIS02  ND1  -0.400
 CHARGE   HIS02  HD1   0.400
-CHARGE   HIS02  CD2  -0.125
+CHARGE   HIS02  CD2   0.155
 CHARGE   HIS02  HD2   0.125
 
 CHARGE   HIS+1  CB    0.125
@@ -267,3 +272,7 @@ CHARGE   HIS-1  HD2  -0.003
 ROTAMER  HIS   0     CA - CB   CG   ND1  CE1  CD2  NE2
 ROTAMER  HIS   1     CB - CG   ND1  CE1  CD2  NE2
 #=========================================================================
+
+#-------|---|----|-|---------|---------|---------|---------|---------|---------|
+ROT_SWAP HIS   0     ND1- CD2  CE1- NE2
+

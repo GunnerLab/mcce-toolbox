@@ -269,6 +269,9 @@ ATOMNAME RSB+1   61 3H20
 
 
 
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 #1.Basic Conformer Information: name, pka, em, rxn.
 PROTON   RSB01      0
 PROTON   RSB+1      +1
@@ -434,7 +437,7 @@ RADIUS   RSB    CE  2.00
 RADIUS   RSB   1HE  1.00
 RADIUS   RSB   2HE  1.00
 RADIUS   RSB    NZ  1.50
-RADIUS   RSB    HZ  0.00
+RADIUS   RSB    HZ  1.00
 RADIUS   RSB    C1  2.00
 RADIUS   RSB    C2  2.00
 RADIUS   RSB   1H2  1.00

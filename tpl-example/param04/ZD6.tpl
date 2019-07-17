@@ -1,0 +1,1042 @@
+####################################
+# Topology File for:
+# param/ZD6.tpl
+# /home/salah/mcce-charges/epik_inhibitors/output/Vandetanib/Vandetanib
+#
+# Created on: 2016-06-12
+#
+# Created with: make_tpl_1.py by Salah Salah
+####################################
+
+# neural always starts with 0
+# numberical value means the charge is 1
+# alphabet lower case means the charge is 2
+# alphabet upper case means the charge is 3
+# nothing for charge of 4, this code will not work
+
+CONFLIST ZD6        ZD6BK ZD6+1 ZD6+a ZD601 ZD6+b ZD6DM 
+
+NATOM    ZD6BK      0
+NATOM    ZD6+1      55
+NATOM    ZD6+a      56
+NATOM    ZD601      54
+NATOM    ZD6+b      56
+NATOM    ZD6DM      0
+
+IATOM    ZD6+1   CAK    0
+IATOM    ZD6+1   CAM    1
+IATOM    ZD6+1   NBD    2
+IATOM    ZD6+1   CAB    3
+IATOM    ZD6+1   CAN    4
+IATOM    ZD6+1   CAL    5
+IATOM    ZD6+1   CBC    6
+IATOM    ZD6+1   CAO    7
+IATOM    ZD6+1   OAT    8
+IATOM    ZD6+1   CAY    9
+IATOM    ZD6+1   CAI   10
+IATOM    ZD6+1   CAX   11
+IATOM    ZD6+1   OAS   12
+IATOM    ZD6+1   CAA   13
+IATOM    ZD6+1   CAJ   14
+IATOM    ZD6+1    C5   15
+IATOM    ZD6+1    C4   16
+IATOM    ZD6+1    N3   17
+IATOM    ZD6+1    C2   18
+IATOM    ZD6+1    N1   19
+IATOM    ZD6+1    C6   20
+IATOM    ZD6+1   NAR   21
+IATOM    ZD6+1   CAW   22
+IATOM    ZD6+1   CAF   23
+IATOM    ZD6+1   CAE   24
+IATOM    ZD6+1   CAU   25
+IATOM    ZD6+1    BR   26
+IATOM    ZD6+1   CAH   27
+IATOM    ZD6+1   CAV   28
+IATOM    ZD6+1   FAC   29
+IATOM    ZD6+1  HAK1   30
+IATOM    ZD6+1  HAK2   31
+IATOM    ZD6+1  HAM1   32
+IATOM    ZD6+1  HAM2   33
+IATOM    ZD6+1  HAB1   34
+IATOM    ZD6+1  HAB2   35
+IATOM    ZD6+1  HAB3   36
+IATOM    ZD6+1  HAN1   37
+IATOM    ZD6+1  HAN2   38
+IATOM    ZD6+1  HAL1   39
+IATOM    ZD6+1  HAL2   40
+IATOM    ZD6+1   HBC   41
+IATOM    ZD6+1  HAO1   42
+IATOM    ZD6+1  HAO2   43
+IATOM    ZD6+1   HAI   44
+IATOM    ZD6+1  HAA1   45
+IATOM    ZD6+1  HAA2   46
+IATOM    ZD6+1  HAA3   47
+IATOM    ZD6+1   HAJ   48
+IATOM    ZD6+1    H2   49
+IATOM    ZD6+1   HAF   50
+IATOM    ZD6+1   HAE   51
+IATOM    ZD6+1   HAH   52
+IATOM    ZD6+1   H54   53
+IATOM    ZD6+1   H55   54
+
+IATOM    ZD6+a   CAK    0
+IATOM    ZD6+a   CAM    1
+IATOM    ZD6+a   NBD    2
+IATOM    ZD6+a   CAB    3
+IATOM    ZD6+a   CAN    4
+IATOM    ZD6+a   CAL    5
+IATOM    ZD6+a   CBC    6
+IATOM    ZD6+a   CAO    7
+IATOM    ZD6+a   OAT    8
+IATOM    ZD6+a   CAY    9
+IATOM    ZD6+a   CAI   10
+IATOM    ZD6+a   CAX   11
+IATOM    ZD6+a   OAS   12
+IATOM    ZD6+a   CAA   13
+IATOM    ZD6+a   CAJ   14
+IATOM    ZD6+a    C5   15
+IATOM    ZD6+a    C4   16
+IATOM    ZD6+a    N3   17
+IATOM    ZD6+a    C2   18
+IATOM    ZD6+a    N1   19
+IATOM    ZD6+a    C6   20
+IATOM    ZD6+a   NAR   21
+IATOM    ZD6+a   CAW   22
+IATOM    ZD6+a   CAF   23
+IATOM    ZD6+a   CAE   24
+IATOM    ZD6+a   CAU   25
+IATOM    ZD6+a    BR   26
+IATOM    ZD6+a   CAH   27
+IATOM    ZD6+a   CAV   28
+IATOM    ZD6+a   FAC   29
+IATOM    ZD6+a  HAK1   30
+IATOM    ZD6+a  HAK2   31
+IATOM    ZD6+a  HAM1   32
+IATOM    ZD6+a  HAM2   33
+IATOM    ZD6+a  HAB1   34
+IATOM    ZD6+a  HAB2   35
+IATOM    ZD6+a  HAB3   36
+IATOM    ZD6+a  HAN1   37
+IATOM    ZD6+a  HAN2   38
+IATOM    ZD6+a  HAL1   39
+IATOM    ZD6+a  HAL2   40
+IATOM    ZD6+a   HBC   41
+IATOM    ZD6+a  HAO1   42
+IATOM    ZD6+a  HAO2   43
+IATOM    ZD6+a   HAI   44
+IATOM    ZD6+a  HAA1   45
+IATOM    ZD6+a  HAA2   46
+IATOM    ZD6+a  HAA3   47
+IATOM    ZD6+a   HAJ   48
+IATOM    ZD6+a    H3   49
+IATOM    ZD6+a    H2   50
+IATOM    ZD6+a   HAF   51
+IATOM    ZD6+a   HAE   52
+IATOM    ZD6+a   HAH   53
+IATOM    ZD6+a   H55   54
+IATOM    ZD6+a   H56   55
+
+IATOM    ZD601   CAK    0
+IATOM    ZD601   CAM    1
+IATOM    ZD601   NBD    2
+IATOM    ZD601   CAB    3
+IATOM    ZD601   CAN    4
+IATOM    ZD601   CAL    5
+IATOM    ZD601   CBC    6
+IATOM    ZD601   CAO    7
+IATOM    ZD601   OAT    8
+IATOM    ZD601   CAY    9
+IATOM    ZD601   CAI   10
+IATOM    ZD601   CAX   11
+IATOM    ZD601   OAS   12
+IATOM    ZD601   CAA   13
+IATOM    ZD601   CAJ   14
+IATOM    ZD601    C5   15
+IATOM    ZD601    C4   16
+IATOM    ZD601    N3   17
+IATOM    ZD601    C2   18
+IATOM    ZD601    N1   19
+IATOM    ZD601    C6   20
+IATOM    ZD601   NAR   21
+IATOM    ZD601   CAW   22
+IATOM    ZD601   CAF   23
+IATOM    ZD601   CAE   24
+IATOM    ZD601   CAU   25
+IATOM    ZD601    BR   26
+IATOM    ZD601   CAH   27
+IATOM    ZD601   CAV   28
+IATOM    ZD601   FAC   29
+IATOM    ZD601  HAK1   30
+IATOM    ZD601  HAK2   31
+IATOM    ZD601  HAM1   32
+IATOM    ZD601  HAM2   33
+IATOM    ZD601  HAB1   34
+IATOM    ZD601  HAB2   35
+IATOM    ZD601  HAB3   36
+IATOM    ZD601  HAN1   37
+IATOM    ZD601  HAN2   38
+IATOM    ZD601  HAL1   39
+IATOM    ZD601  HAL2   40
+IATOM    ZD601   HBC   41
+IATOM    ZD601  HAO1   42
+IATOM    ZD601  HAO2   43
+IATOM    ZD601   HAI   44
+IATOM    ZD601  HAA1   45
+IATOM    ZD601  HAA2   46
+IATOM    ZD601  HAA3   47
+IATOM    ZD601   HAJ   48
+IATOM    ZD601    H2   49
+IATOM    ZD601   HAF   50
+IATOM    ZD601   HAE   51
+IATOM    ZD601   HAH   52
+IATOM    ZD601   H54   53
+
+IATOM    ZD6+b   CAK    0
+IATOM    ZD6+b   CAM    1
+IATOM    ZD6+b   NBD    2
+IATOM    ZD6+b   CAB    3
+IATOM    ZD6+b   CAN    4
+IATOM    ZD6+b   CAL    5
+IATOM    ZD6+b   CBC    6
+IATOM    ZD6+b   CAO    7
+IATOM    ZD6+b   OAT    8
+IATOM    ZD6+b   CAY    9
+IATOM    ZD6+b   CAI   10
+IATOM    ZD6+b   CAX   11
+IATOM    ZD6+b   OAS   12
+IATOM    ZD6+b   CAA   13
+IATOM    ZD6+b   CAJ   14
+IATOM    ZD6+b    C5   15
+IATOM    ZD6+b    C4   16
+IATOM    ZD6+b    N3   17
+IATOM    ZD6+b    C2   18
+IATOM    ZD6+b    N1   19
+IATOM    ZD6+b    C6   20
+IATOM    ZD6+b   NAR   21
+IATOM    ZD6+b   CAW   22
+IATOM    ZD6+b   CAF   23
+IATOM    ZD6+b   CAE   24
+IATOM    ZD6+b   CAU   25
+IATOM    ZD6+b    BR   26
+IATOM    ZD6+b   CAH   27
+IATOM    ZD6+b   CAV   28
+IATOM    ZD6+b   FAC   29
+IATOM    ZD6+b  HAK1   30
+IATOM    ZD6+b  HAK2   31
+IATOM    ZD6+b  HAM1   32
+IATOM    ZD6+b  HAM2   33
+IATOM    ZD6+b  HAB1   34
+IATOM    ZD6+b  HAB2   35
+IATOM    ZD6+b  HAB3   36
+IATOM    ZD6+b  HAN1   37
+IATOM    ZD6+b  HAN2   38
+IATOM    ZD6+b  HAL1   39
+IATOM    ZD6+b  HAL2   40
+IATOM    ZD6+b   HBC   41
+IATOM    ZD6+b  HAO1   42
+IATOM    ZD6+b  HAO2   43
+IATOM    ZD6+b   HAI   44
+IATOM    ZD6+b  HAA1   45
+IATOM    ZD6+b  HAA2   46
+IATOM    ZD6+b  HAA3   47
+IATOM    ZD6+b   HAJ   48
+IATOM    ZD6+b    H2   49
+IATOM    ZD6+b   HAF   50
+IATOM    ZD6+b   HAE   51
+IATOM    ZD6+b   HAH   52
+IATOM    ZD6+b   H54   53
+IATOM    ZD6+b   H55   54
+IATOM    ZD6+b   H56   55
+
+ATOMNAME ZD6+1     0 CAK
+ATOMNAME ZD6+1     1 CAM
+ATOMNAME ZD6+1     2 NBD
+ATOMNAME ZD6+1     3 CAB
+ATOMNAME ZD6+1     4 CAN
+ATOMNAME ZD6+1     5 CAL
+ATOMNAME ZD6+1     6 CBC
+ATOMNAME ZD6+1     7 CAO
+ATOMNAME ZD6+1     8 OAT
+ATOMNAME ZD6+1     9 CAY
+ATOMNAME ZD6+1    10 CAI
+ATOMNAME ZD6+1    11 CAX
+ATOMNAME ZD6+1    12 OAS
+ATOMNAME ZD6+1    13 CAA
+ATOMNAME ZD6+1    14 CAJ
+ATOMNAME ZD6+1    15  C5
+ATOMNAME ZD6+1    16  C4
+ATOMNAME ZD6+1    17  N3
+ATOMNAME ZD6+1    18  C2
+ATOMNAME ZD6+1    19  N1
+ATOMNAME ZD6+1    20  C6
+ATOMNAME ZD6+1    21 NAR
+ATOMNAME ZD6+1    22 CAW
+ATOMNAME ZD6+1    23 CAF
+ATOMNAME ZD6+1    24 CAE
+ATOMNAME ZD6+1    25 CAU
+ATOMNAME ZD6+1    26  BR
+ATOMNAME ZD6+1    27 CAH
+ATOMNAME ZD6+1    28 CAV
+ATOMNAME ZD6+1    29 FAC
+ATOMNAME ZD6+1    30HAK1
+ATOMNAME ZD6+1    31HAK2
+ATOMNAME ZD6+1    32HAM1
+ATOMNAME ZD6+1    33HAM2
+ATOMNAME ZD6+1    34HAB1
+ATOMNAME ZD6+1    35HAB2
+ATOMNAME ZD6+1    36HAB3
+ATOMNAME ZD6+1    37HAN1
+ATOMNAME ZD6+1    38HAN2
+ATOMNAME ZD6+1    39HAL1
+ATOMNAME ZD6+1    40HAL2
+ATOMNAME ZD6+1    41 HBC
+ATOMNAME ZD6+1    42HAO1
+ATOMNAME ZD6+1    43HAO2
+ATOMNAME ZD6+1    44 HAI
+ATOMNAME ZD6+1    45HAA1
+ATOMNAME ZD6+1    46HAA2
+ATOMNAME ZD6+1    47HAA3
+ATOMNAME ZD6+1    48 HAJ
+ATOMNAME ZD6+1    49  H2
+ATOMNAME ZD6+1    50 HAF
+ATOMNAME ZD6+1    51 HAE
+ATOMNAME ZD6+1    52 HAH
+ATOMNAME ZD6+1    53 H54
+ATOMNAME ZD6+1    54 H55
+
+ATOMNAME ZD6+a     0 CAK
+ATOMNAME ZD6+a     1 CAM
+ATOMNAME ZD6+a     2 NBD
+ATOMNAME ZD6+a     3 CAB
+ATOMNAME ZD6+a     4 CAN
+ATOMNAME ZD6+a     5 CAL
+ATOMNAME ZD6+a     6 CBC
+ATOMNAME ZD6+a     7 CAO
+ATOMNAME ZD6+a     8 OAT
+ATOMNAME ZD6+a     9 CAY
+ATOMNAME ZD6+a    10 CAI
+ATOMNAME ZD6+a    11 CAX
+ATOMNAME ZD6+a    12 OAS
+ATOMNAME ZD6+a    13 CAA
+ATOMNAME ZD6+a    14 CAJ
+ATOMNAME ZD6+a    15  C5
+ATOMNAME ZD6+a    16  C4
+ATOMNAME ZD6+a    17  N3
+ATOMNAME ZD6+a    18  C2
+ATOMNAME ZD6+a    19  N1
+ATOMNAME ZD6+a    20  C6
+ATOMNAME ZD6+a    21 NAR
+ATOMNAME ZD6+a    22 CAW
+ATOMNAME ZD6+a    23 CAF
+ATOMNAME ZD6+a    24 CAE
+ATOMNAME ZD6+a    25 CAU
+ATOMNAME ZD6+a    26  BR
+ATOMNAME ZD6+a    27 CAH
+ATOMNAME ZD6+a    28 CAV
+ATOMNAME ZD6+a    29 FAC
+ATOMNAME ZD6+a    30HAK1
+ATOMNAME ZD6+a    31HAK2
+ATOMNAME ZD6+a    32HAM1
+ATOMNAME ZD6+a    33HAM2
+ATOMNAME ZD6+a    34HAB1
+ATOMNAME ZD6+a    35HAB2
+ATOMNAME ZD6+a    36HAB3
+ATOMNAME ZD6+a    37HAN1
+ATOMNAME ZD6+a    38HAN2
+ATOMNAME ZD6+a    39HAL1
+ATOMNAME ZD6+a    40HAL2
+ATOMNAME ZD6+a    41 HBC
+ATOMNAME ZD6+a    42HAO1
+ATOMNAME ZD6+a    43HAO2
+ATOMNAME ZD6+a    44 HAI
+ATOMNAME ZD6+a    45HAA1
+ATOMNAME ZD6+a    46HAA2
+ATOMNAME ZD6+a    47HAA3
+ATOMNAME ZD6+a    48 HAJ
+ATOMNAME ZD6+a    49  H3
+ATOMNAME ZD6+a    50  H2
+ATOMNAME ZD6+a    51 HAF
+ATOMNAME ZD6+a    52 HAE
+ATOMNAME ZD6+a    53 HAH
+ATOMNAME ZD6+a    54 H55
+ATOMNAME ZD6+a    55 H56
+
+ATOMNAME ZD601     0 CAK
+ATOMNAME ZD601     1 CAM
+ATOMNAME ZD601     2 NBD
+ATOMNAME ZD601     3 CAB
+ATOMNAME ZD601     4 CAN
+ATOMNAME ZD601     5 CAL
+ATOMNAME ZD601     6 CBC
+ATOMNAME ZD601     7 CAO
+ATOMNAME ZD601     8 OAT
+ATOMNAME ZD601     9 CAY
+ATOMNAME ZD601    10 CAI
+ATOMNAME ZD601    11 CAX
+ATOMNAME ZD601    12 OAS
+ATOMNAME ZD601    13 CAA
+ATOMNAME ZD601    14 CAJ
+ATOMNAME ZD601    15  C5
+ATOMNAME ZD601    16  C4
+ATOMNAME ZD601    17  N3
+ATOMNAME ZD601    18  C2
+ATOMNAME ZD601    19  N1
+ATOMNAME ZD601    20  C6
+ATOMNAME ZD601    21 NAR
+ATOMNAME ZD601    22 CAW
+ATOMNAME ZD601    23 CAF
+ATOMNAME ZD601    24 CAE
+ATOMNAME ZD601    25 CAU
+ATOMNAME ZD601    26  BR
+ATOMNAME ZD601    27 CAH
+ATOMNAME ZD601    28 CAV
+ATOMNAME ZD601    29 FAC
+ATOMNAME ZD601    30HAK1
+ATOMNAME ZD601    31HAK2
+ATOMNAME ZD601    32HAM1
+ATOMNAME ZD601    33HAM2
+ATOMNAME ZD601    34HAB1
+ATOMNAME ZD601    35HAB2
+ATOMNAME ZD601    36HAB3
+ATOMNAME ZD601    37HAN1
+ATOMNAME ZD601    38HAN2
+ATOMNAME ZD601    39HAL1
+ATOMNAME ZD601    40HAL2
+ATOMNAME ZD601    41 HBC
+ATOMNAME ZD601    42HAO1
+ATOMNAME ZD601    43HAO2
+ATOMNAME ZD601    44 HAI
+ATOMNAME ZD601    45HAA1
+ATOMNAME ZD601    46HAA2
+ATOMNAME ZD601    47HAA3
+ATOMNAME ZD601    48 HAJ
+ATOMNAME ZD601    49  H2
+ATOMNAME ZD601    50 HAF
+ATOMNAME ZD601    51 HAE
+ATOMNAME ZD601    52 HAH
+ATOMNAME ZD601    53 H54
+
+ATOMNAME ZD6+b     0 CAK
+ATOMNAME ZD6+b     1 CAM
+ATOMNAME ZD6+b     2 NBD
+ATOMNAME ZD6+b     3 CAB
+ATOMNAME ZD6+b     4 CAN
+ATOMNAME ZD6+b     5 CAL
+ATOMNAME ZD6+b     6 CBC
+ATOMNAME ZD6+b     7 CAO
+ATOMNAME ZD6+b     8 OAT
+ATOMNAME ZD6+b     9 CAY
+ATOMNAME ZD6+b    10 CAI
+ATOMNAME ZD6+b    11 CAX
+ATOMNAME ZD6+b    12 OAS
+ATOMNAME ZD6+b    13 CAA
+ATOMNAME ZD6+b    14 CAJ
+ATOMNAME ZD6+b    15  C5
+ATOMNAME ZD6+b    16  C4
+ATOMNAME ZD6+b    17  N3
+ATOMNAME ZD6+b    18  C2
+ATOMNAME ZD6+b    19  N1
+ATOMNAME ZD6+b    20  C6
+ATOMNAME ZD6+b    21 NAR
+ATOMNAME ZD6+b    22 CAW
+ATOMNAME ZD6+b    23 CAF
+ATOMNAME ZD6+b    24 CAE
+ATOMNAME ZD6+b    25 CAU
+ATOMNAME ZD6+b    26  BR
+ATOMNAME ZD6+b    27 CAH
+ATOMNAME ZD6+b    28 CAV
+ATOMNAME ZD6+b    29 FAC
+ATOMNAME ZD6+b    30HAK1
+ATOMNAME ZD6+b    31HAK2
+ATOMNAME ZD6+b    32HAM1
+ATOMNAME ZD6+b    33HAM2
+ATOMNAME ZD6+b    34HAB1
+ATOMNAME ZD6+b    35HAB2
+ATOMNAME ZD6+b    36HAB3
+ATOMNAME ZD6+b    37HAN1
+ATOMNAME ZD6+b    38HAN2
+ATOMNAME ZD6+b    39HAL1
+ATOMNAME ZD6+b    40HAL2
+ATOMNAME ZD6+b    41 HBC
+ATOMNAME ZD6+b    42HAO1
+ATOMNAME ZD6+b    43HAO2
+ATOMNAME ZD6+b    44 HAI
+ATOMNAME ZD6+b    45HAA1
+ATOMNAME ZD6+b    46HAA2
+ATOMNAME ZD6+b    47HAA3
+ATOMNAME ZD6+b    48 HAJ
+ATOMNAME ZD6+b    49  H2
+ATOMNAME ZD6+b    50 HAF
+ATOMNAME ZD6+b    51 HAE
+ATOMNAME ZD6+b    52 HAH
+ATOMNAME ZD6+b    53 H54
+ATOMNAME ZD6+b    54 H55
+ATOMNAME ZD6+b    55 H56
+
+#1.Basic Conformer Information: name, pka, em, rxn.
+#23456789A123456789B123456789C
+
+# PROTON SECTION: PROTON means charge
+
+PROTON   ZD6+1      0    
+PROTON   ZD6+a      0    
+PROTON   ZD601      0    
+PROTON   ZD6+b      0    
+PROTON   ZD6DM      0    
+
+# Solution pKa Section: pKa data from CRC Handbook of Chemistry and Physics
+# pka is set to zero
+PKA      ZD6+1         0.000
+PKA      ZD6+a         0.000
+PKA      ZD601         0.000
+PKA      ZD6+b         0.000
+PKA      ZD6DM         0.000
+
+#ELECTRON SECTION:
+ELECTRON ZD6+1      0.0  
+ELECTRON ZD6+a      0.0  
+ELECTRON ZD601      0.0  
+ELECTRON ZD6+b      0.0  
+ELECTRON ZD6DM      0.0  
+
+# EM SECTION:
+EM       ZD6+1      0.0  
+EM       ZD6+a      0.0  
+EM       ZD601      0.0  
+EM       ZD6+b      0.0  
+EM       ZD6DM      0.0  
+
+# REACTION FIELD ENERGY SECTION:
+RXN      ZD6+1      0.0  
+RXN      ZD6+a      0.0  
+RXN      ZD601      0.0  
+RXN      ZD6+b      0.0  
+
+#  ZD6+1
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn 
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|
+CONNECT  ZD6+1 CAK     sp3     0   CAM   0   CBC   0   HAK1  0   HAK2 
+CONNECT  ZD6+1 CAM     sp3     0   CAK   0   NBD   0   HAM1  0   HAM2 
+CONNECT  ZD6+1 NBD     sp3     0   CAM   0   CAB   0   CAN   0   H55  
+CONNECT  ZD6+1 CAB     sp3     0   NBD   0   HAB1  0   HAB2  0   HAB3 
+CONNECT  ZD6+1 CAN     sp3     0   NBD   0   CAL   0   HAN1  0   HAN2 
+CONNECT  ZD6+1 CAL     sp3     0   CAN   0   CBC   0   HAL1  0   HAL2 
+CONNECT  ZD6+1 CBC     sp3     0   CAK   0   CAL   0   CAO   0   HBC  
+CONNECT  ZD6+1 CAO     sp3     0   CBC   0   OAT   0   HAO1  0   HAO2 
+CONNECT  ZD6+1 OAT     sp3     0   CAO   0   CAY  
+CONNECT  ZD6+1 CAY     sp2     0   OAT   0   CAI   0   CAX  
+CONNECT  ZD6+1 CAI     sp2     0   CAY   0    C4   0   HAI  
+CONNECT  ZD6+1 CAX     sp2     0   CAY   0   OAS   0   CAJ  
+CONNECT  ZD6+1 OAS     sp3     0   CAX   0   CAA  
+CONNECT  ZD6+1 CAA     sp3     0   OAS   0   HAA1  0   HAA2  0   HAA3 
+CONNECT  ZD6+1 CAJ     sp2     0   CAX   0    C5   0   HAJ  
+CONNECT  ZD6+1  C5     sp2     0   CAJ   0    C4   0    C6  
+CONNECT  ZD6+1  C4     sp2     0   CAI   0    C5   0    N3  
+CONNECT  ZD6+1  N3     sp2     0    C4   0    C2  
+CONNECT  ZD6+1  C2     sp2     0    N3   0    N1   0    H2  
+CONNECT  ZD6+1  N1     sp2     0    C2   0    C6  
+CONNECT  ZD6+1  C6     sp2     0    C5   0    N1   0   NAR  
+CONNECT  ZD6+1 NAR     sp3     0    C6   0   CAW   0   H54  
+CONNECT  ZD6+1 CAW     sp2     0   NAR   0   CAF   0   CAV  
+CONNECT  ZD6+1 CAF     sp2     0   CAW   0   CAE   0   HAF  
+CONNECT  ZD6+1 CAE     sp2     0   CAF   0   CAU   0   HAE  
+CONNECT  ZD6+1 CAU     sp2     0   CAE   0    BR   0   CAH  
+CONNECT  ZD6+1  BR      sp     0   CAU  
+CONNECT  ZD6+1 CAH     sp2     0   CAU   0   CAV   0   HAH  
+CONNECT  ZD6+1 CAV     sp2     0   CAW   0   CAH   0   FAC  
+CONNECT  ZD6+1 FAC      sp     0   CAV  
+CONNECT  ZD6+1 HAK1     s      0   CAK  
+CONNECT  ZD6+1 HAK2     s      0   CAK  
+CONNECT  ZD6+1 HAM1     s      0   CAM  
+CONNECT  ZD6+1 HAM2     s      0   CAM  
+CONNECT  ZD6+1 HAB1     s      0   CAB  
+CONNECT  ZD6+1 HAB2     s      0   CAB  
+CONNECT  ZD6+1 HAB3     s      0   CAB  
+CONNECT  ZD6+1 HAN1     s      0   CAN  
+CONNECT  ZD6+1 HAN2     s      0   CAN  
+CONNECT  ZD6+1 HAL1     s      0   CAL  
+CONNECT  ZD6+1 HAL2     s      0   CAL  
+CONNECT  ZD6+1 HBC      s      0   CBC  
+CONNECT  ZD6+1 HAO1     s      0   CAO  
+CONNECT  ZD6+1 HAO2     s      0   CAO  
+CONNECT  ZD6+1 HAI      s      0   CAI  
+CONNECT  ZD6+1 HAA1     s      0   CAA  
+CONNECT  ZD6+1 HAA2     s      0   CAA  
+CONNECT  ZD6+1 HAA3     s      0   CAA  
+CONNECT  ZD6+1 HAJ      s      0   CAJ  
+CONNECT  ZD6+1  H2      s      0    C2  
+CONNECT  ZD6+1 HAF      s      0   CAF  
+CONNECT  ZD6+1 HAE      s      0   CAE  
+CONNECT  ZD6+1 HAH      s      0   CAH  
+CONNECT  ZD6+1 H54      s      0   NAR  
+CONNECT  ZD6+1 H55      s      0   NBD  
+
+#  ZD6+a
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn 
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|
+CONNECT  ZD6+a CAK     sp3     0   CAM   0   CBC   0   HAK1  0   HAK2 
+CONNECT  ZD6+a CAM     sp3     0   CAK   0   NBD   0   HAM1  0   HAM2 
+CONNECT  ZD6+a NBD     sp3     0   CAM   0   CAB   0   CAN   0   H56  
+CONNECT  ZD6+a CAB     sp3     0   NBD   0   HAB1  0   HAB2  0   HAB3 
+CONNECT  ZD6+a CAN     sp3     0   NBD   0   CAL   0   HAN1  0   HAN2 
+CONNECT  ZD6+a CAL     sp3     0   CAN   0   CBC   0   HAL1  0   HAL2 
+CONNECT  ZD6+a CBC     sp3     0   CAK   0   CAL   0   CAO   0   HBC  
+CONNECT  ZD6+a CAO     sp3     0   CBC   0   OAT   0   HAO1  0   HAO2 
+CONNECT  ZD6+a OAT     sp3     0   CAO   0   CAY  
+CONNECT  ZD6+a CAY     sp2     0   OAT   0   CAI   0   CAX  
+CONNECT  ZD6+a CAI     sp2     0   CAY   0    C4   0   HAI  
+CONNECT  ZD6+a CAX     sp2     0   CAY   0   OAS   0   CAJ  
+CONNECT  ZD6+a OAS     sp3     0   CAX   0   CAA  
+CONNECT  ZD6+a CAA     sp3     0   OAS   0   HAA1  0   HAA2  0   HAA3 
+CONNECT  ZD6+a CAJ     sp2     0   CAX   0    C5   0   HAJ  
+CONNECT  ZD6+a  C5     sp2     0   CAJ   0    C4   0    C6  
+CONNECT  ZD6+a  C4     sp2     0   CAI   0    C5   0    N3  
+CONNECT  ZD6+a  N3     sp3     0    C4   0    C2   0    H2  
+CONNECT  ZD6+a  C2     sp2     0    N3   0    N1   0   HAF  
+CONNECT  ZD6+a  N1     sp2     0    C2   0    C6  
+CONNECT  ZD6+a  C6     sp2     0    C5   0    N1   0   NAR  
+CONNECT  ZD6+a NAR     sp3     0    C6   0   CAW   0   H55  
+CONNECT  ZD6+a CAW     sp2     0   NAR   0   CAF   0   CAV  
+CONNECT  ZD6+a CAF     sp2     0   CAW   0   CAE   0   HAE  
+CONNECT  ZD6+a CAE     sp2     0   CAF   0   CAU   0   HAH  
+CONNECT  ZD6+a CAU     sp2     0   CAE   0    BR   0   CAH  
+CONNECT  ZD6+a  BR      sp     0   CAU  
+CONNECT  ZD6+a CAH     sp2     0   CAU   0   CAV   0   H54  
+CONNECT  ZD6+a CAV     sp2     0   CAW   0   CAH   0   FAC  
+CONNECT  ZD6+a FAC      sp     0   CAV  
+CONNECT  ZD6+a HAK1     s      0   CAK  
+CONNECT  ZD6+a HAK2     s      0   CAK  
+CONNECT  ZD6+a HAM1     s      0   CAM  
+CONNECT  ZD6+a HAM2     s      0   CAM  
+CONNECT  ZD6+a HAB1     s      0   CAB  
+CONNECT  ZD6+a HAB2     s      0   CAB  
+CONNECT  ZD6+a HAB3     s      0   CAB  
+CONNECT  ZD6+a HAN1     s      0   CAN  
+CONNECT  ZD6+a HAN2     s      0   CAN  
+CONNECT  ZD6+a HAL1     s      0   CAL  
+CONNECT  ZD6+a HAL2     s      0   CAL  
+CONNECT  ZD6+a HBC      s      0   CBC  
+CONNECT  ZD6+a HAO1     s      0   CAO  
+CONNECT  ZD6+a HAO2     s      0   CAO  
+CONNECT  ZD6+a HAI      s      0   CAI  
+CONNECT  ZD6+a HAA1     s      0   CAA  
+CONNECT  ZD6+a HAA2     s      0   CAA  
+CONNECT  ZD6+a HAA3     s      0   CAA  
+CONNECT  ZD6+a HAJ      s      0   CAJ  
+CONNECT  ZD6+a  H3      s      0    N3  
+CONNECT  ZD6+a  H2      s      0    C2  
+CONNECT  ZD6+a HAF      s      0   CAF  
+CONNECT  ZD6+a HAE      s      0   CAE  
+CONNECT  ZD6+a HAH      s      0   CAH  
+CONNECT  ZD6+a H55      s      0   NAR  
+CONNECT  ZD6+a H56      s      0   NBD  
+
+#  ZD601
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn 
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|
+CONNECT  ZD601 CAK     sp3     0   CAM   0   CBC   0   HAK1  0   HAK2 
+CONNECT  ZD601 CAM     sp3     0   CAK   0   NBD   0   HAM1  0   HAM2 
+CONNECT  ZD601 NBD     sp3     0   CAM   0   CAB   0   CAN  
+CONNECT  ZD601 CAB     sp3     0   NBD   0   HAB1  0   HAB2  0   HAB3 
+CONNECT  ZD601 CAN     sp3     0   NBD   0   CAL   0   HAN1  0   HAN2 
+CONNECT  ZD601 CAL     sp3     0   CAN   0   CBC   0   HAL1  0   HAL2 
+CONNECT  ZD601 CBC     sp3     0   CAK   0   CAL   0   CAO   0   HBC  
+CONNECT  ZD601 CAO     sp3     0   CBC   0   OAT   0   HAO1  0   HAO2 
+CONNECT  ZD601 OAT     sp3     0   CAO   0   CAY  
+CONNECT  ZD601 CAY     sp2     0   OAT   0   CAI   0   CAX  
+CONNECT  ZD601 CAI     sp2     0   CAY   0    C4   0   HAI  
+CONNECT  ZD601 CAX     sp2     0   CAY   0   OAS   0   CAJ  
+CONNECT  ZD601 OAS     sp3     0   CAX   0   CAA  
+CONNECT  ZD601 CAA     sp3     0   OAS   0   HAA1  0   HAA2  0   HAA3 
+CONNECT  ZD601 CAJ     sp2     0   CAX   0    C5   0   HAJ  
+CONNECT  ZD601  C5     sp2     0   CAJ   0    C4   0    C6  
+CONNECT  ZD601  C4     sp2     0   CAI   0    C5   0    N3  
+CONNECT  ZD601  N3     sp2     0    C4   0    C2  
+CONNECT  ZD601  C2     sp2     0    N3   0    N1   0    H2  
+CONNECT  ZD601  N1     sp2     0    C2   0    C6  
+CONNECT  ZD601  C6     sp2     0    C5   0    N1   0   NAR  
+CONNECT  ZD601 NAR     sp3     0    C6   0   CAW   0   H54  
+CONNECT  ZD601 CAW     sp2     0   NAR   0   CAF   0   CAV  
+CONNECT  ZD601 CAF     sp2     0   CAW   0   CAE   0   HAF  
+CONNECT  ZD601 CAE     sp2     0   CAF   0   CAU   0   HAE  
+CONNECT  ZD601 CAU     sp2     0   CAE   0    BR   0   CAH  
+CONNECT  ZD601  BR      sp     0   CAU  
+CONNECT  ZD601 CAH     sp2     0   CAU   0   CAV   0   HAH  
+CONNECT  ZD601 CAV     sp2     0   CAW   0   CAH   0   FAC  
+CONNECT  ZD601 FAC      sp     0   CAV  
+CONNECT  ZD601 HAK1     s      0   CAK  
+CONNECT  ZD601 HAK2     s      0   CAK  
+CONNECT  ZD601 HAM1     s      0   CAM  
+CONNECT  ZD601 HAM2     s      0   CAM  
+CONNECT  ZD601 HAB1     s      0   CAB  
+CONNECT  ZD601 HAB2     s      0   CAB  
+CONNECT  ZD601 HAB3     s      0   CAB  
+CONNECT  ZD601 HAN1     s      0   CAN  
+CONNECT  ZD601 HAN2     s      0   CAN  
+CONNECT  ZD601 HAL1     s      0   CAL  
+CONNECT  ZD601 HAL2     s      0   CAL  
+CONNECT  ZD601 HBC      s      0   CBC  
+CONNECT  ZD601 HAO1     s      0   CAO  
+CONNECT  ZD601 HAO2     s      0   CAO  
+CONNECT  ZD601 HAI      s      0   CAI  
+CONNECT  ZD601 HAA1     s      0   CAA  
+CONNECT  ZD601 HAA2     s      0   CAA  
+CONNECT  ZD601 HAA3     s      0   CAA  
+CONNECT  ZD601 HAJ      s      0   CAJ  
+CONNECT  ZD601  H2      s      0    C2  
+CONNECT  ZD601 HAF      s      0   CAF  
+CONNECT  ZD601 HAE      s      0   CAE  
+CONNECT  ZD601 HAH      s      0   CAH  
+CONNECT  ZD601 H54      s      0   NAR  
+
+#  ZD6+b
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn 
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|
+CONNECT  ZD6+b CAK     sp3     0   CAM   0   CBC   0   HAK1  0   HAK2 
+CONNECT  ZD6+b CAM     sp3     0   CAK   0   NBD   0   HAM1  0   HAM2 
+CONNECT  ZD6+b NBD     sp3     0   CAM   0   CAB   0   CAN   0   H55  
+CONNECT  ZD6+b CAB     sp3     0   NBD   0   HAB1  0   HAB2  0   HAB3 
+CONNECT  ZD6+b CAN     sp3     0   NBD   0   CAL   0   HAN1  0   HAN2 
+CONNECT  ZD6+b CAL     sp3     0   CAN   0   CBC   0   HAL1  0   HAL2 
+CONNECT  ZD6+b CBC     sp3     0   CAK   0   CAL   0   CAO   0   HBC  
+CONNECT  ZD6+b CAO     sp3     0   CBC   0   OAT   0   HAO1  0   HAO2 
+CONNECT  ZD6+b OAT     sp3     0   CAO   0   CAY  
+CONNECT  ZD6+b CAY     sp2     0   OAT   0   CAI   0   CAX  
+CONNECT  ZD6+b CAI     sp2     0   CAY   0    C4   0   HAI  
+CONNECT  ZD6+b CAX     sp2     0   CAY   0   OAS   0   CAJ  
+CONNECT  ZD6+b OAS     sp3     0   CAX   0   CAA  
+CONNECT  ZD6+b CAA     sp3     0   OAS   0   HAA1  0   HAA2  0   HAA3 
+CONNECT  ZD6+b CAJ     sp2     0   CAX   0    C5   0   HAJ  
+CONNECT  ZD6+b  C5     sp2     0   CAJ   0    C4   0    C6  
+CONNECT  ZD6+b  C4     sp2     0   CAI   0    C5   0    N3  
+CONNECT  ZD6+b  N3     sp3     0    C4   0    C2   0   H56  
+CONNECT  ZD6+b  C2     sp2     0    N3   0    N1   0    H2  
+CONNECT  ZD6+b  N1     sp2     0    C2   0    C6  
+CONNECT  ZD6+b  C6     sp2     0    C5   0    N1   0   NAR  
+CONNECT  ZD6+b NAR     sp3     0    C6   0   CAW   0   H54  
+CONNECT  ZD6+b CAW     sp2     0   NAR   0   CAF   0   CAV  
+CONNECT  ZD6+b CAF     sp2     0   CAW   0   CAE   0   HAF  
+CONNECT  ZD6+b CAE     sp2     0   CAF   0   CAU   0   HAE  
+CONNECT  ZD6+b CAU     sp2     0   CAE   0    BR   0   CAH  
+CONNECT  ZD6+b  BR      sp     0   CAU  
+CONNECT  ZD6+b CAH     sp2     0   CAU   0   CAV   0   HAH  
+CONNECT  ZD6+b CAV     sp2     0   CAW   0   CAH   0   FAC  
+CONNECT  ZD6+b FAC      sp     0   CAV  
+CONNECT  ZD6+b HAK1     s      0   CAK  
+CONNECT  ZD6+b HAK2     s      0   CAK  
+CONNECT  ZD6+b HAM1     s      0   CAM  
+CONNECT  ZD6+b HAM2     s      0   CAM  
+CONNECT  ZD6+b HAB1     s      0   CAB  
+CONNECT  ZD6+b HAB2     s      0   CAB  
+CONNECT  ZD6+b HAB3     s      0   CAB  
+CONNECT  ZD6+b HAN1     s      0   CAN  
+CONNECT  ZD6+b HAN2     s      0   CAN  
+CONNECT  ZD6+b HAL1     s      0   CAL  
+CONNECT  ZD6+b HAL2     s      0   CAL  
+CONNECT  ZD6+b HBC      s      0   CBC  
+CONNECT  ZD6+b HAO1     s      0   CAO  
+CONNECT  ZD6+b HAO2     s      0   CAO  
+CONNECT  ZD6+b HAI      s      0   CAI  
+CONNECT  ZD6+b HAA1     s      0   CAA  
+CONNECT  ZD6+b HAA2     s      0   CAA  
+CONNECT  ZD6+b HAA3     s      0   CAA  
+CONNECT  ZD6+b HAJ      s      0   CAJ  
+CONNECT  ZD6+b  H2      s      0    C2  
+CONNECT  ZD6+b HAF      s      0   CAF  
+CONNECT  ZD6+b HAE      s      0   CAE  
+CONNECT  ZD6+b HAH      s      0   CAH  
+CONNECT  ZD6+b H54      s      0   NAR  
+CONNECT  ZD6+b H55      s      0   NBD  
+CONNECT  ZD6+b H56      s      0    N3  
+
+# Atom Parameters:
+# Van Der Waals Radii. See source for reference
+RADIUS   ZD6    CAK       1.7
+RADIUS   ZD6    CAM       1.7
+RADIUS   ZD6    NBD      1.55
+RADIUS   ZD6    CAB       1.7
+RADIUS   ZD6    CAN       1.7
+RADIUS   ZD6    CAL       1.7
+RADIUS   ZD6    CBC       1.7
+RADIUS   ZD6    CAO       1.7
+RADIUS   ZD6    OAT      1.52
+RADIUS   ZD6    CAY       1.7
+RADIUS   ZD6    CAI       1.7
+RADIUS   ZD6    CAX       1.7
+RADIUS   ZD6    OAS      1.52
+RADIUS   ZD6    CAA       1.7
+RADIUS   ZD6    CAJ       1.7
+RADIUS   ZD6    C5        1.7
+RADIUS   ZD6    C4        1.7
+RADIUS   ZD6    N3       1.55
+RADIUS   ZD6    C2        1.7
+RADIUS   ZD6    N1       1.55
+RADIUS   ZD6    C6        1.7
+RADIUS   ZD6    NAR      1.55
+RADIUS   ZD6    CAW       1.7
+RADIUS   ZD6    CAF       1.7
+RADIUS   ZD6    CAE       1.7
+RADIUS   ZD6    CAU       1.7
+RADIUS   ZD6    BR       1.92
+RADIUS   ZD6    CAH       1.7
+RADIUS   ZD6    CAV       1.7
+RADIUS   ZD6    FAC      1.47
+RADIUS   ZD6    HAK1      1.2
+RADIUS   ZD6    HAK2      1.2
+RADIUS   ZD6    HAM1      1.2
+RADIUS   ZD6    HAM2      1.2
+RADIUS   ZD6    HAB1      1.2
+RADIUS   ZD6    HAB2      1.2
+RADIUS   ZD6    HAB3      1.2
+RADIUS   ZD6    HAN1      1.2
+RADIUS   ZD6    HAN2      1.2
+RADIUS   ZD6    HAL1      1.2
+RADIUS   ZD6    HAL2      1.2
+RADIUS   ZD6    HBC       1.2
+RADIUS   ZD6    HAO1      1.2
+RADIUS   ZD6    HAO2      1.2
+RADIUS   ZD6    HAI       1.2
+RADIUS   ZD6    HAA1      1.2
+RADIUS   ZD6    HAA2      1.2
+RADIUS   ZD6    HAA3      1.2
+RADIUS   ZD6    HAJ       1.2
+RADIUS   ZD6    H3        1.2
+RADIUS   ZD6    H2        1.2
+RADIUS   ZD6    HAF       1.2
+RADIUS   ZD6    HAE       1.2
+RADIUS   ZD6    HAH       1.2
+RADIUS   ZD6    H55       1.2
+RADIUS   ZD6    H56       1.2
+RADIUS   ZD6    H54       1.2
+
+CHARGE   ZD6+1  CAK  -0.109
+CHARGE   ZD6+1  CAM  0.1154
+CHARGE   ZD6+1  NBD -0.6878
+CHARGE   ZD6+1  CAB  0.0848
+CHARGE   ZD6+1  CAN  0.1154
+CHARGE   ZD6+1  CAL  -0.109
+CHARGE   ZD6+1  CBC -0.0898
+CHARGE   ZD6+1  CAO  0.1357
+CHARGE   ZD6+1  OAT -0.3464
+CHARGE   ZD6+1  CAY  0.0915
+CHARGE   ZD6+1  CAI -0.1845
+CHARGE   ZD6+1  CAX  0.0633
+CHARGE   ZD6+1  OAS -0.3436
+CHARGE   ZD6+1  CAA  0.1146
+CHARGE   ZD6+1  CAJ -0.0955
+CHARGE   ZD6+1  C5  -0.2897
+CHARGE   ZD6+1  C4   0.4454
+CHARGE   ZD6+1  N3  -0.7212
+CHARGE   ZD6+1  C2    0.688
+CHARGE   ZD6+1  N1  -0.7352
+CHARGE   ZD6+1  C6   0.7038
+CHARGE   ZD6+1  NAR -0.7103
+CHARGE   ZD6+1  CAW  0.0851
+CHARGE   ZD6+1  CAF -0.1403
+CHARGE   ZD6+1  CAE -0.1065
+CHARGE   ZD6+1  CAU -0.0044
+CHARGE   ZD6+1  BR  -0.0549
+CHARGE   ZD6+1  CAH -0.1355
+CHARGE   ZD6+1  CAV  0.1644
+CHARGE   ZD6+1  FAC -0.1088
+CHARGE   ZD6+1  HAK1  0.0919
+CHARGE   ZD6+1  HAK2  0.0919
+CHARGE   ZD6+1  HAM1  0.1039
+CHARGE   ZD6+1  HAM2  0.1039
+CHARGE   ZD6+1  HAB1  0.1046
+CHARGE   ZD6+1  HAB2  0.1046
+CHARGE   ZD6+1  HAB3  0.1046
+CHARGE   ZD6+1  HAN1  0.1039
+CHARGE   ZD6+1  HAN2  0.1039
+CHARGE   ZD6+1  HAL1  0.0919
+CHARGE   ZD6+1  HAL2  0.0919
+CHARGE   ZD6+1  HBC  0.0865
+CHARGE   ZD6+1  HAO1  0.0624
+CHARGE   ZD6+1  HAO2  0.0624
+CHARGE   ZD6+1  HAI  0.1628
+CHARGE   ZD6+1  HAA1  0.0467
+CHARGE   ZD6+1  HAA2  0.0467
+CHARGE   ZD6+1  HAA3  0.0467
+CHARGE   ZD6+1  HAJ   0.148
+CHARGE   ZD6+1  H2   0.0658
+CHARGE   ZD6+1  HAF  0.1386
+CHARGE   ZD6+1  HAE  0.1574
+CHARGE   ZD6+1  HAH  0.1716
+CHARGE   ZD6+1  H54  0.4269
+CHARGE   ZD6+1  H55  0.4453
+
+CHARGE   ZD6+a  CAK -0.1111
+CHARGE   ZD6+a  CAM  0.1142
+CHARGE   ZD6+a  NBD -0.6869
+CHARGE   ZD6+a  CAB   0.084
+CHARGE   ZD6+a  CAN  0.1142
+CHARGE   ZD6+a  CAL -0.1111
+CHARGE   ZD6+a  CBC -0.0822
+CHARGE   ZD6+a  CAO  0.1295
+CHARGE   ZD6+a  OAT  -0.319
+CHARGE   ZD6+a  CAY  0.1733
+CHARGE   ZD6+a  CAI -0.2031
+CHARGE   ZD6+a  CAX  0.0888
+CHARGE   ZD6+a  OAS -0.3132
+CHARGE   ZD6+a  CAA  0.1139
+CHARGE   ZD6+a  CAJ -0.0652
+CHARGE   ZD6+a  C5   -0.248
+CHARGE   ZD6+a  C4   0.1909
+CHARGE   ZD6+a  N3   -0.668
+CHARGE   ZD6+a  C2   0.7202
+CHARGE   ZD6+a  N1  -0.7182
+CHARGE   ZD6+a  C6   0.6187
+CHARGE   ZD6+a  NAR -0.2045
+CHARGE   ZD6+a  CAW -0.1112
+CHARGE   ZD6+a  CAF -0.0702
+CHARGE   ZD6+a  CAE -0.1068
+CHARGE   ZD6+a  CAU  0.0238
+CHARGE   ZD6+a  BR  -0.0014
+CHARGE   ZD6+a  CAH -0.1248
+CHARGE   ZD6+a  CAV  0.1495
+CHARGE   ZD6+a  FAC -0.1207
+CHARGE   ZD6+a  HAK1  0.0929
+CHARGE   ZD6+a  HAK2  0.0929
+CHARGE   ZD6+a  HAM1  0.1109
+CHARGE   ZD6+a  HAM2  0.1109
+CHARGE   ZD6+a  HAB1  0.1103
+CHARGE   ZD6+a  HAB2  0.1103
+CHARGE   ZD6+a  HAB3  0.1103
+CHARGE   ZD6+a  HAN1  0.1109
+CHARGE   ZD6+a  HAN2  0.1109
+CHARGE   ZD6+a  HAL1  0.0929
+CHARGE   ZD6+a  HAL2  0.0929
+CHARGE   ZD6+a  HBC   0.085
+CHARGE   ZD6+a  HAO1  0.0593
+CHARGE   ZD6+a  HAO2  0.0593
+CHARGE   ZD6+a  HAI  0.1702
+CHARGE   ZD6+a  HAA1   0.052
+CHARGE   ZD6+a  HAA2   0.052
+CHARGE   ZD6+a  HAA3   0.052
+CHARGE   ZD6+a  HAJ   0.172
+CHARGE   ZD6+a  H3   0.4923
+CHARGE   ZD6+a  H2   0.1109
+CHARGE   ZD6+a  HAF   0.154
+CHARGE   ZD6+a  HAE  0.1759
+CHARGE   ZD6+a  HAH  0.1902
+CHARGE   ZD6+a  H55  0.3268
+CHARGE   ZD6+a  H56  0.4469
+
+CHARGE   ZD601  CAK -0.0743
+CHARGE   ZD601  CAM  0.1644
+CHARGE   ZD601  NBD -0.7217
+CHARGE   ZD601  CAB  0.1534
+CHARGE   ZD601  CAN  0.1644
+CHARGE   ZD601  CAL -0.0743
+CHARGE   ZD601  CBC -0.0742
+CHARGE   ZD601  CAO  0.1357
+CHARGE   ZD601  OAT -0.3465
+CHARGE   ZD601  CAY   0.116
+CHARGE   ZD601  CAI -0.1911
+CHARGE   ZD601  CAX  0.0734
+CHARGE   ZD601  OAS -0.3389
+CHARGE   ZD601  CAA  0.1167
+CHARGE   ZD601  CAJ -0.1142
+CHARGE   ZD601  C5  -0.2903
+CHARGE   ZD601  C4   0.4412
+CHARGE   ZD601  N3  -0.7116
+CHARGE   ZD601  C2    0.674
+CHARGE   ZD601  N1  -0.7443
+CHARGE   ZD601  C6   0.6947
+CHARGE   ZD601  NAR  -0.713
+CHARGE   ZD601  CAW  0.0974
+CHARGE   ZD601  CAF -0.1436
+CHARGE   ZD601  CAE -0.1067
+CHARGE   ZD601  CAU -0.0093
+CHARGE   ZD601  BR  -0.0702
+CHARGE   ZD601  CAH -0.1408
+CHARGE   ZD601  CAV  0.1613
+CHARGE   ZD601  FAC -0.1087
+CHARGE   ZD601  HAK1  0.0514
+CHARGE   ZD601  HAK2  0.0514
+CHARGE   ZD601  HAM1  0.0317
+CHARGE   ZD601  HAM2  0.0317
+CHARGE   ZD601  HAB1  0.0317
+CHARGE   ZD601  HAB2  0.0317
+CHARGE   ZD601  HAB3  0.0317
+CHARGE   ZD601  HAN1  0.0317
+CHARGE   ZD601  HAN2  0.0317
+CHARGE   ZD601  HAL1  0.0514
+CHARGE   ZD601  HAL2  0.0514
+CHARGE   ZD601  HBC  0.0642
+CHARGE   ZD601  HAO1  0.0496
+CHARGE   ZD601  HAO2  0.0496
+CHARGE   ZD601  HAI  0.1692
+CHARGE   ZD601  HAA1  0.0457
+CHARGE   ZD601  HAA2  0.0457
+CHARGE   ZD601  HAA3  0.0457
+CHARGE   ZD601  HAJ  0.1387
+CHARGE   ZD601  H2   0.0588
+CHARGE   ZD601  HAF  0.1412
+CHARGE   ZD601  HAE  0.1534
+CHARGE   ZD601  HAH  0.1658
+CHARGE   ZD601  H54  0.4259
+
+CHARGE   ZD6+b  CAK -0.1108
+CHARGE   ZD6+b  CAM   0.115
+CHARGE   ZD6+b  NBD -0.6873
+CHARGE   ZD6+b  CAB  0.0837
+CHARGE   ZD6+b  CAN   0.115
+CHARGE   ZD6+b  CAL -0.1108
+CHARGE   ZD6+b  CBC -0.0816
+CHARGE   ZD6+b  CAO  0.1279
+CHARGE   ZD6+b  OAT  -0.304
+CHARGE   ZD6+b  CAY  0.1962
+CHARGE   ZD6+b  CAI -0.2426
+CHARGE   ZD6+b  CAX  0.0894
+CHARGE   ZD6+b  OAS -0.3252
+CHARGE   ZD6+b  CAA  0.1104
+CHARGE   ZD6+b  CAJ -0.0621
+CHARGE   ZD6+b  C5  -0.2595
+CHARGE   ZD6+b  C4   0.2026
+CHARGE   ZD6+b  N3  -0.5965
+CHARGE   ZD6+b  C2   0.3733
+CHARGE   ZD6+b  N1  -0.6375
+CHARGE   ZD6+b  C6   0.7877
+CHARGE   ZD6+b  NAR -0.5867
+CHARGE   ZD6+b  CAW  0.0257
+CHARGE   ZD6+b  CAF -0.0633
+CHARGE   ZD6+b  CAE -0.1046
+CHARGE   ZD6+b  CAU  0.0182
+CHARGE   ZD6+b  BR  -0.0006
+CHARGE   ZD6+b  CAH -0.1197
+CHARGE   ZD6+b  CAV  0.1241
+CHARGE   ZD6+b  FAC -0.1336
+CHARGE   ZD6+b  HAK1  0.0932
+CHARGE   ZD6+b  HAK2  0.0932
+CHARGE   ZD6+b  HAM1  0.1115
+CHARGE   ZD6+b  HAM2  0.1115
+CHARGE   ZD6+b  HAB1  0.1101
+CHARGE   ZD6+b  HAB2  0.1101
+CHARGE   ZD6+b  HAB3  0.1101
+CHARGE   ZD6+b  HAN1  0.1115
+CHARGE   ZD6+b  HAN2  0.1115
+CHARGE   ZD6+b  HAL1  0.0932
+CHARGE   ZD6+b  HAL2  0.0932
+CHARGE   ZD6+b  HBC  0.0881
+CHARGE   ZD6+b  HAO1  0.0599
+CHARGE   ZD6+b  HAO2  0.0599
+CHARGE   ZD6+b  HAI  0.1637
+CHARGE   ZD6+b  HAA1   0.059
+CHARGE   ZD6+b  HAA2   0.059
+CHARGE   ZD6+b  HAA3   0.059
+CHARGE   ZD6+b  HAJ  0.1737
+CHARGE   ZD6+b  H2   0.2389
+CHARGE   ZD6+b  HAF  0.1689
+CHARGE   ZD6+b  HAE   0.178
+CHARGE   ZD6+b  HAH   0.189
+CHARGE   ZD6+b  H54  0.4739
+CHARGE   ZD6+b  H55  0.4465
+CHARGE   ZD6+b  H56  0.4904
+
+# EXTRA energy for tautomers:
+EXTRA    ZD6+1         0.005
+EXTRA    ZD6+a         3.240
+EXTRA    ZD601         3.381
+EXTRA    ZD6+b         3.901
+

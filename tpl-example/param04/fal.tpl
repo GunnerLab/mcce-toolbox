@@ -212,6 +212,9 @@ RXN      FAL-1      0.0
 #2.Structure Connectivity
 
 #23456789A123456789B123456789C123456789D123456789E123456789F123456789G
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  FAL01  C11 sp3       -3    C3B 0     O11 0     C12 0     H11 
 CONNECT  FAL01  O11 sp3       0     C11 0     HO1 
 CONNECT  FAL01  C12 sp3       0     C11 0     C13 0    1H12 0    2H12 

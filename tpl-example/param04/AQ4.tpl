@@ -1,0 +1,552 @@
+####################################
+# Topology File for:
+# param/AQ4.tpl
+# /home/salah/mcce-charges/epik_inhibitors/output/Erlotinib/Erlotinib
+#
+# Created on: 2016-06-12
+#
+# Created with: make_tpl_1.py by Salah Salah
+####################################
+
+# neural always starts with 0
+# numberical value means the charge is 1
+# alphabet lower case means the charge is 2
+# alphabet upper case means the charge is 3
+# nothing for charge of 4, this code will not work
+
+CONFLIST AQ4        AQ4BK AQ401 AQ402 AQ4DM
+
+NATOM    AQ4BK      0
+NATOM    AQ401      52
+NATOM    AQ402      53
+NATOM    AQ4DM      0
+
+IATOM    AQ401    C1    0
+IATOM    AQ401    C2    1
+IATOM    AQ401    C3    2
+IATOM    AQ401    C4    3
+IATOM    AQ401    C5    4
+IATOM    AQ401    N1    5
+IATOM    AQ401    C6    6
+IATOM    AQ401    C7    7
+IATOM    AQ401    C8    8
+IATOM    AQ401    C9    9
+IATOM    AQ401    O1   10
+IATOM    AQ401   C10   11
+IATOM    AQ401   C11   12
+IATOM    AQ401    O2   13
+IATOM    AQ401   C12   14
+IATOM    AQ401   C13   15
+IATOM    AQ401    O3   16
+IATOM    AQ401   C14   17
+IATOM    AQ401   C15   18
+IATOM    AQ401    O4   19
+IATOM    AQ401   C16   20
+IATOM    AQ401   C17   21
+IATOM    AQ401   C18   22
+IATOM    AQ401    N2   23
+IATOM    AQ401   C19   24
+IATOM    AQ401    N3   25
+IATOM    AQ401   C20   26
+IATOM    AQ401   C21   27
+IATOM    AQ401   C22   28
+IATOM    AQ401    H1   29
+IATOM    AQ401    H2   30
+IATOM    AQ401    H3   31
+IATOM    AQ401    H4   32
+IATOM    AQ401    H5   33
+IATOM    AQ401    H6   34
+IATOM    AQ401    H7   35
+IATOM    AQ401    H8   36
+IATOM    AQ401    H9   37
+IATOM    AQ401   H10   38
+IATOM    AQ401   H11   39
+IATOM    AQ401   H12   40
+IATOM    AQ401   H13   41
+IATOM    AQ401   H14   42
+IATOM    AQ401   H15   43
+IATOM    AQ401   H16   44
+IATOM    AQ401   H17   45
+IATOM    AQ401   H18   46
+IATOM    AQ401   H19   47
+IATOM    AQ401   H20   48
+IATOM    AQ401   H21   49
+IATOM    AQ401   H22   50
+IATOM    AQ401   H23   51
+
+IATOM    AQ402    C1    0
+IATOM    AQ402    C2    1
+IATOM    AQ402    C3    2
+IATOM    AQ402    C4    3
+IATOM    AQ402    C5    4
+IATOM    AQ402    N1    5
+IATOM    AQ402    C6    6
+IATOM    AQ402    C7    7
+IATOM    AQ402    C8    8
+IATOM    AQ402    C9    9
+IATOM    AQ402    O1   10
+IATOM    AQ402   C10   11
+IATOM    AQ402   C11   12
+IATOM    AQ402    O2   13
+IATOM    AQ402   C12   14
+IATOM    AQ402   C13   15
+IATOM    AQ402    O3   16
+IATOM    AQ402   C14   17
+IATOM    AQ402   C15   18
+IATOM    AQ402    O4   19
+IATOM    AQ402   C16   20
+IATOM    AQ402   C17   21
+IATOM    AQ402   C18   22
+IATOM    AQ402    N2   23
+IATOM    AQ402   C19   24
+IATOM    AQ402    N3   25
+IATOM    AQ402   C20   26
+IATOM    AQ402   C21   27
+IATOM    AQ402   C22   28
+IATOM    AQ402    H1   29
+IATOM    AQ402    H2   30
+IATOM    AQ402    H3   31
+IATOM    AQ402    H4   32
+IATOM    AQ402    H5   33
+IATOM    AQ402    H6   34
+IATOM    AQ402    H7   35
+IATOM    AQ402    H8   36
+IATOM    AQ402    H9   37
+IATOM    AQ402   H10   38
+IATOM    AQ402   H11   39
+IATOM    AQ402   H12   40
+IATOM    AQ402   H13   41
+IATOM    AQ402   H14   42
+IATOM    AQ402   H15   43
+IATOM    AQ402   H16   44
+IATOM    AQ402   H17   45
+IATOM    AQ402   H18   46
+IATOM    AQ402   H19   47
+IATOM    AQ402   H20   48
+IATOM    AQ402   H21   49
+IATOM    AQ402   H22   50
+IATOM    AQ402   H23   51
+IATOM    AQ402   H53   52
+
+ATOMNAME AQ401     0  C1
+ATOMNAME AQ401     1  C2
+ATOMNAME AQ401     2  C3
+ATOMNAME AQ401     3  C4
+ATOMNAME AQ401     4  C5
+ATOMNAME AQ401     5  N1
+ATOMNAME AQ401     6  C6
+ATOMNAME AQ401     7  C7
+ATOMNAME AQ401     8  C8
+ATOMNAME AQ401     9  C9
+ATOMNAME AQ401    10  O1
+ATOMNAME AQ401    11 C10
+ATOMNAME AQ401    12 C11
+ATOMNAME AQ401    13  O2
+ATOMNAME AQ401    14 C12
+ATOMNAME AQ401    15 C13
+ATOMNAME AQ401    16  O3
+ATOMNAME AQ401    17 C14
+ATOMNAME AQ401    18 C15
+ATOMNAME AQ401    19  O4
+ATOMNAME AQ401    20 C16
+ATOMNAME AQ401    21 C17
+ATOMNAME AQ401    22 C18
+ATOMNAME AQ401    23  N2
+ATOMNAME AQ401    24 C19
+ATOMNAME AQ401    25  N3
+ATOMNAME AQ401    26 C20
+ATOMNAME AQ401    27 C21
+ATOMNAME AQ401    28 C22
+ATOMNAME AQ401    29  H1
+ATOMNAME AQ401    30  H2
+ATOMNAME AQ401    31  H3
+ATOMNAME AQ401    32  H4
+ATOMNAME AQ401    33  H5
+ATOMNAME AQ401    34  H6
+ATOMNAME AQ401    35  H7
+ATOMNAME AQ401    36  H8
+ATOMNAME AQ401    37  H9
+ATOMNAME AQ401    38 H10
+ATOMNAME AQ401    39 H11
+ATOMNAME AQ401    40 H12
+ATOMNAME AQ401    41 H13
+ATOMNAME AQ401    42 H14
+ATOMNAME AQ401    43 H15
+ATOMNAME AQ401    44 H16
+ATOMNAME AQ401    45 H17
+ATOMNAME AQ401    46 H18
+ATOMNAME AQ401    47 H19
+ATOMNAME AQ401    48 H20
+ATOMNAME AQ401    49 H21
+ATOMNAME AQ401    50 H22
+ATOMNAME AQ401    51 H23
+
+ATOMNAME AQ402     0  C1
+ATOMNAME AQ402     1  C2
+ATOMNAME AQ402     2  C3
+ATOMNAME AQ402     3  C4
+ATOMNAME AQ402     4  C5
+ATOMNAME AQ402     5  N1
+ATOMNAME AQ402     6  C6
+ATOMNAME AQ402     7  C7
+ATOMNAME AQ402     8  C8
+ATOMNAME AQ402     9  C9
+ATOMNAME AQ402    10  O1
+ATOMNAME AQ402    11 C10
+ATOMNAME AQ402    12 C11
+ATOMNAME AQ402    13  O2
+ATOMNAME AQ402    14 C12
+ATOMNAME AQ402    15 C13
+ATOMNAME AQ402    16  O3
+ATOMNAME AQ402    17 C14
+ATOMNAME AQ402    18 C15
+ATOMNAME AQ402    19  O4
+ATOMNAME AQ402    20 C16
+ATOMNAME AQ402    21 C17
+ATOMNAME AQ402    22 C18
+ATOMNAME AQ402    23  N2
+ATOMNAME AQ402    24 C19
+ATOMNAME AQ402    25  N3
+ATOMNAME AQ402    26 C20
+ATOMNAME AQ402    27 C21
+ATOMNAME AQ402    28 C22
+ATOMNAME AQ402    29  H1
+ATOMNAME AQ402    30  H2
+ATOMNAME AQ402    31  H3
+ATOMNAME AQ402    32  H4
+ATOMNAME AQ402    33  H5
+ATOMNAME AQ402    34  H6
+ATOMNAME AQ402    35  H7
+ATOMNAME AQ402    36  H8
+ATOMNAME AQ402    37  H9
+ATOMNAME AQ402    38 H10
+ATOMNAME AQ402    39 H11
+ATOMNAME AQ402    40 H12
+ATOMNAME AQ402    41 H13
+ATOMNAME AQ402    42 H14
+ATOMNAME AQ402    43 H15
+ATOMNAME AQ402    44 H16
+ATOMNAME AQ402    45 H17
+ATOMNAME AQ402    46 H18
+ATOMNAME AQ402    47 H19
+ATOMNAME AQ402    48 H20
+ATOMNAME AQ402    49 H21
+ATOMNAME AQ402    50 H22
+ATOMNAME AQ402    51 H23
+ATOMNAME AQ402    52 H53
+
+#1.Basic Conformer Information: name, pka, em, rxn.
+#23456789A123456789B123456789C
+
+# PROTON SECTION: PROTON means charge
+
+PROTON   AQ401      0    
+PROTON   AQ402      0    
+PROTON   AQ4DM      0    
+
+# Solution pKa Section: pKa data from CRC Handbook of Chemistry and Physics
+# pka is set to zero
+PKA      AQ401         0.000
+PKA      AQ402         0.000
+PKA      AQ4DM         0.000
+
+#ELECTRON SECTION:
+ELECTRON AQ401      0.0  
+ELECTRON AQ402      0.0  
+ELECTRON AQ4DM      0.0  
+
+# EM SECTION:
+EM       AQ401      0.0  
+EM       AQ402      0.0  
+EM       AQ4DM      0.0  
+
+# REACTION FIELD ENERGY SECTION:
+#
+#	  1m17	   4hjo
+# AQ401  -10.083  -10.080
+# AQ402	 -10.371  -10.480
+#
+
+RXN      AQ401      -10.080
+RXN      AQ402      -10.480
+
+#  AQ401
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn 
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|
+CONNECT  AQ401  C1      sp     0    H1   0    C2  
+CONNECT  AQ401  C2      sp     0    C1   0    C3  
+CONNECT  AQ401  C3     sp2     0    C2   0    C4   0   C22  
+CONNECT  AQ401  C4     sp2     0    C3   0    H2   0    C5  
+CONNECT  AQ401  C5     sp2     0    C4   0    N1   0   C20  
+CONNECT  AQ401  N1     sp3     0    C5   0    C6   0    H3  
+CONNECT  AQ401  C6     sp2     0    N1   0    N3   0    C7  
+CONNECT  AQ401  C7     sp2     0    C6   0   C18   0    C8  
+CONNECT  AQ401  C8     sp2     0    C7   0    H4   0    C9  
+CONNECT  AQ401  C9     sp2     0    C8   0   C13   0    O1  
+CONNECT  AQ401  O1     sp3     0    C9   0   C10  
+CONNECT  AQ401 C10     sp3     0    O1   0    H5   0    H6   0   C11  
+CONNECT  AQ401 C11     sp3     0   C10   0    H7   0    H8   0    O2  
+CONNECT  AQ401  O2     sp3     0   C11   0   C12  
+CONNECT  AQ401 C12     sp3     0    O2   0    H9   0   H10   0   H11  
+CONNECT  AQ401 C13     sp2     0    C9   0   C17   0    O3  
+CONNECT  AQ401  O3     sp3     0   C13   0   C14  
+CONNECT  AQ401 C14     sp3     0    O3   0   H12   0   H13   0   C15  
+CONNECT  AQ401 C15     sp3     0   C14   0    O4   0   H14   0   H15  
+CONNECT  AQ401  O4     sp3     0   C15   0   C16  
+CONNECT  AQ401 C16     sp3     0    O4   0   H16   0   H17   0   H18  
+CONNECT  AQ401 C17     sp2     0   C13   0   C18   0   H19  
+CONNECT  AQ401 C18     sp2     0    C7   0   C17   0    N2  
+CONNECT  AQ401  N2     sp2     0   C18   0   C19  
+CONNECT  AQ401 C19     sp2     0    N2   0   H20   0    N3  
+CONNECT  AQ401  N3     sp2     0    C6   0   C19  
+CONNECT  AQ401 C20     sp2     0    C5   0   C21   0   H21  
+CONNECT  AQ401 C21     sp2     0   C20   0   C22   0   H22  
+CONNECT  AQ401 C22     sp2     0    C3   0   C21   0   H23  
+CONNECT  AQ401  H1      s      0    C1  
+CONNECT  AQ401  H2      s      0    C4  
+CONNECT  AQ401  H3      s      0    N1  
+CONNECT  AQ401  H4      s      0    C8  
+CONNECT  AQ401  H5      s      0   C10  
+CONNECT  AQ401  H6      s      0   C10  
+CONNECT  AQ401  H7      s      0   C11  
+CONNECT  AQ401  H8      s      0   C11  
+CONNECT  AQ401  H9      s      0   C12  
+CONNECT  AQ401 H10      s      0   C12  
+CONNECT  AQ401 H11      s      0   C12  
+CONNECT  AQ401 H12      s      0   C14  
+CONNECT  AQ401 H13      s      0   C14  
+CONNECT  AQ401 H14      s      0   C15  
+CONNECT  AQ401 H15      s      0   C15  
+CONNECT  AQ401 H16      s      0   C16  
+CONNECT  AQ401 H17      s      0   C16  
+CONNECT  AQ401 H18      s      0   C16  
+CONNECT  AQ401 H19      s      0   C17  
+CONNECT  AQ401 H20      s      0   C19  
+CONNECT  AQ401 H21      s      0   C20  
+CONNECT  AQ401 H22      s      0   C21  
+CONNECT  AQ401 H23      s      0   C22  
+
+#  AQ402
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn 
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|
+CONNECT  AQ402  C1      sp     0    H1   0    C2  
+CONNECT  AQ402  C2      sp     0    C1   0    C3  
+CONNECT  AQ402  C3     sp2     0    C2   0    C4   0   C22  
+CONNECT  AQ402  C4     sp2     0    C3   0    H2   0    C5  
+CONNECT  AQ402  C5     sp2     0    C4   0    N1   0   C20  
+CONNECT  AQ402  N1     sp3     0    C5   0    C6   0    H3  
+CONNECT  AQ402  C6     sp2     0    N1   0    N3   0    C7  
+CONNECT  AQ402  C7     sp2     0    C6   0   C18   0    C8  
+CONNECT  AQ402  C8     sp2     0    C7   0    H4   0    C9  
+CONNECT  AQ402  C9     sp2     0    C8   0   C13   0    O1  
+CONNECT  AQ402  O1     sp3     0    C9   0   C10  
+CONNECT  AQ402 C10     sp3     0    O1   0    H5   0    H6   0   C11  
+CONNECT  AQ402 C11     sp3     0   C10   0    H7   0    H8   0    O2  
+CONNECT  AQ402  O2     sp3     0   C11   0   C12  
+CONNECT  AQ402 C12     sp3     0    O2   0    H9   0   H10   0   H11  
+CONNECT  AQ402 C13     sp2     0    C9   0   C17   0    O3  
+CONNECT  AQ402  O3     sp3     0   C13   0   C14  
+CONNECT  AQ402 C14     sp3     0    O3   0   H12   0   H13   0   C15  
+CONNECT  AQ402 C15     sp3     0   C14   0    O4   0   H14   0   H15  
+CONNECT  AQ402  O4     sp3     0   C15   0   C16  
+CONNECT  AQ402 C16     sp3     0    O4   0   H16   0   H17   0   H18  
+CONNECT  AQ402 C17     sp2     0   C13   0   C18   0   H19  
+CONNECT  AQ402 C18     sp2     0    C7   0   C17   0    N2  
+CONNECT  AQ402  N2     sp3     0   C18   0   C19   0   H53  
+CONNECT  AQ402 C19     sp2     0    N2   0   H20   0    N3  
+CONNECT  AQ402  N3     sp2     0    C6   0   C19  
+CONNECT  AQ402 C20     sp2     0    C5   0   C21   0   H21  
+CONNECT  AQ402 C21     sp2     0   C20   0   C22   0   H22  
+CONNECT  AQ402 C22     sp2     0    C3   0   C21   0   H23  
+CONNECT  AQ402  H1      s      0    C1  
+CONNECT  AQ402  H2      s      0    C4  
+CONNECT  AQ402  H3      s      0    N1  
+CONNECT  AQ402  H4      s      0    C8  
+CONNECT  AQ402  H5      s      0   C10  
+CONNECT  AQ402  H6      s      0   C10  
+CONNECT  AQ402  H7      s      0   C11  
+CONNECT  AQ402  H8      s      0   C11  
+CONNECT  AQ402  H9      s      0   C12  
+CONNECT  AQ402 H10      s      0   C12  
+CONNECT  AQ402 H11      s      0   C12  
+CONNECT  AQ402 H12      s      0   C14  
+CONNECT  AQ402 H13      s      0   C14  
+CONNECT  AQ402 H14      s      0   C15  
+CONNECT  AQ402 H15      s      0   C15  
+CONNECT  AQ402 H16      s      0   C16  
+CONNECT  AQ402 H17      s      0   C16  
+CONNECT  AQ402 H18      s      0   C16  
+CONNECT  AQ402 H19      s      0   C17  
+CONNECT  AQ402 H20      s      0   C19  
+CONNECT  AQ402 H21      s      0   C20  
+CONNECT  AQ402 H22      s      0   C21  
+CONNECT  AQ402 H23      s      0   C22  
+CONNECT  AQ402 H53      s      0    N2  
+
+# Atom Parameters:
+# Van Der Waals Radii. See source for reference
+RADIUS   AQ4    C1        1.7
+RADIUS   AQ4    C2        1.7
+RADIUS   AQ4    C3        1.7
+RADIUS   AQ4    C4        1.7
+RADIUS   AQ4    C5        1.7
+RADIUS   AQ4    N1       1.55
+RADIUS   AQ4    C6        1.7
+RADIUS   AQ4    C7        1.7
+RADIUS   AQ4    C8        1.7
+RADIUS   AQ4    C9        1.7
+RADIUS   AQ4    O1       1.52
+RADIUS   AQ4    C10       1.7
+RADIUS   AQ4    C11       1.7
+RADIUS   AQ4    O2       1.52
+RADIUS   AQ4    C12       1.7
+RADIUS   AQ4    C13       1.7
+RADIUS   AQ4    O3       1.52
+RADIUS   AQ4    C14       1.7
+RADIUS   AQ4    C15       1.7
+RADIUS   AQ4    O4       1.52
+RADIUS   AQ4    C16       1.7
+RADIUS   AQ4    C17       1.7
+RADIUS   AQ4    C18       1.7
+RADIUS   AQ4    N2       1.55
+RADIUS   AQ4    C19       1.7
+RADIUS   AQ4    N3       1.55
+RADIUS   AQ4    C20       1.7
+RADIUS   AQ4    C21       1.7
+RADIUS   AQ4    C22       1.7
+RADIUS   AQ4    H1       1.00
+RADIUS   AQ4    H2       1.00
+RADIUS   AQ4    H3       1.00
+RADIUS   AQ4    H4       1.00
+RADIUS   AQ4    H5       1.00
+RADIUS   AQ4    H6       1.00
+RADIUS   AQ4    H7       1.00
+RADIUS   AQ4    H8       1.00
+RADIUS   AQ4    H9       1.00
+RADIUS   AQ4    H10      1.00
+RADIUS   AQ4    H11      1.00
+RADIUS   AQ4    H12      1.00
+RADIUS   AQ4    H13      1.00
+RADIUS   AQ4    H14      1.00
+RADIUS   AQ4    H15      1.00
+RADIUS   AQ4    H16      1.00
+RADIUS   AQ4    H17      1.00
+RADIUS   AQ4    H18      1.00
+RADIUS   AQ4    H19      1.00
+RADIUS   AQ4    H20      1.00
+RADIUS   AQ4    H21      1.00
+RADIUS   AQ4    H22      1.00
+RADIUS   AQ4    H23      1.00
+RADIUS   AQ4    H53      1.00
+
+CHARGE   AQ401  C1  -0.1346
+CHARGE   AQ401  C2  -0.1260
+CHARGE   AQ401  C3   0.0481
+CHARGE   AQ401  C4  -0.1611
+CHARGE   AQ401  C5   0.1656
+CHARGE   AQ401  N1  -0.7616
+CHARGE   AQ401  C6   0.7003
+CHARGE   AQ401  C7  -0.2635
+CHARGE   AQ401  C8  -0.1695
+CHARGE   AQ401  C9   0.1135
+CHARGE   AQ401  O1  -0.3090
+CHARGE   AQ401  C10  0.1199
+CHARGE   AQ401  C11  0.1214
+CHARGE   AQ401  O2  -0.4236
+CHARGE   AQ401  C12  0.1161
+CHARGE   AQ401  C13  0.1224
+CHARGE   AQ401  O3  -0.3277
+CHARGE   AQ401  C14  0.1271
+CHARGE   AQ401  C15  0.1206
+CHARGE   AQ401  O4  -0.4227
+CHARGE   AQ401  C16  0.1182
+CHARGE   AQ401  C17 -0.2039
+CHARGE   AQ401  C18  0.4226
+CHARGE   AQ401  N2  -0.6950
+CHARGE   AQ401  C19  0.6516
+CHARGE   AQ401  N3  -0.7420
+CHARGE   AQ401  C20 -0.1322
+CHARGE   AQ401  C21 -0.1091
+CHARGE   AQ401  C22 -0.1315
+CHARGE   AQ401  H1   0.1672
+CHARGE   AQ401  H2   0.1380
+CHARGE   AQ401  H3   0.4419
+CHARGE   AQ401  H4   0.1457
+CHARGE   AQ401  H5   0.0571
+CHARGE   AQ401  H6   0.0571
+CHARGE   AQ401  H7   0.0460
+CHARGE   AQ401  H8   0.0460
+CHARGE   AQ401  H9   0.0366
+CHARGE   AQ401  H10  0.0366
+CHARGE   AQ401  H11  0.0366
+CHARGE   AQ401  H12  0.0560
+CHARGE   AQ401  H13  0.0560
+CHARGE   AQ401  H14  0.0437
+CHARGE   AQ401  H15  0.0437
+CHARGE   AQ401  H16  0.0349
+CHARGE   AQ401  H17  0.0349
+CHARGE   AQ401  H18  0.0349
+CHARGE   AQ401  H19  0.1689
+CHARGE   AQ401  H20  0.0547
+CHARGE   AQ401  H21  0.1504
+CHARGE   AQ401  H22  0.1374
+CHARGE   AQ401  H23  0.1415
+
+CHARGE   AQ402  C1  -0.1316 
+CHARGE   AQ402  C2   -0.126 
+CHARGE   AQ402  C3   0.0452 
+CHARGE   AQ402  C4  -0.1137 
+CHARGE   AQ402  C5   0.1613 
+CHARGE   AQ402  N1  -0.7583 
+CHARGE   AQ402  C6    0.714 
+CHARGE   AQ402  C7  -0.2975 
+CHARGE   AQ402  C8  -0.1203 
+CHARGE   AQ402  C9    0.084 
+CHARGE   AQ402  O1  -0.3207 
+CHARGE   AQ402  C10  0.1249 
+CHARGE   AQ402  C11  0.1203 
+CHARGE   AQ402  O2  -0.4258 
+CHARGE   AQ402  C12  0.1184 
+CHARGE   AQ402  C13  0.1498 
+CHARGE   AQ402  O3  -0.3116 
+CHARGE   AQ402  C14  0.1191 
+CHARGE   AQ402  C15  0.1212 
+CHARGE   AQ402  O4  -0.4248 
+CHARGE   AQ402  C16  0.1186 
+CHARGE   AQ402  C17 -0.2537 
+CHARGE   AQ402  C18  0.4557 
+CHARGE   AQ402  N2  -0.7147 
+CHARGE   AQ402  C19    0.67 
+CHARGE   AQ402  N3  -0.7603 
+CHARGE   AQ402  C20 -0.1696 
+CHARGE   AQ402  C21 -0.1082 
+CHARGE   AQ402  C22 -0.1294 
+CHARGE   AQ402  H1   0.1674 
+CHARGE   AQ402  H2   0.1575 
+CHARGE   AQ402  H3   0.4461 
+CHARGE   AQ402  H4    0.143 
+CHARGE   AQ402  H5   0.0521 
+CHARGE   AQ402  H6   0.0521 
+CHARGE   AQ402  H7   0.0442 
+CHARGE   AQ402  H8   0.0442 
+CHARGE   AQ402  H9   0.0357 
+CHARGE   AQ402  H10  0.0357 
+CHARGE   AQ402  H11  0.0357 
+CHARGE   AQ402  H12  0.0614 
+CHARGE   AQ402  H13  0.0614 
+CHARGE   AQ402  H14   0.044 
+CHARGE   AQ402  H15   0.044 
+CHARGE   AQ402  H16  0.0358 
+CHARGE   AQ402  H17  0.0358 
+CHARGE   AQ402  H18  0.0358 
+CHARGE   AQ402  H19  0.1671 
+CHARGE   AQ402  H20  0.0549 
+CHARGE   AQ402  H21  0.1319 
+CHARGE   AQ402  H22  0.1364 
+CHARGE   AQ402  H23  0.1412 
+CHARGE   AQ402  H53  0.3120 
+			    
+# EXTRA energy for tautomers:
+EXTRA    AQ401         0.001
+EXTRA    AQ402         4.030
+

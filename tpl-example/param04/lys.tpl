@@ -89,7 +89,7 @@ ATOMNAME LYS+1   15 3HZ
 PROTON   LYS01      0
 PROTON   LYS+1      +1
 PKA      LYS01      0.0
-PKA      LYS+1      10.8
+PKA      LYS+1      10.4  #lowered from 10.8 during mcce2 benchmark
 ELECTRON LYS01      0
 ELECTRON LYS+1      0
 EM       LYS01      0.0
@@ -101,6 +101,9 @@ RXN      LYS+1      -19.8
 
 #2.Structure Connectivity
 #23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  LYSBK  N   sp2       -1    C   0     CA  0     H
 CONNECT  LYSBK  H   s         0     N
 CONNECT  LYSBK  CA  sp3       0     N   0     C   0     CB  0     HA

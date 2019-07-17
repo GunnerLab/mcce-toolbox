@@ -648,7 +648,7 @@ PKA      UbQH2      3.98
 
 ELECTRON UbQ01      0
 ELECTRON UbQ-1      1
-ELECTRON UbQ-2      1
+ELECTRON UbQ-2      2
 ELECTRON UbQP1      1
 ELECTRON UbQP2      1
 ELECTRON UbQS1      2
@@ -675,6 +675,9 @@ RXN      UbQH2      -4.07
 
 #2.Structure Connectivity
 #23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  UbQBK  C12 sp2       0     C11 0     C13 
 CONNECT  UbQBK  C13 sp2       0     C12 0     C14 
 CONNECT  UbQBK  C14 sp3       0     C13 0     C15 0     C16 

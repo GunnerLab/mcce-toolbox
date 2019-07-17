@@ -256,6 +256,9 @@ RXN      HEM+1      -10.95
 
 #2.Structure Connectivity
 #23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  HEM01 FE   sp3d2     0     N A 0     N B 0     N C 0     N D LIG   NE2 LIG   SD
 CONNECT  HEM01  CHA sp2       0     C4D 0     C1A 0     HHA
 CONNECT  HEM01  CHB sp2       0     C4A 0     C1B 0     HHB

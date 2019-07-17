@@ -352,6 +352,9 @@ RXN      BDL+1      -8.99
 
 #2.Structure Connectivity
 #23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
+
 CONNECT  BDLBK  C1  sp2       0     O2A 0     C2 
 CONNECT  BDLBK  C2  sp2       0     C1  0     C3 
 CONNECT  BDLBK  C3  sp3       0     C2  0     C4  0     C5 

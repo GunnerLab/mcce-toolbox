@@ -26,6 +26,9 @@ ATOMNAME GLYBK    6  C
 
 #2.Structure Connectivity
 #23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  GLYBK  N   sp2       -1    C   0     CA  0     H
 CONNECT  GLYBK  H   s         0     N
 CONNECT  GLYBK  CA  sp3       0     N   0     C   0    1HA  0    2HA

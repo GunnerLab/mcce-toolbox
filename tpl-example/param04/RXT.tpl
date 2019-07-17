@@ -1,0 +1,437 @@
+####################################
+# Topology File for:
+# param/RXT.tpl
+# /home/salah/mcce-charges/epik_inhibitors/output/Ruxolitinib/Ruxolitinib
+#
+# Created on: 2016-06-12
+#
+# Created with: make_tpl_1.py by Salah Salah
+####################################
+
+# neural always starts with 0
+# numberical value means the charge is 1
+# alphabet lower case means the charge is 2
+# alphabet upper case means the charge is 3
+# nothing for charge of 4, this code will not work
+
+CONFLIST RXT        RXTBK RXT01 RXT02 RXTDM 
+
+NATOM    RXTBK      0
+NATOM    RXT01      41
+NATOM    RXT02      40
+NATOM    RXTDM      0
+
+IATOM    RXT01   CAK    0
+IATOM    RXT01   CAH    1
+IATOM    RXT01   CAI    2
+IATOM    RXT01   CAL    3
+IATOM    RXT01   CAU    4
+IATOM    RXT01   CAV    5
+IATOM    RXT01   CAJ    6
+IATOM    RXT01   CAB    7
+IATOM    RXT01   NAA    8
+IATOM    RXT01   NAW    9
+IATOM    RXT01   CAG   10
+IATOM    RXT01   NAO   11
+IATOM    RXT01   CAF   12
+IATOM    RXT01   CAQ   13
+IATOM    RXT01   CAR   14
+IATOM    RXT01   NAM   15
+IATOM    RXT01   CAE   16
+IATOM    RXT01   NAP   17
+IATOM    RXT01   CAT   18
+IATOM    RXT01   CAS   19
+IATOM    RXT01   CAD   20
+IATOM    RXT01   CAC   21
+IATOM    RXT01   NAN   22
+IATOM    RXT01    H1   23
+IATOM    RXT01    H2   24
+IATOM    RXT01    H3   25
+IATOM    RXT01    H4   26
+IATOM    RXT01    H5   27
+IATOM    RXT01    H6   28
+IATOM    RXT01    H7   29
+IATOM    RXT01    H8   30
+IATOM    RXT01    H9   31
+IATOM    RXT01   H10   32
+IATOM    RXT01   H11   33
+IATOM    RXT01   H12   34
+IATOM    RXT01   H18   35
+IATOM    RXT01   H19   36
+IATOM    RXT01   H20   37
+IATOM    RXT01   H21   38
+IATOM    RXT01   H22   39
+IATOM    RXT01   H23   40
+
+IATOM    RXT02   CAK    0
+IATOM    RXT02   CAH    1
+IATOM    RXT02   CAI    2
+IATOM    RXT02   CAL    3
+IATOM    RXT02   CAU    4
+IATOM    RXT02   CAV    5
+IATOM    RXT02   CAJ    6
+IATOM    RXT02   CAB    7
+IATOM    RXT02   NAA    8
+IATOM    RXT02   NAW    9
+IATOM    RXT02   CAG   10
+IATOM    RXT02   NAO   11
+IATOM    RXT02   CAF   12
+IATOM    RXT02   CAQ   13
+IATOM    RXT02   CAR   14
+IATOM    RXT02   NAM   15
+IATOM    RXT02   CAE   16
+IATOM    RXT02   NAP   17
+IATOM    RXT02   CAT   18
+IATOM    RXT02   CAS   19
+IATOM    RXT02   CAD   20
+IATOM    RXT02   CAC   21
+IATOM    RXT02   NAN   22
+IATOM    RXT02    H1   23
+IATOM    RXT02    H2   24
+IATOM    RXT02    H3   25
+IATOM    RXT02    H4   26
+IATOM    RXT02    H5   27
+IATOM    RXT02    H6   28
+IATOM    RXT02    H7   29
+IATOM    RXT02    H8   30
+IATOM    RXT02    H9   31
+IATOM    RXT02   H10   32
+IATOM    RXT02   H11   33
+IATOM    RXT02   H12   34
+IATOM    RXT02   H18   35
+IATOM    RXT02   H19   36
+IATOM    RXT02   H20   37
+IATOM    RXT02   H21   38
+IATOM    RXT02   H22   39
+
+ATOMNAME RXT01     0 CAK
+ATOMNAME RXT01     1 CAH
+ATOMNAME RXT01     2 CAI
+ATOMNAME RXT01     3 CAL
+ATOMNAME RXT01     4 CAU
+ATOMNAME RXT01     5 CAV
+ATOMNAME RXT01     6 CAJ
+ATOMNAME RXT01     7 CAB
+ATOMNAME RXT01     8 NAA
+ATOMNAME RXT01     9 NAW
+ATOMNAME RXT01    10 CAG
+ATOMNAME RXT01    11 NAO
+ATOMNAME RXT01    12 CAF
+ATOMNAME RXT01    13 CAQ
+ATOMNAME RXT01    14 CAR
+ATOMNAME RXT01    15 NAM
+ATOMNAME RXT01    16 CAE
+ATOMNAME RXT01    17 NAP
+ATOMNAME RXT01    18 CAT
+ATOMNAME RXT01    19 CAS
+ATOMNAME RXT01    20 CAD
+ATOMNAME RXT01    21 CAC
+ATOMNAME RXT01    22 NAN
+ATOMNAME RXT01    23  H1
+ATOMNAME RXT01    24  H2
+ATOMNAME RXT01    25  H3
+ATOMNAME RXT01    26  H4
+ATOMNAME RXT01    27  H5
+ATOMNAME RXT01    28  H6
+ATOMNAME RXT01    29  H7
+ATOMNAME RXT01    30  H8
+ATOMNAME RXT01    31  H9
+ATOMNAME RXT01    32 H10
+ATOMNAME RXT01    33 H11
+ATOMNAME RXT01    34 H12
+ATOMNAME RXT01    35 H18
+ATOMNAME RXT01    36 H19
+ATOMNAME RXT01    37 H20
+ATOMNAME RXT01    38 H21
+ATOMNAME RXT01    39 H22
+ATOMNAME RXT01    40 H23
+
+ATOMNAME RXT02     0 CAK
+ATOMNAME RXT02     1 CAH
+ATOMNAME RXT02     2 CAI
+ATOMNAME RXT02     3 CAL
+ATOMNAME RXT02     4 CAU
+ATOMNAME RXT02     5 CAV
+ATOMNAME RXT02     6 CAJ
+ATOMNAME RXT02     7 CAB
+ATOMNAME RXT02     8 NAA
+ATOMNAME RXT02     9 NAW
+ATOMNAME RXT02    10 CAG
+ATOMNAME RXT02    11 NAO
+ATOMNAME RXT02    12 CAF
+ATOMNAME RXT02    13 CAQ
+ATOMNAME RXT02    14 CAR
+ATOMNAME RXT02    15 NAM
+ATOMNAME RXT02    16 CAE
+ATOMNAME RXT02    17 NAP
+ATOMNAME RXT02    18 CAT
+ATOMNAME RXT02    19 CAS
+ATOMNAME RXT02    20 CAD
+ATOMNAME RXT02    21 CAC
+ATOMNAME RXT02    22 NAN
+ATOMNAME RXT02    23  H1
+ATOMNAME RXT02    24  H2
+ATOMNAME RXT02    25  H3
+ATOMNAME RXT02    26  H4
+ATOMNAME RXT02    27  H5
+ATOMNAME RXT02    28  H6
+ATOMNAME RXT02    29  H7
+ATOMNAME RXT02    30  H8
+ATOMNAME RXT02    31  H9
+ATOMNAME RXT02    32 H10
+ATOMNAME RXT02    33 H11
+ATOMNAME RXT02    34 H12
+ATOMNAME RXT02    35 H18
+ATOMNAME RXT02    36 H19
+ATOMNAME RXT02    37 H20
+ATOMNAME RXT02    38 H21
+ATOMNAME RXT02    39 H22
+
+#1.Basic Conformer Information: name, pka, em, rxn.
+#23456789A123456789B123456789C
+
+# PROTON SECTION: PROTON means charge
+
+PROTON   RXT01      0    
+PROTON   RXT02      0    
+PROTON   RXTDM      0    
+
+# Solution pKa Section: pKa data from CRC Handbook of Chemistry and Physics
+# pka is set to zero
+PKA      RXT01         0.000
+PKA      RXT02         0.000
+PKA      RXTDM         0.000
+
+#ELECTRON SECTION:
+ELECTRON RXT01      0.0  
+ELECTRON RXT02      0.0  
+ELECTRON RXTDM      0.0  
+
+# EM SECTION:
+EM       RXT01      0.0  
+EM       RXT02      0.0  
+EM       RXTDM      0.0  
+
+# REACTION FIELD ENERGY SECTION:
+RXN      RXT01      0.0  
+RXN      RXT02      0.0  
+
+#  RXT01
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn 
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|
+CONNECT  RXT01 CAK     sp3     0    H1   0    H2   0   CAH   0   CAU  
+CONNECT  RXT01 CAH     sp3     0   CAK   0    H3   0    H4   0   CAI  
+CONNECT  RXT01 CAI     sp3     0   CAH   0    H5   0    H6   0   CAL  
+CONNECT  RXT01 CAL     sp3     0   CAI   0   CAU   0    H7   0    H8  
+CONNECT  RXT01 CAU     sp3     0   CAK   0   CAL   0    H9   0   CAV  
+CONNECT  RXT01 CAV     sp3     0   CAU   0   H10   0   CAJ   0   NAW  
+CONNECT  RXT01 CAJ     sp3     0   CAV   0   CAB   0   H11   0   H12  
+CONNECT  RXT01 CAB      sp     0   CAJ   0   NAA  
+CONNECT  RXT01 NAA      sp     0   CAB  
+CONNECT  RXT01 NAW     sp3     0   CAV   0   CAG   0   NAO  
+CONNECT  RXT01 CAG     sp2     0   NAW   0   H18   0   CAQ  
+CONNECT  RXT01 NAO     sp2     0   NAW   0   CAF  
+CONNECT  RXT01 CAF     sp2     0   NAO   0   CAQ   0   H19  
+CONNECT  RXT01 CAQ     sp2     0   CAG   0   CAF   0   CAR  
+CONNECT  RXT01 CAR     sp2     0   CAQ   0   CAS   0   NAM  
+CONNECT  RXT01 NAM     sp2     0   CAR   0   CAE  
+CONNECT  RXT01 CAE     sp2     0   NAM   0   NAP   0   H20  
+CONNECT  RXT01 NAP     sp2     0   CAE   0   CAT  
+CONNECT  RXT01 CAT     sp2     0   NAP   0   CAS   0   NAN  
+CONNECT  RXT01 CAS     sp2     0   CAR   0   CAT   0   CAD  
+CONNECT  RXT01 CAD     sp2     0   CAS   0   CAC   0   H21  
+CONNECT  RXT01 CAC     sp2     0   CAD   0   H22   0   NAN  
+CONNECT  RXT01 NAN     sp3     0   CAT   0   CAC   0   H23  
+CONNECT  RXT01  H1      s      0   CAK  
+CONNECT  RXT01  H2      s      0   CAK  
+CONNECT  RXT01  H3      s      0   CAH  
+CONNECT  RXT01  H4      s      0   CAH  
+CONNECT  RXT01  H5      s      0   CAI  
+CONNECT  RXT01  H6      s      0   CAI  
+CONNECT  RXT01  H7      s      0   CAL  
+CONNECT  RXT01  H8      s      0   CAL  
+CONNECT  RXT01  H9      s      0   CAU  
+CONNECT  RXT01 H10      s      0   CAV  
+CONNECT  RXT01 H11      s      0   CAJ  
+CONNECT  RXT01 H12      s      0   CAJ  
+CONNECT  RXT01 H18      s      0   CAG  
+CONNECT  RXT01 H19      s      0   CAF  
+CONNECT  RXT01 H20      s      0   CAE  
+CONNECT  RXT01 H21      s      0   CAD  
+CONNECT  RXT01 H22      s      0   CAC  
+CONNECT  RXT01 H23      s      0   NAN  
+
+#  RXT02
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn 
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|
+CONNECT  RXT02 CAK     sp3     0    H1   0    H2   0   CAH   0   CAU  
+CONNECT  RXT02 CAH     sp3     0   CAK   0    H3   0    H4   0   CAI  
+CONNECT  RXT02 CAI     sp3     0   CAH   0    H5   0    H6   0   CAL  
+CONNECT  RXT02 CAL     sp3     0   CAI   0   CAU   0    H7   0    H8  
+CONNECT  RXT02 CAU     sp3     0   CAK   0   CAL   0    H9   0   CAV  
+CONNECT  RXT02 CAV     sp3     0   CAU   0   H10   0   CAJ   0   NAW  
+CONNECT  RXT02 CAJ     sp3     0   CAV   0   CAB   0   H11   0   H12  
+CONNECT  RXT02 CAB      sp     0   CAJ   0   NAA  
+CONNECT  RXT02 NAA      sp     0   CAB  
+CONNECT  RXT02 NAW     sp3     0   CAV   0   CAG   0   NAO  
+CONNECT  RXT02 CAG     sp2     0   NAW   0   H18   0   CAQ  
+CONNECT  RXT02 NAO     sp2     0   NAW   0   CAF  
+CONNECT  RXT02 CAF     sp2     0   NAO   0   CAQ   0   H19  
+CONNECT  RXT02 CAQ     sp2     0   CAG   0   CAF   0   CAR  
+CONNECT  RXT02 CAR     sp2     0   CAQ   0   CAS   0   NAM  
+CONNECT  RXT02 NAM     sp2     0   CAR   0   CAE  
+CONNECT  RXT02 CAE     sp2     0   NAM   0   NAP   0   H20  
+CONNECT  RXT02 NAP     sp2     0   CAE   0   CAT  
+CONNECT  RXT02 CAT     sp2     0   NAP   0   CAS   0   NAN  
+CONNECT  RXT02 CAS     sp2     0   CAR   0   CAT   0   CAD  
+CONNECT  RXT02 CAD     sp2     0   CAS   0   CAC   0   H21  
+CONNECT  RXT02 CAC     sp2     0   CAD   0   H22   0   NAN  
+CONNECT  RXT02 NAN     sp2     0   CAT   0   CAC  
+CONNECT  RXT02  H1      s      0   CAK  
+CONNECT  RXT02  H2      s      0   CAK  
+CONNECT  RXT02  H3      s      0   CAH  
+CONNECT  RXT02  H4      s      0   CAH  
+CONNECT  RXT02  H5      s      0   CAI  
+CONNECT  RXT02  H6      s      0   CAI  
+CONNECT  RXT02  H7      s      0   CAL  
+CONNECT  RXT02  H8      s      0   CAL  
+CONNECT  RXT02  H9      s      0   CAU  
+CONNECT  RXT02 H10      s      0   CAV  
+CONNECT  RXT02 H11      s      0   CAJ  
+CONNECT  RXT02 H12      s      0   CAJ  
+CONNECT  RXT02 H18      s      0   CAG  
+CONNECT  RXT02 H19      s      0   CAF  
+CONNECT  RXT02 H20      s      0   CAE  
+CONNECT  RXT02 H21      s      0   CAD  
+CONNECT  RXT02 H22      s      0   CAC  
+
+# Atom Parameters:
+# Van Der Waals Radii. See source for reference
+RADIUS   RXT    CAK       1.7
+RADIUS   RXT    CAH       1.7
+RADIUS   RXT    CAI       1.7
+RADIUS   RXT    CAL       1.7
+RADIUS   RXT    CAU       1.7
+RADIUS   RXT    CAV       1.7
+RADIUS   RXT    CAJ       1.7
+RADIUS   RXT    CAB       1.7
+RADIUS   RXT    NAA      1.55
+RADIUS   RXT    NAW      1.55
+RADIUS   RXT    CAG       1.7
+RADIUS   RXT    NAO      1.55
+RADIUS   RXT    CAF       1.7
+RADIUS   RXT    CAQ       1.7
+RADIUS   RXT    CAR       1.7
+RADIUS   RXT    NAM      1.55
+RADIUS   RXT    CAE       1.7
+RADIUS   RXT    NAP      1.55
+RADIUS   RXT    CAT       1.7
+RADIUS   RXT    CAS       1.7
+RADIUS   RXT    CAD       1.7
+RADIUS   RXT    CAC       1.7
+RADIUS   RXT    NAN      1.55
+RADIUS   RXT    H1        1.2
+RADIUS   RXT    H2        1.2
+RADIUS   RXT    H3        1.2
+RADIUS   RXT    H4        1.2
+RADIUS   RXT    H5        1.2
+RADIUS   RXT    H6        1.2
+RADIUS   RXT    H7        1.2
+RADIUS   RXT    H8        1.2
+RADIUS   RXT    H9        1.2
+RADIUS   RXT    H10       1.2
+RADIUS   RXT    H11       1.2
+RADIUS   RXT    H12       1.2
+RADIUS   RXT    H18       1.2
+RADIUS   RXT    H19       1.2
+RADIUS   RXT    H20       1.2
+RADIUS   RXT    H21       1.2
+RADIUS   RXT    H22       1.2
+RADIUS   RXT    H23       1.2
+
+CHARGE   RXT01  CAK -0.0798
+CHARGE   RXT01  CAH -0.0794
+CHARGE   RXT01  CAI -0.0794
+CHARGE   RXT01  CAL -0.0798
+CHARGE   RXT01  CAU -0.0911
+CHARGE   RXT01  CAV  0.0904
+CHARGE   RXT01  CAJ -0.0302
+CHARGE   RXT01  CAB  0.2067
+CHARGE   RXT01  NAA -0.3651
+CHARGE   RXT01  NAW   0.083
+CHARGE   RXT01  CAG -0.0947
+CHARGE   RXT01  NAO -0.5189
+CHARGE   RXT01  CAF  0.3293
+CHARGE   RXT01  CAQ -0.3349
+CHARGE   RXT01  CAR  0.5833
+CHARGE   RXT01  NAM -0.7173
+CHARGE   RXT01  CAE  0.6414
+CHARGE   RXT01  NAP -0.7001
+CHARGE   RXT01  CAT  0.5687
+CHARGE   RXT01  CAS -0.3092
+CHARGE   RXT01  CAD -0.1547
+CHARGE   RXT01  CAC -0.0011
+CHARGE   RXT01  NAN -0.6769
+CHARGE   RXT01  H1   0.0518
+CHARGE   RXT01  H2   0.0518
+CHARGE   RXT01  H3   0.0449
+CHARGE   RXT01  H4   0.0449
+CHARGE   RXT01  H5   0.0449
+CHARGE   RXT01  H6   0.0449
+CHARGE   RXT01  H7   0.0518
+CHARGE   RXT01  H8   0.0518
+CHARGE   RXT01  H9   0.0657
+CHARGE   RXT01  H10  0.0696
+CHARGE   RXT01  H11  0.0965
+CHARGE   RXT01  H12  0.0965
+CHARGE   RXT01  H18   0.187
+CHARGE   RXT01  H19  0.0503
+CHARGE   RXT01  H20  0.0527
+CHARGE   RXT01  H21  0.1656
+CHARGE   RXT01  H22  0.1723
+CHARGE   RXT01  H23  0.4671
+
+CHARGE   RXT02  CAK     0.0
+CHARGE   RXT02  CAH     0.0
+CHARGE   RXT02  CAI     0.0
+CHARGE   RXT02  CAL     0.0
+CHARGE   RXT02  CAU     0.0
+CHARGE   RXT02  CAV     0.0
+CHARGE   RXT02  CAJ     0.0
+CHARGE   RXT02  CAB     0.0
+CHARGE   RXT02  NAA     0.0
+CHARGE   RXT02  NAW     0.0
+CHARGE   RXT02  CAG     0.0
+CHARGE   RXT02  NAO     0.0
+CHARGE   RXT02  CAF     0.0
+CHARGE   RXT02  CAQ     0.0
+CHARGE   RXT02  CAR     0.0
+CHARGE   RXT02  NAM     0.0
+CHARGE   RXT02  CAE     0.0
+CHARGE   RXT02  NAP     0.0
+CHARGE   RXT02  CAT     0.0
+CHARGE   RXT02  CAS     0.0
+CHARGE   RXT02  CAD     0.0
+CHARGE   RXT02  CAC     0.0
+CHARGE   RXT02  NAN     0.0
+CHARGE   RXT02  H1      0.0
+CHARGE   RXT02  H2      0.0
+CHARGE   RXT02  H3      0.0
+CHARGE   RXT02  H4      0.0
+CHARGE   RXT02  H5      0.0
+CHARGE   RXT02  H6      0.0
+CHARGE   RXT02  H7      0.0
+CHARGE   RXT02  H8      0.0
+CHARGE   RXT02  H9      0.0
+CHARGE   RXT02  H10     0.0
+CHARGE   RXT02  H11     0.0
+CHARGE   RXT02  H12     0.0
+CHARGE   RXT02  H18     0.0
+CHARGE   RXT02  H19     0.0
+CHARGE   RXT02  H20     0.0
+CHARGE   RXT02  H21     0.0
+CHARGE   RXT02  H22     0.0
+
+# EXTRA energy for tautomers:
+EXTRA    RXT01         0.000
+

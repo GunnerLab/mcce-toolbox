@@ -93,6 +93,9 @@ RXN      PAA-1      -18.2
 
 #2.Structure Connectivity
 #23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  PAA01  CAA sp3       -1    C2A 0     CBA 0    1HAA 0    2HAA
 CONNECT  PAA01  CBA sp3       0     CAA 0     CGA 0    1HBA 0    2HBA
 CONNECT  PAA01  CGA sp2       0     CBA 0     O1A 0     O2A

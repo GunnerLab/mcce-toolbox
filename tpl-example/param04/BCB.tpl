@@ -1,3 +1,6 @@
+### Bacteriochlorophyl with a carbon tail to C20 
+### 2 redox states: 0, +1 -Agnes
+
 CONFLIST BCB        BCBBK BCB01 BCB+1
 
 NATOM    BCBBK      19
@@ -385,7 +388,7 @@ PKA      BCB+1      0.0
 
 
 ELECTRON BCB01      0
-ELECTRON BCB+1      1
+ELECTRON BCB+1      -1
 
 
 EM       BCB01      0.0
@@ -396,6 +399,8 @@ RXN      BCB01      -6.2635
 RXN      BCB+1      -14.2578
 
 #23456789A123456789B123456789C123456789D123456789E123456789F123456789G123456789H123456789I
+#ONNECT   conf atom  orbital  ires conn ires conn ires conn ires conn
+#ONNECT |-----|----|---------|----|----|----|----|----|----|----|----|----|----|----|----|
 CONNECT  BCBBK  C2  sp2       0     C1  0     C3
 CONNECT  BCBBK  C3  sp2       0     C2  0     C4  0     C5
 CONNECT  BCBBK  C4  sp3       0     C3

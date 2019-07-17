@@ -19,7 +19,17 @@ if __name__ == "__main__":
         print("Example: rxn-complete.py  tmp.ftpl 4")
         sys.exit()
 
+    to_be_replaced = "rxn="
+    replaced_by = "rxn%02d=" % int(sys.argv[2])
     lines = open(sys.argv[1]).readlines()
 
     for line in lines:
-        
+        line = line.strip("\n")
+        line_str = line.strip().split("#", 1)[0].strip()
+        fields = line_str.split(":")
+        if len(fields) == 2:
+           key = fields[0].split(",")[0]
+           if key == "CONFORMER":
+               line = line.replace(to_be_replaced, replaced_by)
+
+        print(line)

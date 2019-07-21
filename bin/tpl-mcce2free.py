@@ -128,7 +128,11 @@ if __name__ == "__main__":
     lines = open(filename).readlines()
 
     extralines = []
+    comment_lines = []
     for line in lines:
+        if line[0] == "#":
+            comment_lines.append(line)
+
         end = line.find("#")
         line = line[:end]
         if len(line) < 20:
@@ -161,6 +165,14 @@ if __name__ == "__main__":
 
     # Make conflist
     tplout = []
+
+    # Include old comment lines
+    tplout.append(">>>START of original comments, this file was converted from old format\n")
+    for line in comment_lines:
+        tplout.append(line)
+    tplout.append("<<<END of original comments\n")
+
+
     tplout.append("\n# Values of the same key are appended and separated by \",\"\n")
     residue_names = [x[:3] for x in conformers]
     residues = list(set(residue_names))

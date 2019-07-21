@@ -2,7 +2,7 @@
 Please add your ideas here.
 
  - [ ] Integrate free format tpl
- - [ ] Make RXN indexed by dielectric constant
+ - [x] Make RXN indexed by dielectric constant
  - [ ] Clean up tpl files
  - [ ] Test step 3, clear text output
  - [ ] Investigate symmetry of pairwise interaction

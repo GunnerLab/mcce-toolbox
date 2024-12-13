@@ -68,7 +68,7 @@ def save_paths_to_file(all_paths, output_file, input_filename):
 # Main function
 def main():
     parser = argparse.ArgumentParser(description="Process conserved H-bond graph data.")
-    parser.add_argument('filename', help="Input file containing the conserved H-bond graph data.")
+    parser.add_argument('filename', help="Input textfile containing the cgraphs H-bond graph data.")
     args = parser.parse_args()
 
     # Process the input file

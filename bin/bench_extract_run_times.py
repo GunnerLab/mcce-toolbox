@@ -22,6 +22,7 @@ def extract_run_times(runs_folder):
             run_log_file = os.path.join(pdb_folder_path, 'run.log')
             rot_stat_file = os.path.join(pdb_folder_path, 'rot_stat')
             prot_pdb_file = os.path.join(pdb_folder_path, 'prot.pdb')
+            head1_lst_file = os.path.join(pdb_folder_path, 'head1.lst')
 
             # Skip if run.log or prot.pdb doesn't exist
             if not os.path.isfile(run_log_file) or not os.path.isfile(prot_pdb_file):
@@ -35,6 +36,7 @@ def extract_run_times(runs_folder):
             residues = set()
             non_protein_molecules = set()
             water_molecules = set()
+            non_surface_waters = set()  # To store non-surface waters
 
             # Read the run.log file
             with open(run_log_file, 'r') as file:
@@ -75,10 +77,20 @@ def extract_run_times(runs_folder):
                         else:  # Count non-protein molecules
                             non_protein_molecules.add((chain_id, residue_seq, residue_name))
 
+            # Read the head1.lst file to count number of non-surface water molecules
+            if os.path.isfile(head1_lst_file):
+                with open(head1_lst_file, 'r') as file:
+                    for line in file:
+                        parts = line.split()
+                        if parts[0] == "HOH":  # Count non-surface water molecules
+                            water_id = parts[1].strip()  # Water residue sequence number
+                            non_surface_waters.add(water_id)  
+
             # Count unique residues, non-protein molecules, and water molecules
             num_residues = len(residues)
             num_non_protein_molecules = len(non_protein_molecules)
             num_waters = len(water_molecules)
+            num_non_surface_waters = len(non_surface_waters)
 
             # If any times are found, add to data list
             if step1_time is not None and step2_time is not None and step3_time is not None and step4_time is not None:
@@ -88,6 +100,7 @@ def extract_run_times(runs_folder):
                     num_residues,
                     num_non_protein_molecules,
                     num_waters,
+                    num_non_surface_waters,
                     rot_stat,
                     step1_time,
                     step2_time,
@@ -104,6 +117,7 @@ def extract_run_times(runs_folder):
             'Residues',
             'Cofactors',
             'Waters',
+            'MCCE Waters (NSW)',
             'Conformers',
             'Step1 (premcce)',
             'Step2 (rotamer making)',

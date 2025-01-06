@@ -14,20 +14,20 @@ import os
 def process_conserved_graph(file_path):
     with open(file_path, 'r') as file:
         input_text = file.read()
-    
+
     # Extract nodes and edges from the file content
     nodes_start = input_text.find("List of conserved nodes:") + len("List of conserved nodes:")
     edges_start = input_text.find("List of conserved edges:")
-    
+
     # Extract nodes and convert to list
     nodes_text = input_text[nodes_start:edges_start].strip()
     nodes = ast.literal_eval(nodes_text.replace("'", '"').replace(" ", ","))
-    
+
     # Extract edges and convert to list of tuples
     edges_text = input_text[edges_start + len("List of conserved edges:"):].strip()
     edges_list = ast.literal_eval(edges_text.replace("'", '"').replace(" ", ","))
     edges = [tuple(edge) for edge in edges_list]
-    
+
     return nodes, edges
 
 # Function to find all paths using networkx
@@ -49,7 +49,7 @@ def find_all_paths(nodes, edges):
                         paths_for_node.append(path)
         if paths_for_node:  # Only store nodes that have paths to other nodes
             all_paths[node] = paths_for_node
-    
+
     return all_paths
 
 # Function to save the paths to a file
@@ -57,13 +57,24 @@ def save_paths_to_file(all_paths, output_file, input_filename):
     with open(output_file, 'w') as file:
         # Add title at the top of the file
         file.write(f"Full paths for the argument file: {input_filename}\n\n")
-        
+
         # Write paths for each starting residue
         for start_residue, paths in all_paths.items():
             file.write(f"Paths starting from {start_residue}:\n")
             for path in paths:
                 file.write(" -> ".join(path) + "\n")
             file.write("\n")
+
+# Function to save edges to a file
+def save_edges_to_file(edges, output_file, input_filename):
+    with open(output_file, 'w') as file:
+        # Add title at the top of the file
+        #file.write(f"Edges for the argument file: {input_filename}\n\n")
+        #file.write("Residue1\tResidue2\n")  # Header for the columns
+        
+        # Write each edge as two columns
+        for edge in edges:
+            file.write(f"{edge[0]}\t{edge[1]}\n")
 
 # Main function
 def main():
@@ -74,11 +85,15 @@ def main():
     # Process the input file
     nodes, edges = process_conserved_graph(args.filename)
     all_paths = find_all_paths(nodes, edges)
-    
-    # Create dynamic output file name and save the paths
+
+    # Create dynamic output file names
     base_filename = os.path.basename(args.filename).split('.')[0]  # Get the base name of the input file without extension
-    output_file = f"FullResPaths_{base_filename}.txt"  # Create the output filename
-    save_paths_to_file(all_paths, output_file, args.filename)
+    output_paths_file = f"FullResPaths_{base_filename}.txt"  # Output filename for paths
+    output_edges_file = f"Edges_{base_filename}.txt"  # Output filename for edges
+
+    # Save paths and edges to respective files
+    save_paths_to_file(all_paths, output_paths_file, args.filename)
+    save_edges_to_file(edges, output_edges_file, args.filename)
 
     # Optionally, output the paths to the console as well
     print(f"Full Paths Between Residues (At Least Two Residues):")

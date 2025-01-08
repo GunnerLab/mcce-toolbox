@@ -35,18 +35,32 @@ def process_conserved_graph(file_path):
     # Extract nodes and convert to list
     nodes_text = input_text[nodes_start:edges_start].strip()
     try:
-        nodes = ast.literal_eval(nodes_text.replace("'", '"').replace(" ", ","))
-    except Exception as e:
-        raise ValueError(f"Error parsing nodes: {e}")
+        # First attempt: Replace specific patterns and parse
+        nodes = ast.literal_eval(nodes_text.replace("' '", "','"))
+    except Exception:
+        try:
+            # Second attempt: Replace single quotes with double quotes and spaces with commas
+            nodes = ast.literal_eval(nodes_text.replace("'", '"').replace(" ", ","))
+        except Exception as e:
+            # Raise a descriptive error if both attempts fail
+            raise ValueError(f"Error parsing nodes: {e}")
+
     print(f"Nodes:\n{nodes}\n")
 
     # Extract edges and convert to list of tuples
     edges_text = input_text[edges_start + len(edges_match.group(0)):].strip()
     try:
-        edges_list = ast.literal_eval(edges_text.replace("'", '"').replace(" ", ","))
-        edges = [tuple(edge) for edge in edges_list]
-    except Exception as e:
-        raise ValueError(f"Error parsing edges: {e}")
+        # First attempt: Replace specific patterns and parse
+        edges_list = ast.literal_eval(edges_text.replace("' '", "','"))
+    except Exception:
+        try:
+            # Second attempt: Replace single quotes with double quotes and spaces with commas
+            edges_list = ast.literal_eval(edges_text.replace("'", '"').replace(" ", ","))
+        except Exception as e:
+            # Raise a descriptive error if both attempts fail
+            raise ValueError(f"Error parsing edges: {e}")
+    edges = [tuple(edge) for edge in edges_list]   
+ 
     print(f"Edges:\n{edges}\n")
 
     return nodes, edges

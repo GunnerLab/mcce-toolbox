@@ -9,24 +9,45 @@ import ast
 import argparse
 import networkx as nx
 import os
+import re
 
 # Function to process the input data
 def process_conserved_graph(file_path):
     with open(file_path, 'r') as file:
         input_text = file.read()
 
-    # Extract nodes and edges from the file content
-    nodes_start = input_text.find("List of conserved nodes:") + len("List of conserved nodes:")
-    edges_start = input_text.find("List of conserved edges:")
+    # Define patterns to handle both "conserved" and non-conserved versions. Find start positions for nodes and edges
+    node_pattern = re.compile(r"List of (conserved )?nodes:")
+    edge_pattern = re.compile(r"List of (conserved )?edges:")
+    nodes_match = node_pattern.search(input_text)
+    edges_match = edge_pattern.search(input_text)
+
+    if nodes_match:
+        nodes_start = nodes_match.end()
+    else:
+        raise ValueError("Node list not found in the input text.")
+
+    if edges_match:
+        edges_start = edges_match.start()
+    else:
+        raise ValueError("Edge list not found in the input text.")
 
     # Extract nodes and convert to list
     nodes_text = input_text[nodes_start:edges_start].strip()
-    nodes = ast.literal_eval(nodes_text.replace("'", '"').replace(" ", ","))
+    try:
+        nodes = ast.literal_eval(nodes_text.replace("'", '"').replace(" ", ","))
+    except Exception as e:
+        raise ValueError(f"Error parsing nodes: {e}")
+    print(f"Nodes:\n{nodes}\n")
 
     # Extract edges and convert to list of tuples
-    edges_text = input_text[edges_start + len("List of conserved edges:"):].strip()
-    edges_list = ast.literal_eval(edges_text.replace("'", '"').replace(" ", ","))
-    edges = [tuple(edge) for edge in edges_list]
+    edges_text = input_text[edges_start + len(edges_match.group(0)):].strip()
+    try:
+        edges_list = ast.literal_eval(edges_text.replace("'", '"').replace(" ", ","))
+        edges = [tuple(edge) for edge in edges_list]
+    except Exception as e:
+        raise ValueError(f"Error parsing edges: {e}")
+    print(f"Edges:\n{edges}\n")
 
     return nodes, edges
 
@@ -82,21 +103,22 @@ def main():
     parser.add_argument('filename', help="Input textfile containing the cgraphs H-bond graph data.")
     args = parser.parse_args()
 
-    # Process the input file
-    nodes, edges = process_conserved_graph(args.filename)
-    all_paths = find_all_paths(nodes, edges)
-
-    # Create dynamic output file names
+    # Process the input file to extract nodes and edges from the graph
     base_filename = os.path.basename(args.filename).split('.')[0]  # Get the base name of the input file without extension
-    output_paths_file = f"FullResPaths_{base_filename}.txt"  # Output filename for paths
-    output_edges_file = f"Edges_{base_filename}.txt"  # Output filename for edges
+    nodes, edges = process_conserved_graph(args.filename)
+    output_edges_file = f"Edges_{base_filename}.txt"               # Output filename for edges
+    save_edges_to_file(edges, output_edges_file, args.filename) 
+    print(f"Edges data has been saved to '{output_edges_file}'.")
 
-    # Save paths and edges to respective files
+    # Find all possible paths between residues in the graph
+    all_paths = find_all_paths(nodes, edges)
+    output_paths_file = f"FullResPaths_{base_filename}.txt"        # Output filename for paths
     save_paths_to_file(all_paths, output_paths_file, args.filename)
-    save_edges_to_file(edges, output_edges_file, args.filename)
+    print(f"Paths data has been saved to '{output_paths_file}'.")
 
     # Optionally, output the paths to the console as well
-    print(f"Full Paths Between Residues (At Least Two Residues):")
+    print(f"\n===============================================================================================================================")
+    print(f"\nFull Paths Between Residues (At Least Two Residues):")
     for start_residue, paths in all_paths.items():
         print(f"\nPaths starting from {start_residue}:")
         for path in paths:

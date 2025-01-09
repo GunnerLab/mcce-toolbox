@@ -105,7 +105,7 @@ def save_edges_to_file(edges, output_file, input_filename):
     with open(output_file, 'w') as file:
         # Add title at the top of the file
         #file.write(f"Edges for the argument file: {input_filename}\n\n")
-        #file.write("Residue1\tResidue2\n")  # Header for the columns
+        file.write("Residue1\tResidue2\n")  # Header for the columns
         
         # Write each edge as two columns
         for edge in edges:
@@ -132,11 +132,11 @@ def main():
 
     # Optionally, output the paths to the console as well
     print(f"\n===============================================================================================================================")
-    print(f"\nFull Paths Between Residues (At Least Two Residues):")
-    for start_residue, paths in all_paths.items():
-        print(f"\nPaths starting from {start_residue}:")
-        for path in paths:
-            print(" -> ".join(path))
+    #print(f"\nFull Paths Between Residues (At Least Two Residues):")
+    #for start_residue, paths in all_paths.items():
+    #    print(f"\nPaths starting from {start_residue}:")
+    #    for path in paths:
+    #        print(" -> ".join(path))
 
 if __name__ == "__main__":
     main()

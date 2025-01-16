@@ -1,53 +1,66 @@
 #!/usr/bin/env python
-import sys
-import re
 
-def line_counter(file_data, source_mcce=False):  
+from collections import defaultdict
+from pathlib import Path
+import re
+import sys
+from typing import TextIO, Tuple, Union
+
+
+def line_counter(file_data: TextIO, source_mcce: bool = False) -> Tuple:
     """Accepts a string of text and returns counts for # of waters and amino acids, counting them by the number of lines they appear in.
 
     Args:
         file_data (string): file data in text form
 
     Returns:
-        list: A list of strings, each containing the data for one chain."""
-    
-    file_data = file_data.splitlines() # split our file data by lines
+        A 3-tuple: Number of waters, number of amino acids, list of ligand names
+    """
+    file_data = file_data.splitlines()
     waters = 0
     aa = 0
     non_aa = 0
     ligand_names = []
+    # Standard amino acid residue names:
     amino_acids = set([
-        'ALA', 'ARG', 'ASN', 'ASP', 'CYS', 'GLU', 'GLN', 'GLY', 'HIS', 'ILE',
-        'LEU', 'LYS', 'MET', 'PHE', 'PRO', 'SER', 'THR', 'TRP', 'TYR', 'VAL'
-    ])  # Standard amino acid residue names
+        "ALA", "ARG", "ASN", "ASP", "CYS", "GLU", "GLN", "GLY", "HIS", "ILE",
+        "LEU", "LYS", "MET", "PHE", "PRO", "SER", "THR", "TRP", "TYR", "VAL"
+    ])
 
     for this_line in file_data:
 
-        if " CA " in this_line and "REMARK" not in this_line and "ANISOU" not in this_line:
+        # residues and non-residues:
+        if this_line.startswith("HETATM") or this_line.startswith("ATOM"):
+            residue_name = this_line[17:20].strip()
+
+            # FIX: Remove if not displayed or part of output
+            if this_line.startswith("ATOM") and residue_name not in amino_acids:
+                # Count non-standard amino acids based on residue name
+                non_aa += 1
+        
+        # FIX: CA can be calcium
+        if " CA " in this_line and not ("REMARK" in this_line or "ANISOU" in this_line):
             aa += 1
-        if source_mcce == False: 
+
+        # waters and ligands names:
+        if not source_mcce: 
             if this_line.startswith("HETATM") and "HOH" not in this_line:
                 ligand_names.append(this_line[17:29])
-            if "HOH" in this_line and "HETATM" in this_line: # or "ANISOU" in this_line): # do we count ANISOU? Can't remember
+            if this_line.startswith("HETATM") and "HOH" in this_line:
+                # or "ANISOU" in this_line): # do we count ANISOU? Can"t remember
                 waters += 1
         else:
             if this_line.startswith("HETATM") and "HOH" not in this_line:
                 ligand_names.append(this_line[17:20])
-            if this_line.startswith('HETATM') and "HOH" in this_line and " O " in this_line:
+            if this_line.startswith("HETATM") and "HOH" in this_line and " O " in this_line:
                 waters += 1
-        if this_line.startswith('HETATM') or this_line.startswith('ATOM'):
-            residue_name = this_line[17:20].strip()
-
-            if this_line.startswith('ATOM') and residue_name not in amino_acids:
-                # Count standard amino acids based on residue name
-                non_aa += 1
 
     # print("Non-amino acid residues are this many: " + str(non_aa))
-
     return waters, ligand_names, aa
 
-def display_table(data, graph_name="Total", use_borders=False):
-    """Takes in a 3 x 3 list of data and outputs a nicely formatted table. Used to display amino acid, ligand, and water counts for the total PDB file and its chains.
+
+def display_table(data: list, graph_name: str = "Total", use_borders: bool = False) -> None:
+    """Takes in a 3 x 3 list of data and outputs a nicely formatted table and displays amino acid, ligand, and water counts for the total PDB file and its chains.
 
     Args:
         data (3 x 3 list): Path to the PDB file.
@@ -55,8 +68,8 @@ def display_table(data, graph_name="Total", use_borders=False):
         use_borders (bool): whether we want a border drawn around the table, or not
 
     Returns:
-        list: A list of strings, each containing the data for one chain."""
-
+        Nothing (prints a table).
+    """
     if len(data) != 3 or any(len(row) != 3 for row in data):
         raise ValueError("Input data must be a 3x3 matrix.")
 
@@ -72,77 +85,84 @@ def display_table(data, graph_name="Total", use_borders=False):
     col_widths = [max(len(str(row[col])) for row in table_data) for col in range(len(table_data[0]))]
     if use_borders:
         # Create a separator line
-        separator = '+' + '+'.join('-' * (width + 2) for width in col_widths) + '+'
+        separator = "+" + "+".join("-" * (width + 2) for width in col_widths) + "+"
 
         # Build the table
         table = [separator]
         for row in table_data:
-            row_line = '|' + '|'.join(f" {str(row[col]).ljust(col_widths[col])} " for col in range(len(row))) + '|'
+            row_line = "|" + "|".join(f" {str(row[col]).ljust(col_widths[col])} " for col in range(len(row))) + "|"
             table.append(row_line)
             table.append(separator)
 
     else:
-
         # Build the table without borders
         table = []
         for row in table_data:
-            row_line = '     '.join(f"{str(row[col]).ljust(col_widths[col])}" for col in range(len(row)))
+            row_line = "     ".join(f"{str(row[col]).ljust(col_widths[col])}" for col in range(len(row)))
             table.append(row_line)
 
     # Print the table
-    print('\n'.join(table))
+    print("\n".join(table))
 
-def parse_pdb_chains(pdb_file):
+
+def parse_pdb_chains(pdb_filepath: str) -> Union[Tuple[list, list], None]:
     """Identifies and extracts individual chains from a PDB file.
 
     Args:
-        pdb_file (str): Path to the PDB file.
+        pdb_filepath (str): Path to the PDB file.
 
     Returns:
-        list: A list of strings, each containing the data for one chain."""
-    
-    chains = {}
+        A 2-tuple: the chains' line data, and a list of the chains' names or
+        None if an error occurs.
+    """
+    chains = defaultdict(list)
 
     try:
-        with open(pdb_file, 'r') as file:
+        with open(pdb_filepath, "r") as file:
             for line in file:
-                # Only process lines starting with 'ATOM' or 'HETATM'
-                if line.startswith(('ATOM', 'HETATM')):
-                    chain_id = line[21]  # Chain identifier is in column 22 (0-indexed: 21)
-                    if chain_id not in chains:
-                        chains[chain_id] = []
+                # Only process lines starting with "ATOM" or "HETATM"
+                if line.startswith(("ATOM", "HETATM")):
+                    chain_id = line[21]  # Chain identifier is in 0-indexed column 22
+                    #if chain_id not in chains:
+                    #    chains[chain_id] = []
                     chains[chain_id].append(line)
 
         # Convert the chains dictionary to a list of strings
         chain_data = ["".join(chains[chain_id]) for chain_id in chains]
 
-        return chain_data, list(chains.keys()) # return the chains, and a list of the chains' names
+        return chain_data, list(chains.keys())
 
     except FileNotFoundError:
-        print(f"Error: File '{pdb_file}' not found.")
-        return []
+        print(f"Error: File {pdb_filepath!s} not found.")
+        return None
+
     except Exception as e:
         print(f"An error occurred: {e}")
-        return []
+        return None
 
-try:
-    input_file = sys.argv[1].lower() # take the first terminal argument after the Python script is called. WHAT IF FILE NOT LOWERCASE? Include option to turn the .lower() off
-    if ".pdb" not in input_file: # will work whether or not the user includes .pdb
+
+# TODO:
+# 1. Place following code into a "main" function;
+# 2. Do checks on number of sys.argv under condition: if __name__ == "__main__": section;
+try: 
+    input_file = Path(sys.argv[1]) 
+    if not input_file.suffix:
+        # will work whether or not the user includes .pdb
         input_file = input_file + ".pdb"
+
 except IndexError:
-    print("\nPlease include the PDB file after the executable, e.g. 'ProtInfo_J.py 4lzt.pdb'. protinfo expects lowercase file names.\n")
-    raise SystemExit() # just quit the program
+    sys.exit("\nPlease include the PDB file after the executable, e.g. 'protinfo_v2.py 4lzt.pdb'.\n")
 
 # maybe include multiple model warning- MCCE expects 1 model pdb file
 
 try:
-    with open(input_file, 'r') as file:  # for how many waters, ligands, aa's, were in protein file
+    with open(input_file) as file:  # for how many waters, ligands, aa"s, were in protein file
         data = file.read()
 
-    with open('step1_out.pdb', 'r') as file:  # for how many waters, ligands, aa's, post-processing
+    with open("step1_out.pdb") as file:  # for how many waters, ligands, aa"s, post-processing
         mcce_data = file.read()
 
-    with open('run1.log', 'r') as file:  # helps identify where changes have occurred
+    with open("run1.log") as file:  # helps identify where changes have occurred
         log_data = file.read()
 
 except FileNotFoundError:
@@ -151,37 +171,38 @@ except FileNotFoundError:
 
 print("\nOutputting protinfo to 'protinfo2_output.txt'.\n")
 
-sys.stdout = open('pinfo2_output.txt', 'wt')
+sys.stdout = open("pinfo2_output.txt", "wt")
 
 # get HOH, ligand names, and amino acid counts
 HOH_count, ligand_names, aa_count = line_counter(data) 
 HOH_mcce_count, ligand_mcce_names, aa_mcce_count = line_counter(mcce_data, source_mcce=True)
 
-print("\nNew ProtInfo by Jared! It's still in progress!\n")
 print("For the input file " + input_file + ", we find the following:\n")
 
 # should count non-standard amino acid residues
 
 # format the data for the function to pick up (maybe make this part of an Object)
+# FIX: The display_table function should be responsible for this conversion to string:
 interior_data = [
     [str(aa_count), str(aa_mcce_count), str(abs(aa_count - aa_mcce_count))],
     [str(len(set(ligand_names))), str(len(set(ligand_mcce_names))), str(abs(len(set(ligand_names)) - len(set(ligand_mcce_names))))],
     [str(HOH_count), str(HOH_mcce_count), str(abs(HOH_count - HOH_mcce_count))],
 ]
-
 display_table(interior_data)
 chains, chain_labels = parse_pdb_chains(input_file)
 print(f"\nThe PDB file contains {len(chains)} chain(s).")
 
 if len(chains) > 1:
+    mcce_chains, _ = parse_pdb_chains("step1_out.pdb")
 
-    mcce_chains, _ = parse_pdb_chains('step1_out.pdb')
-
+    # FIX: Why set the enumeration start to 1 only to reset it to 0-based when needed?
     for i, chain in enumerate(chains, start=1):
-        
         print("") # formatting assistance
 
+        # FIX: Consider shorter names, eg: chain_waters, chain_ligands, chain_aas 
         HOH_chain_count, ligand_chain_names, aa_chain_count = line_counter(chain) 
+
+        # FIX: Consider shorter names, eg: mc_chain_waters, mc_chain_ligands, mc_chain_aas 
         HOH_mcce_chain_count, ligand_chain_mcce_names, aa_mcce_chain_count = line_counter(mcce_chains[i - 1], source_mcce=True) # adjust to 0-indexed
         # water count not happening properly for different chains for mcce_chains?
 
@@ -190,13 +211,20 @@ if len(chains) > 1:
             [str(len(set(ligand_chain_names))), str(len(set(ligand_chain_mcce_names))), str(abs(len(set(ligand_chain_mcce_names)) - len(set(ligand_chain_names))))],
             [str(HOH_chain_count), str(HOH_mcce_chain_count), str(abs(HOH_chain_count - HOH_mcce_chain_count))],
         ]
-        display_table(chain_data, graph_name="Chain " + str(chain_labels[i - 1])) # again, adjust to 0-indexed
+        display_table(chain_data, graph_name="Chain " + str(chain_labels[i - 1]))  # again, adjust to 0-indexed
 
-print("\n'00always_needed.tpl' is an editable file that controls ligand stripping, and can be found in the /MCCE4/param directory.") # appears to be 00always_needed.tpl, so give the pathway to it
-print("\nCustom changes to cofactor stripping thresholds may be passed in like: 'step1.py -u H2O_SASCUTOFF=0.10'")
+# appears to be 00always_needed.tpl, so give the pathway to it
+print("\n'00always_needed.tpl' is an editable file that controls ligand stripping",
+      "and can be found in the /MCCE4/param directory.",
+      "\nCustom changes to cofactor stripping thresholds may be passed in the -u option",
+      "of step1.py: 'step1.py -u H2O_SASCUTOFF=0.10'"
+      )
+
+# == REVIEW PAUSED ==
 
 log_data = log_data.splitlines()
-rules = {} # dictionary to contain rules and examples for how molecules are renamed
+# FIX: Change to defaultdict(tuple):
+rules = {}  # dictionary to contain rules and examples for how molecules are renamed
 err_top_files = ""
 how_many_atoms_change = 0
 missing_atoms = 0
@@ -204,13 +232,13 @@ NTR_line = ""
 CTR_line = ""
 
 for line in log_data:
-
+    # how to account for multiple TR changes
     if "Labeling" in line and "NTR" in line:
-        NTR_line += line + "\n" # how to account for multiple NTR changes
+        NTR_line += line + "\n"
     if "Labeling" in line and "CTR" in line:
         CTR_line += line + "\n"
 
-    match = re.match(r'\s*Renaming \"(.*?)\" to \"(.*?)\"', line)
+    match = re.match(r"\s*Renaming \"(.*?)\" to \"(.*?)\"", line)
     if match:
         how_many_atoms_change += 1
         original, renamed = match.groups()
@@ -219,23 +247,22 @@ for line in log_data:
         rule = ""
         for i, (o_char, r_char) in enumerate(zip(original, renamed)):
             if o_char != r_char:
-                rule += f"Position {i}: '{o_char}' -> '{r_char}'\n"
+                rule += f"Position {i}: {o_char!s} -> {r_char!s}\n"
 
         if len(original) != len(renamed):
             rule += f"Length difference: Original({len(original)}) -> Renamed({len(renamed)})\n"
 
         # Normalize the rule description
         rule = rule.strip()
-
         # Store one example for each unique rule
         if rule not in rules:
             rules[rule] = (original, renamed)
 
     if "Error!" in line:
-        err_top_files += line + "\n" 
+        err_top_files += line + "\n"
 
-    # count missing atoms, but don't count the line saying "Missing heavy atoms detected."
-    if "Missing" in line and "detected" not in line: 
+    # count missing atoms, but don"t count the line saying "Missing heavy atoms detected."
+    if "Missing" in line and "detected" not in line:
         missing_atoms += 1
 
 print("\nThese residues have been modified:")
@@ -244,44 +271,43 @@ print(NTR_line + CTR_line)
 print(str(missing_atoms) + " missing atoms added. This number includes atoms relabeled as NTR, or CTR. See run1.log for full list.")
 
 if not ligand_names: # if ligand name list is empty, skip ligands
+    msg = ("\nNo ligands detected.",
+           "\nA list of all atoms that are modified can be found in run1.log.",
+           f"\n{str(how_many_atoms_change)} atoms changed."
+           )
+    sys.exit(msg)  # finish the program early
 
-    print("\nNo ligands detected.")
-    print("\nA list of all atoms that are modified can be found in run1.log.")
-    print("\n" + str(how_many_atoms_change) + " atoms changed.")
-    raise SystemExit() # finish the program early
+print("\nLIGANDS:",
+      f"{input_file} LGDNAMES: {str(set(ligand_names))}",  # might actually be nice to have
+      f"step1_out.pdb LGDNAMES: {str(set(ligand_mcce_names))}",
+      sep="\n"
+      )
 
-print("\nLIGANDS:")
-
-print(f"\n{input_file} LGDNAMES: " + str(set(ligand_names)) + "\n") # might actually be nice to have
-print("step1_out.pdb LGDNAMES: " + str(set(ligand_mcce_names)) + "\n")
-
-if bool(rules):
-
+if rules:
     print("      The rules for changes, and examples:\n")
-
     for rule, example in rules.items():
         # print(f"Rule:\n{rule}")
-        print(f"      {example[0]} -> {example[1]}")
-
+        print(f"\t  {example[0]} -> {example[1]}")
     print("\nA list of all atoms that are modified can be found in run1.log.\n")
 
 print(str(how_many_atoms_change) + " atoms changed.")
 
 # find shared ligands between list of ligands, ligands w/o topology files
-ligand_sifter = set((" ".join(ligand_names)).split()) & set(err_top_files.split()) 
-ligand_names = [l[0:3] for l in ligand_names] 
+ligand_sifter = set((" ".join(ligand_names)).split()) & set(err_top_files.split())
+ligand_names = [lig[:3] for lig in ligand_names]
 ligand_top = set(ligand_names) - ligand_sifter
 
 if ligand_top:
-
     print("\nWe have topology files for these ligands:")
     print("TPLFOUND: " + str(ligand_top))
 
 if err_top_files:
-
     print("\nWe do not have topology files for these ligands:")
-    print("\nNOTPL: ", end='')
-    print([line[-3:] for line in err_top_files.splitlines()]) # to be concise, only print the 3-char names of the residues
-    print("\nYou can (1) remove them from the input pdb file; (2) run with all atoms with zero charge; (3) make a topology file using instructions in:")
+    print("\nNOTPL: ", [line[-3:] for line in err_top_files.splitlines()], end="")
+    # to be concise, only print the 3-char names of the residues
 
-print("\nThanks for using protinfo!")
+    # FIX: Missing link?
+    print("\nYou can either: (1) remove them from the input pdb file; (2) run with",
+          "all atoms with zero charge; (3) make a topology file using instructions in:")
+
+print("\nThanks for using protinfo: It's free!")

@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 import sys
 import re
+from datetime import datetime, timezone
+from collections import defaultdict
 
-def line_counter(file_data, source_mcce=False):  
+def line_counter(file_data : str, source_mcce : bool = False) -> tuple:  
     """Accepts a string of text and returns counts for # of waters and amino acids, counting them by the number of lines they appear in.
 
     Args:
@@ -46,7 +48,7 @@ def line_counter(file_data, source_mcce=False):
 
     return waters, ligand_names, aa
 
-def display_table(data, graph_name="Total", use_borders=False):
+def display_table(data : list, graph_name : str = "Total", use_borders : bool = False) -> None:
     """Takes in a 3 x 3 list of data and outputs a nicely formatted table. Used to display amino acid, ligand, and water counts for the total PDB file and its chains.
 
     Args:
@@ -92,7 +94,65 @@ def display_table(data, graph_name="Total", use_borders=False):
     # Print the table
     print('\n'.join(table))
 
-def parse_pdb_chains(pdb_file):
+def classify_amino_acids():
+    """ Classify amino acids into ionizable, polarized, and hydrophobic categories.
+
+    Returns:
+        dict: A dictionary with amino acid classifications. """
+    return {
+        "ionizable": ["ARG", "HIS", "LYS", "ASP", "GLU"],
+        "polarized": ["SER", "THR", "ASN", "GLN", "CYS", "TYR"],
+        "hydrophobic": ["ALA", "VAL", "LEU", "ILE", "MET", "PHE", "TRP", "PRO", "GLY"]
+    }
+
+def count_amino_acids(pdb_file):
+    """  Counts occurrences of standard amino acids in a PDB file, divided into three groups.
+
+    Args:
+        pdb_file (str): Path to the PDB file.
+
+    Returns:
+        dict: A dictionary with counts of amino acids in each category.  """
+    amino_acid_classes = classify_amino_acids()
+    counts = defaultdict(int)
+
+    with open(pdb_file, 'r') as file:
+        for line in file:
+            # Only process lines starting with 'ATOM'
+            if line.startswith("ATOM"):
+                res_name = line[17:20].strip()  # Residue name is in columns 18-20
+                for category, residues in amino_acid_classes.items():
+                    if res_name in residues:
+                        counts[category + ":" + res_name] += 1
+                        break
+
+    # Organize counts into categories
+    categorized_counts = {category: {} for category in amino_acid_classes}
+    for key, count in counts.items():
+        category, residue = key.split(":")
+        categorized_counts[category][residue] = count
+
+    print("Amino Acid Counts:")
+
+    # Prepare column headers and sort by count in descending order
+    ionizable = sorted(categorized_counts["ionizable"].items(), key=lambda x: x[1], reverse=True)
+    polarized = sorted(categorized_counts["polarized"].items(), key=lambda x: x[1], reverse=True)
+    hydrophobic = sorted(categorized_counts["hydrophobic"].items(), key=lambda x: x[1], reverse=True)
+
+    # Determine the maximum number of rows
+    max_rows = max(len(ionizable), len(polarized), len(hydrophobic))
+
+    print(f"{'Ionizable':<20}{'Polarized':<20}{'Hydrophobic':<20}")
+    print("-" * 51)
+
+    for i in range(max_rows):
+        ionizable_res = f"{ionizable[i][0]}: {ionizable[i][1]}" if i < len(ionizable) else ""
+        polarized_res = f"{polarized[i][0]}: {polarized[i][1]}" if i < len(polarized) else ""
+        hydrophobic_res = f"{hydrophobic[i][0]}: {hydrophobic[i][1]}" if i < len(hydrophobic) else ""
+
+        print(f"{ionizable_res:<20}{polarized_res:<20}{hydrophobic_res:<20}")        
+
+def parse_pdb_chains(pdb_file : str) -> list:
     """Identifies and extracts individual chains from a PDB file.
 
     Args:
@@ -127,11 +187,11 @@ def parse_pdb_chains(pdb_file):
 if __name__ == "__main__":
 
     try:
-        input_file = sys.argv[1].lower() # take the first terminal argument after the Python script is called. WHAT IF FILE NOT LOWERCASE? Include option to turn the .lower() off
+        input_file = sys.argv[1] # take the first terminal argument after the Python script is called. WHAT IF FILE NOT LOWERCASE? Include option to turn the .lower() off
         if ".pdb" not in input_file: # will work whether or not the user includes .pdb
             input_file = input_file + ".pdb"
     except IndexError:
-        print("\nPlease include the PDB file after the executable, e.g. 'ProtInfo_J.py 4lzt.pdb'. protinfo expects lowercase file names.\n")
+        print("\nPlease include the PDB file after the executable, e.g. 'ProtInfo_J.py 4lzt.pdb'. This is case sensitive.\n")
         raise SystemExit() # just quit the program
 
     # maybe include multiple model warning- MCCE expects 1 model pdb file
@@ -156,10 +216,10 @@ if __name__ == "__main__":
     HOH_count, ligand_names, aa_count = line_counter(data) 
     HOH_mcce_count, ligand_mcce_names, aa_mcce_count = line_counter(mcce_data, source_mcce=True)
 
-    print("\nNew ProtInfo by Jared! It's still in progress!\n")
-    print("## For the input file " + input_file + ", we find the following:\n")
+    print("\nNew ProtInfo by Jared Suchomel, with contributions by Marilyn Gunner, Cat Chenal, and Junjun Mao! It's still in progress!\n")
+    print("### For the input file " + input_file + ", we find the following:\n")
 
-    # should count non-standard amino acid residues
+    count_amino_acids(input_file)
 
     # format the data for the function to pick up (maybe make this part of an Object)
     interior_data = [
@@ -168,9 +228,10 @@ if __name__ == "__main__":
         [str(HOH_count), str(HOH_mcce_count), str(abs(HOH_count - HOH_mcce_count))],
     ]
 
-    display_table(interior_data)
     chains, chain_labels = parse_pdb_chains(input_file)
-    print(f"\n## The PDB file contains {len(chains)} chain(s).")
+    print(f"\n### The PDB file contains {len(chains)} chain(s).")
+
+    display_table(interior_data)
 
     if len(chains) > 1:
 
@@ -209,7 +270,7 @@ if __name__ == "__main__":
             prox_ligands += "   " + line + "\n"
 
         if "Labeling" in line and "NTR" in line:
-            NTR_line += line + "\n" # how to account for multiple NTR changes
+            NTR_line += line + "\n" # account for multiple NTR changes
         if "Labeling" in line and "NTG" in line:
             NTR_line += line + " (NTR for GYL)" + "\n"
         if "Labeling" in line and "CTR" in line:
@@ -244,7 +305,7 @@ if __name__ == "__main__":
             missing_atoms += 1
 
     print("\nThese residues have been modified:")
-    print("\n## TERMINI:\n")
+    print("\n### TERMINI:\n")
     print(NTR_line + CTR_line)
     print(str(missing_atoms) + " missing atoms added. This number includes atoms relabeled as NTR, or CTR. See run1.log for full list.")
 
@@ -290,4 +351,7 @@ if __name__ == "__main__":
         print([line[-3:] for line in err_top_files.splitlines()]) # to be concise, only print the 3-char names of the residues
         print("\nYou can (1) remove them from the input pdb file; (2) run with all atoms with zero charge; (3) make a topology file using instructions in:")
 
-    print("\nThanks for using protinfo!\n")
+    utc_dt = datetime.now(timezone.utc)
+    print("\npinfo was run at local time {}".format(utc_dt.astimezone().strftime('%a %b %d %Y, %I:%M%p')))
+
+    print("\nThanks for using protinfo! It's free!\n")

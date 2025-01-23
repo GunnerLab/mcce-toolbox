@@ -119,7 +119,7 @@ def count_amino_acids(pdb_file):
     with open(pdb_file, 'r') as file:
         for line in file:
             # Only process lines starting with 'ATOM'
-            if line.startswith("ATOM"):
+            if line.startswith("ATOM") and " CA " in line:
                 res_name = line[17:20].strip()  # Residue name is in columns 18-20
                 for category, residues in amino_acid_classes.items():
                     if res_name in residues:
@@ -210,14 +210,12 @@ if __name__ == "__main__":
         print(f"\nProtInfo requires {input_file}, its associated, run1.log, and step1_out.pdb in the current directory.\n")
         raise SystemExit()
 
-    # print("\nOutputting protinfo to 'protinfo2_output.txt'.\n")
-
     # get HOH, ligand names, and amino acid counts
     HOH_count, ligand_names, aa_count = line_counter(data) 
     HOH_mcce_count, ligand_mcce_names, aa_mcce_count = line_counter(mcce_data, source_mcce=True)
 
     print("\nNew ProtInfo by Jared Suchomel, with contributions by Marilyn Gunner, Cat Chenal, and Junjun Mao! It's still in progress!\n")
-    print("### For the input file " + input_file + ", we find the following:\n")
+    print("### For input file " + input_file + ", we find:\n")
 
     count_amino_acids(input_file)
 
@@ -253,7 +251,7 @@ if __name__ == "__main__":
             ]
             display_table(chain_data, graph_name="Chain " + str(chain_labels[i - 1])) # again, adjust to 0-indexed
 
-    print("\nThese residues are stripped if they are surface exposed. The percent exposure limit may be edited in '00always_needed.tpl'") # appears to be 00always_needed.tpl, so give the pathway to it
+    print("\nResidues are stripped if surface exposed. The percent exposure limit may be edited in '00always_needed.tpl'") # appears to be 00always_needed.tpl, so give the pathway to it
 
     log_data = log_data.splitlines()
     rules = {} # dictionary to contain rules and examples for how molecules are renamed
@@ -316,7 +314,7 @@ if __name__ == "__main__":
         print("\n" + str(how_many_atoms_change) + " atoms changed.")
         raise SystemExit() # finish the program early
 
-    print("\n## LIGANDS:")
+    print("\n### LIGANDS:")
 
     print(f"\n      {input_file} LGDNAMES: " + str(set(ligand_names)))
     print("\n      step1_out.pdb LGDNAMES: " + str(set(ligand_mcce_names)))
@@ -354,4 +352,4 @@ if __name__ == "__main__":
     utc_dt = datetime.now(timezone.utc)
     print("\npinfo was run at local time {}".format(utc_dt.astimezone().strftime('%a %b %d %Y, %I:%M%p')))
 
-    print("\nThanks for using protinfo! It's free!\n")
+    print("\nThanks for using pinfo! It's free!\n")

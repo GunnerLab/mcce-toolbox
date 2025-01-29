@@ -17,6 +17,7 @@ def check_files_in_directories():
     all_pk_out_exists = True
     missing_step1_dirs = []
     completed_count = 0
+    completed_files = set()
 
     for subdir in subdirectories:
         subdir_path = os.path.join(current_dir, subdir)
@@ -39,9 +40,10 @@ def check_files_in_directories():
         step4_completed = all(files_status[file] for file in target_files)
         if step4_completed:
             completed_count += 1
+            completed_files.add(subdir)
 
         # Record the row for this directory
-        results.append([subdir] + ["Exists" if files_status[file] else "Missing" for file in target_files] + (["!"] if step4_completed else []))
+        results.append([subdir] + ["Exists" if files_status[file] else "Missing" for file in target_files] + (["!"] if step4_completed else [""]))
 
         # Track directories missing step1_out.pdb
         if not files_status.get("step1_out.pdb"):
@@ -73,6 +75,13 @@ def check_files_in_directories():
         if not files_status.get("pK.out"):
             all_pk_out_exists = False
 
+    # Write to book.txt
+    book_path = os.path.join(current_dir, "book.txt")
+    with open(book_path, 'w') as book_file:
+        for subdir in subdirectories:
+            if os.path.isfile(os.path.join(current_dir, subdir, "prot.pdb")):
+                book_file.write(subdir + ("   c" if subdir in completed_files else "") + "\n")
+
     # Calculate completion percentage
     total_dirs = len(results)
     completion_percentage = (completed_count / total_dirs) * 100 if total_dirs > 0 else 0
@@ -80,15 +89,16 @@ def check_files_in_directories():
     # Print percentage of completed rows
     print(f"Completion: {completion_percentage:.2f}%")
 
+    # Print results in column format with proper spacing
     if results:
-        col_widths = [max(len(row[i]) for row in ([["Directory"] + target_files + ["Status"]] + results)) for i in range(len(results[0]))]
+        col_widths = [max(len(str(row[i])) for row in ([["Directory"] + target_files + ["Status"]] + results)) for i in range(len(results[0]))]
     else:
         col_widths = [len(col) for col in ["Directory"] + target_files + ["Status"]]
 
     header = ["Directory"] + step_names + ["Status"]
     print(" ".join(header[i].ljust(col_widths[i]) for i in range(len(header))))
     for row in results:
-        print(" ".join(row[i].ljust(col_widths[i]) for i in range(len(row))))
+        print(" ".join(str(row[i]).ljust(col_widths[i]) for i in range(len(row))))
 
     # Report directories missing step1_out.pdb
     if missing_step1_dirs:

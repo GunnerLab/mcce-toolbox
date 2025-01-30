@@ -53,7 +53,12 @@ def prompt_and_cleanup(existing_dirs):
 
 def main():
     if len(sys.argv) < 2 or len(sys.argv) > 3:
-        print("Usage: python bench_bench_j.py <protein_files_or_directory> [<shell_script>]")
+
+        print("Bench Batch, or bb, accepts a file containing paths to protein files or a directory containing protein files. A shell script giving custom instructions for the bench batch may also be given. If custom instructions are not given, a default shell script will be created and executed.\n")
+
+        print("bb creates a file called book.txt listing working proteins. If book.txt exists prior to bb being executed, bb will read book.txt to know what runs to perform. In this way, a user may edit book.txt to run batches on a subset of desired proteins.\n")
+
+        print("Usage: python bb_v3.py <protein_files_or_directory> [<shell_script>]")
         sys.exit(1)
 
     input_path = sys.argv[1]
@@ -106,18 +111,28 @@ def main():
                         if os.path.isfile(file_path):
                             process_protein_file(file_path, script_path) # if so, process as usual
             
-            else: # maybe give option to go directly 
-                print("Aborting.")
-                sys.exit(1)
+                print("Bash script is being executed on directories existing in book.txt. You can double check processes are being executed by running command 'top', or by running 'current_progress.py'")
+
+                sys.exit(1) # conclude program upon beginning processing
+
+            else: 
+                response = input("Run bb directly from given protein list/directory, disregarding current book.txt? (yes/no)")
+
+                if response == "yes" or response == "y": 
+                        
+                    print("book.txt disregarded, resume bb as normal.")
+
+                else:
+
+                    print("Aborting.")
+
+                    sys.exit(1)
 
             # should have some more error messages on here
         
-            print("Bash script is being executed on directories existing in book.txt. You can double check processes are being executed by running command 'top', or by running 'current_progress.py'")
-
-            sys.exit(1) # conclude program 
             
-        else:
-
+        
+        else: # get rid of else so if book.txt is disregarded we end up down here anyways
             # write to the book list here
             with open('book.txt', 'w') as file:
                 file.write(book_list)
@@ -132,7 +147,7 @@ def main():
                     if os.path.isfile(file_path):
                         process_protein_file(file_path, script_path)
             else:
-                print("Aborting.")
+                print("Aborting. Edit book.txt to remove undesired proteins, and run bb again.")
                 sys.exit(1)
 
         if existing_dirs:

@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from collections import defaultdict
 
 def line_counter(file_data : str, source_mcce : bool = False) -> tuple:  
-    """Accepts a string of text and returns counts for # of waters and amino acids, counting them by the number of lines they appear in.
+    """Accepts a string of text and returns counts for # of waters, ligands, and amino acids
 
     Args:
         file_data (string): file data in text form
@@ -17,7 +17,7 @@ def line_counter(file_data : str, source_mcce : bool = False) -> tuple:
     waters = 0
     aa = 0
     non_aa = 0
-    ligand_names = []
+    ligands = set()
     amino_acids = set([
         'ALA', 'ARG', 'ASN', 'ASP', 'CYS', 'GLU', 'GLN', 'GLY', 'HIS', 'ILE',
         'LEU', 'LYS', 'MET', 'PHE', 'PRO', 'SER', 'THR', 'TRP', 'TYR', 'VAL'
@@ -28,13 +28,19 @@ def line_counter(file_data : str, source_mcce : bool = False) -> tuple:
         if " CA " in this_line and this_line.startswith("ATOM"):
             aa += 1
         if source_mcce == False: 
-            if this_line.startswith("HETATM") and "HOH" not in this_line:
-                ligand_names.append(this_line[17:29])
+            if this_line.startswith("HETATM") and "HOH" not in this_line:  # HETATM indicates ligand or non-protein molecule
+                res_name = this_line[17:20].strip()  # Residue name (ligand identifier)
+                chain_id = this_line[21].strip()  # Chain identifier
+                res_seq = this_line[22:26].strip()  # Residue sequence number
+                ligands.add((res_name, chain_id, res_seq)) # because set, only unique combinations are added
             if "HOH" in this_line and "HETATM" in this_line:
                 waters += 1
         else:
             if this_line.startswith("HETATM") and "HOH" not in this_line:
-                ligand_names.append(this_line[17:20])
+                res_name = this_line[17:20].strip()  # Residue name (ligand identifier)
+                chain_id = this_line[21].strip()  # Chain identifier
+                res_seq = this_line[22:29].strip()  # seq id is longer for step1_out
+                ligands.add((res_name, chain_id, res_seq)) # because set, only unique combinations are added
             if this_line.startswith('HETATM') and "HOH" in this_line and " O " in this_line:
                 waters += 1
         if this_line.startswith('HETATM') or this_line.startswith('ATOM'):
@@ -46,7 +52,7 @@ def line_counter(file_data : str, source_mcce : bool = False) -> tuple:
 
     # print("Non-amino acid residues are this many: " + str(non_aa))
 
-    return waters, ligand_names, aa
+    return waters, ligands, aa
 
 def display_table(data : list, graph_name : str = "Total", use_borders : bool = False) -> None:
     """Takes in a 3 x 3 list of data and outputs a nicely formatted table. Used to display amino acid, ligand, and water counts for the total PDB file and its chains.
@@ -118,7 +124,7 @@ def count_amino_acids(pdb_file):
 
     with open(pdb_file, 'r') as file:
         for line in file:
-            # Only process lines starting with 'ATOM'
+            # Only process lines starting with 'ATOM' with " CA " in them
             if line.startswith("ATOM") and " CA " in line:
                 res_name = line[17:20].strip()  # Residue name is in columns 18-20
                 for category, residues in amino_acid_classes.items():
@@ -150,110 +156,10 @@ def count_amino_acids(pdb_file):
         polarized_res = f"{polarized[i][0]}: {polarized[i][1]}" if i < len(polarized) else ""
         hydrophobic_res = f"{hydrophobic[i][0]}: {hydrophobic[i][1]}" if i < len(hydrophobic) else ""
 
-        print(f"{ionizable_res:<20}{polarized_res:<20}{hydrophobic_res:<20}")        
+        print(f"{ionizable_res:<20}{polarized_res:<20}{hydrophobic_res:<20}") 
 
-def parse_pdb_chains(pdb_file : str) -> list:
-    """Identifies and extracts individual chains from a PDB file.
+def parse_log_data(log_data : str) -> tuple:
 
-    Args:
-        pdb_file (str): Path to the PDB file.
-
-    Returns:
-        list: A list of strings, each containing the data for one chain."""
-    
-    chains = {}
-
-    try:
-        with open(pdb_file, 'r') as file:
-            for line in file:
-                if line.startswith(('ATOM', 'HETATM')):
-                    chain_id = line[21]  # Chain identifier is in column 22 (0-indexed: 21)
-                    if chain_id not in chains:
-                        chains[chain_id] = []
-                    chains[chain_id].append(line)
-
-        # Convert the chains dictionary to a list of strings
-        chain_data = ["".join(chains[chain_id]) for chain_id in chains]
-
-        return chain_data, list(chains.keys()) # return the chains, and a list of the chains' names
-
-    except FileNotFoundError:
-        print(f"Error: File '{pdb_file}' not found.")
-        return []
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return []
-
-if __name__ == "__main__":
-
-    try:
-        input_file = sys.argv[1] # take the first terminal argument after the Python script is called. WHAT IF FILE NOT LOWERCASE? Include option to turn the .lower() off
-        if ".pdb" not in input_file: # will work whether or not the user includes .pdb
-            input_file = input_file + ".pdb"
-    except IndexError:
-        print("\nPlease include the PDB file after the executable, e.g. 'ProtInfo_J.py 4lzt.pdb'. This is case sensitive.\n")
-        raise SystemExit() # just quit the program
-
-    # maybe include multiple model warning- MCCE expects 1 model pdb file
-
-    try:
-        with open(input_file, 'r') as file:  # for how many waters, ligands, aa's, were in protein file
-            data = file.read()
-
-        with open('step1_out.pdb', 'r') as file:  # for how many waters, ligands, aa's, post-processing
-            mcce_data = file.read()
-
-        with open('run1.log', 'r') as file:  # helps identify where changes have occurred
-            log_data = file.read()
-
-    except FileNotFoundError:
-        print(f"\nProtInfo requires {input_file}, its associated, run1.log, and step1_out.pdb in the current directory.\n")
-        raise SystemExit()
-
-    # get HOH, ligand names, and amino acid counts
-    HOH_count, ligand_names, aa_count = line_counter(data) 
-    HOH_mcce_count, ligand_mcce_names, aa_mcce_count = line_counter(mcce_data, source_mcce=True)
-
-    print("\nNew ProtInfo by Jared Suchomel, with contributions by Marilyn Gunner, Cat Chenal, and Junjun Mao! It's still in progress!\n")
-    print("### For input file " + input_file + ", we find:\n")
-
-    count_amino_acids(input_file)
-
-    # format the data for the function to pick up (maybe make this part of an Object)
-    interior_data = [
-        [str(aa_count), str(aa_mcce_count), str(abs(aa_count - aa_mcce_count))],
-        [str(len(set(ligand_names))), str(len(set(ligand_mcce_names))), str(abs(len(set(ligand_names)) - len(set(ligand_mcce_names))))],
-        [str(HOH_count), str(HOH_mcce_count), str(abs(HOH_count - HOH_mcce_count))],
-    ]
-
-    chains, chain_labels = parse_pdb_chains(input_file)
-    print(f"\n### The PDB file contains {len(chains)} chain(s).")
-
-    display_table(interior_data)
-
-    if len(chains) > 1:
-
-        mcce_chains, _ = parse_pdb_chains('step1_out.pdb')
-
-        for i, chain in enumerate(chains, start=1):
-        
-            print("") # formatting assistance
-
-            HOH_chain_count, ligand_chain_names, aa_chain_count = line_counter(chain) 
-            HOH_mcce_chain_count, ligand_chain_mcce_names, aa_mcce_chain_count = line_counter(mcce_chains[i - 1], source_mcce=True) # adjust to 0-indexed
-            # water count not happening properly for different chains for mcce_chains?
-
-            # there has to be a better way to do this
-            chain_data = [
-                [str(aa_chain_count), str(aa_mcce_chain_count), str(abs(aa_chain_count - aa_mcce_chain_count))],
-                [str(len(set(ligand_chain_names))), str(len(set(ligand_chain_mcce_names))), str(abs(len(set(ligand_chain_mcce_names)) - len(set(ligand_chain_names))))],
-                [str(HOH_chain_count), str(HOH_mcce_chain_count), str(abs(HOH_chain_count - HOH_mcce_chain_count))],
-            ]
-            display_table(chain_data, graph_name="Chain " + str(chain_labels[i - 1])) # again, adjust to 0-indexed
-
-    print("\nResidues are stripped if surface exposed. The percent exposure limit may be edited in '00always_needed.tpl'") # appears to be 00always_needed.tpl, so give the pathway to it
-
-    log_data = log_data.splitlines()
     rules = {} # dictionary to contain rules and examples for how molecules are renamed
     err_top_files = ""
     how_many_atoms_change = 0
@@ -261,12 +167,12 @@ if __name__ == "__main__":
     NTR_line = ""
     CTR_line = ""
     prox_ligands = ""
+    log_data = log_data.splitlines()
 
     for line in log_data:
 
         if "Distance below bond threshold" in line:
             prox_ligands += "   " + line + "\n"
-
         if "Labeling" in line and "NTR" in line:
             NTR_line += line + "\n" # account for multiple NTR changes
         if "Labeling" in line and "NTG" in line:
@@ -302,6 +208,133 @@ if __name__ == "__main__":
         if "Missing" in line and "detected" not in line: 
             missing_atoms += 1
 
+    return NTR_line, CTR_line, missing_atoms, how_many_atoms_change, rules, prox_ligands, err_top_files
+
+def parse_pdb_chains(pdb_file : str) -> list:
+    """Identifies and extracts individual chains from a PDB file.
+
+    Args:
+        pdb_file (str): Path to the PDB file.
+
+    Returns:
+        list: A list of strings, each containing the data for one chain."""
+    
+    chains = {}
+
+    try:
+        with open(pdb_file, 'r') as file:
+            for line in file:
+                if line.startswith(('ATOM', 'HETATM')):
+                    chain_id = line[21]  # Chain identifier is in column 22 (0-indexed: 21)
+                    if chain_id not in chains:
+                        chains[chain_id] = []
+                    chains[chain_id].append(line)
+
+        # Convert the chains dictionary to a list of strings
+        chain_data = ["".join(chains[chain_id]) for chain_id in chains]
+
+        return chain_data, list(chains.keys()) # return the chains, and a list of the chains' names
+
+    except FileNotFoundError:
+        print(f"Error: File '{pdb_file}' not found.")
+        return []
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return []
+
+def count_ligands_by_chain(ligands, file_name):
+    chain_ligands = defaultdict(lambda: defaultdict(int))
+    
+    for ligand, chain, _ in ligands:
+        chain_ligands[chain][ligand] += 1
+    
+    for chain, ligand_counts in chain_ligands.items():
+        print(f"\n      Ligand counts for chain {chain}, in {file_name}:")
+        for ligand, count in ligand_counts.items():
+            print(f"          {ligand}: {count}")
+    
+def closer(): 
+
+    utc_dt = datetime.now(timezone.utc)
+    print("\npinfo was run at local time {}".format(utc_dt.astimezone().strftime('%a %b %d %Y, %I:%M%p')))
+
+    print("\nThanks for using protinfo! It's free!\n")
+
+if __name__ == "__main__":
+
+    try:
+        input_file = sys.argv[1] # take the first terminal argument after the Python script is called. WHAT IF FILE NOT LOWERCASE? Include option to turn the .lower() off
+        if ".pdb" not in input_file: # will work whether or not the user includes .pdb
+            input_file = input_file + ".pdb"
+    except IndexError:
+        print("\nPlease include the PDB file after the executable, e.g. 'ProtInfo_J.py 4lzt.pdb'. This is case-sensitive.\n")
+        raise SystemExit() # just quit the program
+
+    # maybe include multiple model warning- MCCE expects 1 model pdb file
+
+    try:
+        with open(input_file, 'r') as file:  # for how many waters, ligands, aa's, were in protein file
+            data = file.read()
+
+        with open('step1_out.pdb', 'r') as file:  # for how many waters, ligands, aa's, post-processing
+            mcce_data = file.read()
+
+        with open('run1.log', 'r') as file:  # helps identify where changes have occurred
+            log_data = file.read()
+
+    except FileNotFoundError:
+        print(f"\nProtInfo requires {input_file}, its associated, run1.log, and step1_out.pdb in the current directory.\n")
+        raise SystemExit()
+
+    # print("\nOutputting protinfo to 'protinfo2_output.txt'.\n")
+
+    # get HOH, ligand names, and amino acid counts
+    HOH_count, ligand_names, aa_count = line_counter(data) 
+    HOH_mcce_count, ligand_mcce_names, aa_mcce_count = line_counter(mcce_data, source_mcce=True)
+    ligand_count = len(ligand_names)
+    ligand_mcce_count = len(ligand_mcce_names)
+
+    print("\nNew ProtInfo by Jared Suchomel, with contributions by Marilyn Gunner, Cat Chenal, and Junjun Mao! It's still in progress!\n")
+    print("### For the input file " + input_file + " we find the following:\n")
+
+    count_amino_acids(input_file)
+
+    # format the data for the function to pick up
+    interior_data = [
+        [str(aa_count), str(aa_mcce_count), str(abs(aa_count - aa_mcce_count))],
+        [str(ligand_count), str(ligand_mcce_count), str(abs(ligand_count - ligand_mcce_count))],
+        [str(HOH_count), str(HOH_mcce_count), str(abs(HOH_count - HOH_mcce_count))],
+    ]
+
+    chains, chain_labels = parse_pdb_chains(input_file)
+    print(f"\n### The PDB file contains {len(chains)} chain(s).")
+
+    display_table(interior_data)
+
+    if len(chains) > 1:
+
+        mcce_chains, _ = parse_pdb_chains('step1_out.pdb')
+
+        for i, chain in enumerate(chains, start=1):
+        
+            print("") # formatting assistance
+
+            HOH_chain_count, ligand_chain_count, aa_chain_count = line_counter(chain) 
+            HOH_mcce_chain_count, ligand_mcce_chain_count, aa_mcce_chain_count = line_counter(mcce_chains[i - 1], source_mcce=True) # adjust to 0-indexed
+            # water count not happening properly for different chains for mcce_chains?
+
+            # there has to be a better way to do this
+            chain_data = [
+                [str(aa_chain_count), str(aa_mcce_chain_count), str(abs(aa_chain_count - aa_mcce_chain_count))],
+                [str(len(ligand_chain_count)), str(len(ligand_mcce_chain_count)), str(abs(len(ligand_chain_count) - len(ligand_mcce_chain_count)))],
+                [str(HOH_chain_count), str(HOH_mcce_chain_count), str(abs(HOH_chain_count - HOH_mcce_chain_count))],
+            ]
+            display_table(chain_data, graph_name="Chain " + str(chain_labels[i - 1])) # again, adjust to 0-indexed
+
+    print("\nThese residues are stripped if they are surface exposed. The percent exposure limit may be edited in '00always_needed.tpl'") # appears to be 00always_needed.tpl, so give the pathway to it
+
+    NTR_line, CTR_line, missing_atoms, how_many_atoms_change, rules, prox_ligands, err_top_files = parse_log_data(log_data)
+ 
     print("\nThese residues have been modified:")
     print("\n### TERMINI:\n")
     print(NTR_line + CTR_line)
@@ -312,12 +345,13 @@ if __name__ == "__main__":
         print("\nNo ligands detected.")
         print("\nA list of all atoms that are modified can be found in run1.log.")
         print("\n" + str(how_many_atoms_change) + " atoms changed.")
+        closer()
         raise SystemExit() # finish the program early
 
     print("\n### LIGANDS:")
 
-    print(f"\n      {input_file} LGDNAMES: " + str(set(ligand_names)))
-    print("\n      step1_out.pdb LGDNAMES: " + str(set(ligand_mcce_names)))
+    count_ligands_by_chain(ligand_names, input_file)
+    count_ligands_by_chain(ligand_mcce_names, "step1_out.pdb")
     print("\n" + prox_ligands)
 
     if bool(rules):
@@ -331,25 +365,26 @@ if __name__ == "__main__":
         print("\nA list of all atoms that are modified can be found in run1.log.\n")
 
     print(str(how_many_atoms_change) + " atoms changed.")
+    
+
+    all_ligand_names = ligand_names.union(ligand_mcce_names)
+    unique_ligand_names = [l[0] for l in all_ligand_names]    
+
 
     # find shared ligands between list of ligands, ligands w/o topology files
-    ligand_sifter = set((" ".join(ligand_names)).split()) & set(err_top_files.split()) 
-    ligand_names = [l[0:3] for l in ligand_names] 
-    ligand_top = set(ligand_names) - ligand_sifter
+    ligand_sifter = set(unique_ligand_names) & set(err_top_files.split()) # re-do this
+    ligand_top = set(unique_ligand_names) - ligand_sifter
 
     if ligand_top:
 
         print("\nWe have topology files for these ligands:")
-        print("      TPLFOUND: " + str(ligand_top))
+        print("\n      TPLFOUND: " + str(ligand_top))
 
     if err_top_files:
 
         print("\nWe do not have topology files for these ligands:")
-        print("\nNOTPL: ", end='')
+        print("\n      NOTPL: ", end='')
         print([line[-3:] for line in err_top_files.splitlines()]) # to be concise, only print the 3-char names of the residues
         print("\nYou can (1) remove them from the input pdb file; (2) run with all atoms with zero charge; (3) make a topology file using instructions in:")
 
-    utc_dt = datetime.now(timezone.utc)
-    print("\npinfo was run at local time {}".format(utc_dt.astimezone().strftime('%a %b %d %Y, %I:%M%p')))
-
-    print("\nThanks for using pinfo! It's free!\n")
+    closer()

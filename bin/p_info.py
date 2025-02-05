@@ -145,6 +145,11 @@ def count_amino_acids(pdb_file):
     polarized = sorted(categorized_counts["polarized"].items(), key=lambda x: x[1], reverse=True)
     hydrophobic = sorted(categorized_counts["hydrophobic"].items(), key=lambda x: x[1], reverse=True)
 
+    # Calculate total counts for each category
+    total_ionizable = sum(count for _, count in ionizable)
+    total_polarized = sum(count for _, count in polarized)
+    total_hydrophobic = sum(count for _, count in hydrophobic)
+
     # Determine the maximum number of rows
     max_rows = max(len(ionizable), len(polarized), len(hydrophobic))
 
@@ -157,6 +162,10 @@ def count_amino_acids(pdb_file):
         hydrophobic_res = f"{hydrophobic[i][0]}: {hydrophobic[i][1]}" if i < len(hydrophobic) else ""
 
         print(f"{ionizable_res:<20}{polarized_res:<20}{hydrophobic_res:<20}") 
+
+    print("-" * 51)
+    print(f"{'Total: ' + str(total_ionizable):<20}{'Total: ' + str(total_polarized):<20}{'Total: ' + str(total_hydrophobic):<20}")
+   
 
 def parse_log_data(log_data : str) -> tuple:
 
@@ -242,17 +251,32 @@ def parse_pdb_chains(pdb_file : str) -> list:
         print(f"An error occurred: {e}")
         return []
 
-def count_ligands_by_chain(ligands, file_name):
-    chain_ligands = defaultdict(lambda: defaultdict(int))
+def count_ligands_by_chain(ligands, file_name, full_prot=False):
     
-    for ligand, chain, _ in ligands:
-        chain_ligands[chain][ligand] += 1
+    if full_prot == False:
+
+        chain_ligands = defaultdict(lambda: defaultdict(int))
+
+        for ligand, chain, _ in ligands:
+            chain_ligands[chain][ligand] += 1
     
-    for chain, ligand_counts in chain_ligands.items():
-        print(f"\n      Ligand counts for chain {chain}, in {file_name}:")
-        for ligand, count in ligand_counts.items():
+        for chain, ligand_counts in chain_ligands.items():
+            print(f"\n      Ligand counts for chain {chain}, in {file_name}:")
+            for ligand, count in ligand_counts.items():
+                print(f"          {ligand}: {count}")
+    
+    else: # print total count 
+
+        total_ligands = defaultdict(int)
+        
+        for ligand, _, __ in ligands:
+            total_ligands[ligand] += 1
+
+        print(f"\n      Total ligand counts for {file_name}:")
+        for ligand, count in total_ligands.items():
             print(f"          {ligand}: {count}")
-    
+
+
 def closer(): 
 
     utc_dt = datetime.now(timezone.utc)
@@ -331,7 +355,7 @@ if __name__ == "__main__":
             ]
             display_table(chain_data, graph_name="Chain " + str(chain_labels[i - 1])) # again, adjust to 0-indexed
 
-    print("\nThese residues are stripped if they are surface exposed. The percent exposure limit may be edited in '00always_needed.tpl'") # appears to be 00always_needed.tpl, so give the pathway to it
+    print("\nWaters and ions are stripped if 5% of their Surface Area is exposed to Solvent. The SAS percent exposure limit may be edited in the input ‘run.prm’ parameter (H2O_SASCUTOFF)") # appears to be 00always_needed.tpl, so give the pathway to it
 
     NTR_line, CTR_line, missing_atoms, how_many_atoms_change, rules, prox_ligands, err_top_files = parse_log_data(log_data)
  
@@ -349,8 +373,10 @@ if __name__ == "__main__":
         raise SystemExit() # finish the program early
 
     print("\n### LIGANDS:")
-
+    
+    count_ligands_by_chain(ligand_names, input_file, full_prot=True)
     count_ligands_by_chain(ligand_names, input_file)
+    count_ligands_by_chain(ligand_mcce_names, "step1_out.pdb", full_prot=True)
     count_ligands_by_chain(ligand_mcce_names, "step1_out.pdb")
     print("\n" + prox_ligands)
 
@@ -385,6 +411,6 @@ if __name__ == "__main__":
         print("\nWe do not have topology files for these ligands:")
         print("\n      NOTPL: ", end='')
         print([line[-3:] for line in err_top_files.splitlines()]) # to be concise, only print the 3-char names of the residues
-        print("\nYou can (1) remove them from the input pdb file; (2) run with all atoms with zero charge; (3) make a topology file using instructions in:")
+        print("\nYou can remove them from the input pdb file if desired, and \n      (1) Continue as is: Atoms for these ligands are set to have zero charge and zero vdw in new.tpl. \n      (2) Repeat step1 with ligands removed: Remove ligands from input pdb and redo step1. \n      (3) Repeat step1 after creating topology files for ligands.")
 
     closer()

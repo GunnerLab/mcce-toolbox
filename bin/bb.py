@@ -24,6 +24,9 @@ __________                     .__      __________         __         .__       
 """
 
 def create_default_script():
+    """Creates a shell script to perform a dry, level 1, d=8 run with delphi.
+    Only run if a custom script is not given.
+    """
     script_path = "default_script.sh"
     with open(script_path, "w") as script_file:
         script_file.write(default_script_content)
@@ -31,6 +34,11 @@ def create_default_script():
     return script_path
 
 def modify_script_for_runprm(script_path):
+    """If run.prm.custom exists in PWD, modifies shell script to incorporate run.prm.custom.
+    
+    Args:
+    script_path -- the shell script containing the base instructions for the MCCE run.
+    """
     if os.path.exists("run.prm.custom"):
         with open(script_path, "r") as script_file:
             lines = script_file.readlines()
@@ -42,12 +50,25 @@ def modify_script_for_runprm(script_path):
                 else:
                     script_file.write(line) # hacky but will hopefully stop this function from wiping out the shell script
     
-def cleanup(d): # delete old stuff so mcce_stat doesn't get confused
+def cleanup(d):
+    """Used to delete occupied directories prior to running, to avoid confusion in case of errors and left-over data.
     
+    Args:
+    d -- a protein file, from which we remove the ".pdb" portion to access its directory.
+    """
+
     trash_file = Path(d).stem
     shutil.rmtree(trash_file)
 
 def process_protein_file(protein_path, script_path):
+    """Executes MCCE scripts on dir containing a protein path.
+    Makes sure all dirs contain their associated PDB file and run.prm.custom (if exists).
+
+    Args:
+    protein_path -- path to the protein to be run
+    script_path -- path to the script 
+    """
+
     protein_name = os.path.splitext(os.path.basename(protein_path))[0]
     protein_dir = os.path.abspath(protein_name)
 
@@ -75,6 +96,7 @@ def process_protein_file(protein_path, script_path):
     os.system(f"cd {protein_dir} && bash ../{script_path} > /dev/null 2>&1 &")
    
 def should_process_protein(protein_name):
+    """Reads book.txt for c and x to check if should process this protein."""
     if os.path.exists("book.txt"):
         with open("book.txt", "r") as book_file:
             for line in book_file:

@@ -39,8 +39,13 @@ def modify_script_for_runprm(script_path):
                 if any(cmd in line for cmd in ["step1.py", "step2.py", "step3.py", "step4.py"]) and " -load_runprm run.prm.custom" not in line:
                     line = line.strip() + " -load_runprm run.prm.custom\n"
                     script_file.write(line)
-    else:
-        return False
+                else:
+                    script_file.write(line) # hacky but will hopefully stop this function from wiping out the shell script
+    
+def cleanup(d): # delete old stuff so mcce_stat doesn't get confused
+    
+    trash_file = Path(d).stem
+    shutil.rmtree(trash_file)
 
 def process_protein_file(protein_path, script_path):
     protein_name = os.path.splitext(os.path.basename(protein_path))[0]
@@ -81,7 +86,7 @@ def should_process_protein(protein_name):
 def main():
     if len(sys.argv) < 2 or len(sys.argv) > 3:
 
-        print("Usage: bb_v3.py <protein_files_or_directory> [<shell_script>]")
+        print("Usage: bb.py <protein_files_or_directory> [<shell_script>]")
         sys.exit(1)
 
     if sys.argv[1] == "--help":
@@ -90,7 +95,7 @@ def main():
 
         print("bb creates a file called book.txt listing working proteins. If book.txt exists prior to bb being executed, bb will read book.txt to know what runs to perform. In this way, a user may edit book.txt to run batches on a subset of desired proteins.\n")
 
-        print("Usage: bb_v3.py <protein_files_or_directory> [<shell_script>]")
+        print("Usage: bb.py <protein_files_or_directory> [<shell_script>]")
 
         sys.exit(1)
 
@@ -152,7 +157,6 @@ def main():
                 sys.exit(1)
 
             if Path("run.prm.custom").is_file():
-
                 print("\nrun.prm.custom found! The given shell script will be overwritten to read from run.prm.custom.")
 
             # LIST ALL SETTINGS, run.prm, extra.tpl, shell script, directories to be used, etc.
@@ -169,7 +173,9 @@ def main():
                         
                         file_path = os.path.join(input_path, filename)
                         if os.path.isfile(file_path):
+                            cleanup(file_path)
                             process_protein_file(file_path, script_path) # if so, process as usual
+                            print("Processing " + file_path + "...")
 
         else: 
             # write to the book list here
@@ -177,9 +183,11 @@ def main():
                 file.write(book_list)
 
             print("\nNew book.txt created. You can remove protein files to be run by editing book.txt if desired, and resume by running bb again. ")
-            if existing_dirs:
-                print("Existing directories include [INSERT LIST OF PRE-EXISTING DIRECTORIES]. If the run proceeds these directories will be emptied and replaced with information from the new run. ")
-            # LIST ALL SETTINGS, run.prm, extra.tpl, shell script, directories to be used, etc.
+
+            print("These proteins will be run:\n\n" + book_list +  "Pre-existing directories for these proteins will be emptied and replaced with information from the new run. ")
+            
+            if Path("run.prm.custom").is_file():
+                print("\nrun.prm.custom found! The given shell script will be overwritten to read from run.prm.custom.")
 
             response = input("Run MCCE with the current settings? (yes/y)").strip().lower()
             if response == "yes" or response == "y":
@@ -187,6 +195,7 @@ def main():
                 for filename in os.listdir(input_path): # check if filename is also in book.txt 
                     file_path = os.path.join(input_path, filename)
                     if os.path.isfile(file_path):
+                        cleanup(filename)
                         process_protein_file(file_path, script_path)
                         print("Processing " + file_path + "...")
             else:

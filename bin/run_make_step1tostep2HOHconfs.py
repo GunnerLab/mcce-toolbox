@@ -8,10 +8,16 @@ Created on Feb 11 01:25:00 2025
 import os
 import shutil
 import subprocess
+import argparse
+
+parser = argparse.ArgumentParser(description="Generate water conformers for an oxygen atom of PDB file.")
+parser.add_argument("input_pdb", type=str, help="The input step1_out.pdb file containing the oxygen atom.")
+parser.add_argument("-N", type=int, default=25, help="Number of water conformers to generate (default: 25).")
+args = parser.parse_args()
 
 input_pdb = "step1_out.pdb"
 output_pdb = "HOH_step2_out.pdb"
-num_conformers = 25  # Change this if needed
+num_conformers = args.N  # Change this if needed
 
 # Initialize list for storing water molecule info
 water_molecules = []

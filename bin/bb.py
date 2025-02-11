@@ -152,7 +152,7 @@ def main():
 
             file_path = os.path.join(input_path, filename)
 
-            if os.path.isfile(file_path):
+            if os.path.isfile(file_path) and filename.lower().endswith('.pdb'): # ONLY process PDB files
                 protein_name = os.path.splitext(os.path.basename(file_path))[0]
                 book_list += protein_name + "\n" # add to the book list
 
@@ -195,7 +195,7 @@ def main():
                         
                         file_path = os.path.join(input_path, filename)
                         if os.path.isfile(file_path):
-                            cleanup(file_path)
+                            # cleanup(file_path)
                             process_protein_file(file_path, script_path) # if so, process as usual
                             print("Processing " + file_path + "...")
 

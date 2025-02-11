@@ -217,7 +217,7 @@ def main():
                 for filename in os.listdir(input_path): # check if filename is also in book.txt 
                     file_path = os.path.join(input_path, filename)
                     if os.path.isfile(file_path):
-                        cleanup(filename)
+                        # cleanup(filename) # presents issues at present
                         process_protein_file(file_path, script_path)
                         print("Processing " + file_path + "...")
             else:

@@ -24,7 +24,7 @@ args = parser.parse_args()
 # Read the input PDB file to extract the oxygen atom coordinates and the ChainRes_ID
 with open(args.input_pdb) as file:
     for line in file:
-        if line.startswith("ATOM") and line[17:20].strip() == "HOH" and line[12:16].strip() == "O":
+        if line.startswith("HETATM") and line[17:20].strip() == "HOH" and line[12:16].strip() == "O":
             newline = line.strip().split()
             x = float(line[30:38])
             y = float(line[38:46])
@@ -137,7 +137,7 @@ with open("HOH_confs.pdb", 'w') as file:
         AtomH1 = '{:07.3f}'.format(H1[0])+" "+'{:07.3f}'.format(H1[1])+" "+'{:07.3f}'.format(H1[2])
         AtomH2 = '{:07.3f}'.format(H2[0])+" "+'{:07.3f}'.format(H2[1])+" "+'{:07.3f}'.format(H2[2])
 
-        file.write("ATOM      1  O   HOH "+ChainRes_ID+""+'{:03}'.format(i+1)+" "+AtomO+ "   1.520      -0.800      01O000M000"+"\n")
-        file.write("ATOM      2  H1  HOH "+ChainRes_ID+""+'{:03}'.format(i+1)+" "+AtomH1+"   1.100       0.400      01O000M000"+"\n")
-        file.write("ATOM      3  H2  HOH "+ChainRes_ID+""+'{:03}'.format(i+1)+" "+AtomH2+"   1.100       0.400      01O000M000"+"\n")
+        file.write("HETATM    1  O   HOH "+ChainRes_ID+""+'{:03}'.format(i+1)+" "+AtomO+ "   1.520      -0.800      01O000M000"+"\n")
+        file.write("HETATM    2  H1  HOH "+ChainRes_ID+""+'{:03}'.format(i+1)+" "+AtomH1+"   1.100       0.400      01O000M000"+"\n")
+        file.write("HETATM    3  H2  HOH "+ChainRes_ID+""+'{:03}'.format(i+1)+" "+AtomH2+"   1.100       0.400      01O000M000"+"\n")
 

@@ -19,7 +19,7 @@ water_molecules = []
 # Read input PDB file and extract water molecules (oxygen atoms)
 with open(input_pdb) as file:
     for line in file:
-        if line.startswith("ATOM") and line[17:20].strip() == "HOH" and line[12:16].strip() == "O":
+        if line.startswith("HETATM") and line[17:20].strip() == "HOH" and line[12:16].strip() == "O":
             resi     = line[17:20]  # Residue
             chain_id = line[21]     # Chain ID
             res_num  = line[22:26]  # Residue number
@@ -46,7 +46,7 @@ for resi, chain_id, res_num in water_molecules:
         with open(input_pdb) as file:
             for line in file:
                 if (
-                    line.startswith("ATOM")
+                    line.startswith("HETATM")
                     and line[17:20].strip() == resi
                     and line[12:16].strip() == "O"
                     and line[21] == chain_id

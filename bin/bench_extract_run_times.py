@@ -9,6 +9,9 @@ import os
 import pandas as pd
 import argparse
 
+NON_CHARGE_CONFORMERS = ["ALA BCR BCT_OG CYD CYL ILE LEU MEL NTG NTR PHE PRO TRP VAL"]
+flag = False
+
 def extract_run_times(runs_folder):
     # Initialize an empty list to store data
     data = []
@@ -74,8 +77,10 @@ def extract_run_times(runs_folder):
                         residue_name = line[17:20].strip()  # Residue name
                         if residue_name == "HOH":  # Count water molecules
                             water_molecules.add((chain_id, residue_seq, residue_name))
-                        else:  # Count non-protein molecules
-                            non_protein_molecules.add((chain_id, residue_seq, residue_name))
+                        # else:  # Count non-protein molecules (conformers)
+                        #    non_protein_molecules.add((chain_id, residue_seq, residue_name))
+                        elif residue_name not in NON_CHARGE_CONFORMERS:  # Count non-protein molecules (conformers) ADJUSTED TO DISINCLUDE ZERO-CHARGE CONFORMERS
+                            non_protein_molecules.add((chain_id, residue_seq, residue_name)) # doesn't change anything?!?
 
             # Read the head1.lst file to count number of non-surface water molecules
             if os.path.isfile(head1_lst_file):
@@ -138,6 +143,8 @@ def extract_run_times(runs_folder):
     with open('run_times.txt', 'w') as f:
         f.write(df.to_string(index=False))
     print(f"Run times saved to 'run_times.txt'.")
+
+    print(flag)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Extract run times and rot_stat from run.log files.")

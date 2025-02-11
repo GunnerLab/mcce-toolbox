@@ -11,11 +11,11 @@ import subprocess
 import argparse
 
 parser = argparse.ArgumentParser(description="Generate water conformers for an oxygen atom of PDB file.")
-parser.add_argument("input_pdb", type=str, help="The input step1_out.pdb file containing the oxygen atom.")
+parser.add_argument("-input_pdb", type=str, default="step1_out.pdb", help="The input step1_out.pdb file containing the oxygen atom.")
 parser.add_argument("-N", type=int, default=25, help="Number of water conformers to generate (default: 25).")
 args = parser.parse_args()
 
-input_pdb = "step1_out.pdb"
+input_pdb = args.input_pdb 
 output_pdb = "HOH_step2_out.pdb"
 num_conformers = args.N  # Change this if needed
 

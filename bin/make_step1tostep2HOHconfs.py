@@ -50,11 +50,11 @@ with open(args.input_pdb) as file:
 
 # Calculate the hydrogen positions for N conformers of the water molecule
 # bond_length =   0.96 # The typical bond length for an oxygen-hydrogen bond in a water molecule
-# bond_angle  = 109.5  # The typical bond angle for a water molecule
+# bond_angle  = 104.5  # The typical bond angle for a water molecule
 
 with open("HOH_confs.pdb", 'w') as file:
     for i in range(args.N):
-        def add_Hs(O_coord, bond_length=0.96, bond_angle=109.5):
+        def add_Hs(O_coord, bond_length=0.96, bond_angle=104.5):
             """Add two hydrogen atoms to a PDB file with an oxygen atom."""
 
             # Add first hydrogen atom randomly within a spherical radius of 1 angstrom

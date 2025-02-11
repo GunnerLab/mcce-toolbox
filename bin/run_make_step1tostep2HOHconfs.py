@@ -10,14 +10,14 @@ import shutil
 import subprocess
 import argparse
 
-parser = argparse.ArgumentParser(description="Generate water conformers for an oxygen atom of PDB file.")
-parser.add_argument("-input_pdb", type=str, default="step1_out.pdb", help="The input step1_out.pdb file containing the oxygen atom.")
+parser = argparse.ArgumentParser(description="Generate water conformers for water oxygen atoms in a PDB file (default: MCCE step1_out.pdb).")
+parser.add_argument("-input_pdb", type=str, default="step1_out.pdb", help="The input PDB file containing water oxygen atoms (default: MCCE step1_out.pdb.")
 parser.add_argument("-N", type=int, default=25, help="Number of water conformers to generate (default: 25).")
 args = parser.parse_args()
 
 input_pdb = args.input_pdb 
 output_pdb = "HOH_step2_out.pdb"
-num_conformers = args.N  # Change this if needed
+num_conformers = args.N
 
 # Initialize list for storing water molecule info
 water_molecules = []
@@ -26,6 +26,7 @@ water_molecules = []
 with open(input_pdb) as file:
     for line in file:
         if line.startswith("HETATM") and line[17:20].strip() == "HOH" and line[12:16].strip() == "O":
+            O_atom   = line[12:16]  # Oxygen Atom
             resi     = line[17:20]  # Residue
             chain_id = line[21]     # Chain ID
             res_num  = line[22:26]  # Residue number
@@ -43,18 +44,17 @@ for resi, chain_id, res_num in water_molecules:
     dir_name = f"temp_HOH_confs/{resi}_{chain_id}{res_num}"
     if os.path.exists(dir_name):
        shutil.rmtree(dir_name)  # Remove existing directory
-    os.makedirs(dir_name)  # Create new directory
-
-    temp_pdb = f"{dir_name}/{resi}_{chain_id}{res_num}.pdb"
+    os.makedirs(dir_name)       # Create new directory
 
     # Extract specific water molecule to a temporary file
+    temp_pdb = f"{dir_name}/{resi}_{chain_id}{res_num}.pdb"
     with open(temp_pdb, "w") as temp_file:
         with open(input_pdb) as file:
             for line in file:
                 if (
                     line.startswith("HETATM")
-                    and line[17:20].strip() == resi
                     and line[12:16].strip() == "O"
+                    and line[17:20].strip() == resi
                     and line[21] == chain_id
                     and line[22:26].strip() == res_num
                 ):
@@ -76,7 +76,12 @@ with open(output_pdb, "w") as outfile:
             with open(confs_pdb_file) as infile:
                 outfile.write(infile.read())
 
+# Check if output file is non-empty before printing
+if os.path.exists(output_pdb) and os.path.getsize(output_pdb) > 0:
+    print(f"✅ Final output written to {output_pdb}")
+else:
+    print("❌ Error: Final output PDB file is empty!")
+
 # Clean up the temporary files
 shutil.rmtree("temp_HOH_confs")
-print(f"Final output written to {output_pdb}")
 

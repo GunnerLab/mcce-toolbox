@@ -111,8 +111,8 @@ with open("HOH_confs.pdb", 'w') as file:
             HOHangle = np.degrees(np.arccos(np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))))
             h1_L = np.linalg.norm(np.array(O_coord) - np.array(H1_coord))
             h2_L = np.linalg.norm(np.array(O_coord) - np.array(H2_coord))
-            H1 = ['{:08.3f}'.format(H1_coord[0]), '{:08.3f}'.format(H1_coord[1]), '{:08.3f}'.format(H1_coord[2])]
-            H2 = ['{:08.3f}'.format(H2_coord[0]), '{:08.3f}'.format(H2_coord[1]), '{:08.3f}'.format(H2_coord[2])]
+            H1 = ['{:07.3f}'.format(H1_coord[0]), '{:07.3f}'.format(H1_coord[1]), '{:07.3f}'.format(H1_coord[2])]
+            H2 = ['{:07.3f}'.format(H2_coord[0]), '{:07.3f}'.format(H2_coord[1]), '{:07.3f}'.format(H2_coord[2])]
 
             print("HOH_{} --> Angle = {}, O-H1 = {}, O-H2 = {}, H1 = {}, H2 = {}".format('{:03d}'.format(i+1), '{:.1f}'.format(HOHangle),
                                                                                          '{:.2f}'.format(h1_L), '{:.2f}'.format(h2_L),
@@ -133,11 +133,19 @@ with open("HOH_confs.pdb", 'w') as file:
         H2 = [h2_x, h2_y, h2_z]
 
         # Write pdb
-        AtomO  = '{:08.3f}'.format(O[0])+""+'{:08.3f}'.format(O[1])+""+'{:08.3f}'.format(O[2])
-        AtomH1 = '{:08.3f}'.format(H1[0])+""+'{:08.3f}'.format(H1[1])+""+'{:08.3f}'.format(H1[2])
-        AtomH2 = '{:08.3f}'.format(H2[0])+""+'{:08.3f}'.format(H2[1])+""+'{:08.3f}'.format(H2[2])
+        #AtomO  = '{:07.3f}'.format(O[0])+""+'{:07.3f}'.format(O[1])+""+'{:07.3f}'.format(O[2])
+        #AtomH1 = '{:07.3f}'.format(H1[0])+""+'{:07.3f}'.format(H1[1])+""+'{:07.3f}'.format(H1[2])
+        #AtomH2 = '{:07.3f}'.format(H2[0])+""+'{:07.3f}'.format(H2[1])+""+'{:07.3f}'.format(H2[2])
+        AtomO  = "{:8.3f}{:8.3f}{:8.3f}".format(O[0], O[1], O[2])
+        AtomH1 = "{:8.3f}{:8.3f}{:8.3f}".format(H1[0], H1[1], H1[2])
+        AtomH2 = "{:8.3f}{:8.3f}{:8.3f}".format(H2[0], H2[1], H2[2])
 
-        file.write("HETATM    1  O   HOH "+ChainRes_ID+""+'{:03}'.format(i+1)+" "+AtomO+ "   1.520      -0.800      01O000M000"+"\n")
-        file.write("HETATM    2  H1  HOH "+ChainRes_ID+""+'{:03}'.format(i+1)+" "+AtomH1+"   1.100       0.400      01O000M000"+"\n")
-        file.write("HETATM    3  H2  HOH "+ChainRes_ID+""+'{:03}'.format(i+1)+" "+AtomH2+"   1.100       0.400      01O000M000"+"\n")
+        #file.write("HETATM    1  O   HOH "+ChainRes_ID+""+'{:03}'.format(i+1)+" "+AtomO+ "  1.520      -0.800      01O000M000"+"\n")
+        #file.write("HETATM    2  H1  HOH "+ChainRes_ID+""+'{:03}'.format(i+1)+" "+AtomH1+"  1.100       0.400      01O000M000"+"\n")
+        #file.write("HETATM    3  H2  HOH "+ChainRes_ID+""+'{:03}'.format(i+1)+" "+AtomH2+"  1.100       0.400      01O000M000"+"\n")
+        file.write("HETATM    1  O   HOH {}{:03}{}".format(ChainRes_ID, i+1, AtomO)  + "   1.520      -0.800      01O000M000\n")
+        file.write("HETATM    2  H1  HOH {}{:03}{}".format(ChainRes_ID, i+1, AtomH1) + "   1.100       0.400      01O000M000\n")
+        file.write("HETATM    3  H2  HOH {}{:03}{}".format(ChainRes_ID, i+1, AtomH2) + "   1.100       0.400      01O000M000\n")
+
+ 
 

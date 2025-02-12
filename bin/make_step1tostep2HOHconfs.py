@@ -133,9 +133,9 @@ with open("HOH_confs.pdb", 'w') as file:
         H2 = [h2_x, h2_y, h2_z]
 
         # Write pdb
-        AtomO  = '{:08.3f}'.format(O[0])+" "+'{:08.3f}'.format(O[1])+" "+'{:08.3f}'.format(O[2])
-        AtomH1 = '{:08.3f}'.format(H1[0])+" "+'{:08.3f}'.format(H1[1])+" "+'{:08.3f}'.format(H1[2])
-        AtomH2 = '{:08.3f}'.format(H2[0])+" "+'{:08.3f}'.format(H2[1])+" "+'{:08.3f}'.format(H2[2])
+        AtomO  = '{:08.3f}'.format(O[0])+""+'{:08.3f}'.format(O[1])+""+'{:08.3f}'.format(O[2])
+        AtomH1 = '{:08.3f}'.format(H1[0])+""+'{:08.3f}'.format(H1[1])+""+'{:08.3f}'.format(H1[2])
+        AtomH2 = '{:08.3f}'.format(H2[0])+""+'{:08.3f}'.format(H2[1])+""+'{:08.3f}'.format(H2[2])
 
         file.write("HETATM    1  O   HOH "+ChainRes_ID+""+'{:03}'.format(i+1)+" "+AtomO+ "   1.520      -0.800      01O000M000"+"\n")
         file.write("HETATM    2  H1  HOH "+ChainRes_ID+""+'{:03}'.format(i+1)+" "+AtomH1+"   1.100       0.400      01O000M000"+"\n")

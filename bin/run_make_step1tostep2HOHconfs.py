@@ -12,7 +12,7 @@ import argparse
 
 parser = argparse.ArgumentParser(description="Generate water conformers for water oxygen atoms in a PDB file (default: MCCE step1_out.pdb).")
 parser.add_argument("-input_pdb", type=str, default="step1_out.pdb", help="The input PDB file containing water oxygen atoms (default: MCCE step1_out.pdb.")
-parser.add_argument("-N", type=int, default=25, help="Number of water conformers to generate (default: 25).")
+parser.add_argument("-N",         type=int, default=25, help="Number of water conformers to generate (default: 25).")
 args = parser.parse_args()
 
 input_pdb = args.input_pdb 
@@ -26,10 +26,11 @@ water_molecules = []
 with open(input_pdb) as file:
     for line in file:
         if line.startswith("HETATM") and line[17:20].strip() == "HOH" and line[12:16].strip() == "O":
-            O_atom   = line[12:16]  # Oxygen Atom
-            resi     = line[17:20]  # Residue
-            chain_id = line[21]     # Chain ID
-            res_num  = line[22:26]  # Residue number
+            resi     = line[17:20].strip()  # Residue
+            chain_id = line[21].strip()     # Chain ID
+            res_num  = line[22:26].strip().zfill(4) #Residue Number 
+            water = resi + " " + chain_id + res_num
+            print(water)
             water_molecules.append((resi, chain_id, res_num))
 
 # Ensure unique water molecules
@@ -55,8 +56,8 @@ for resi, chain_id, res_num in water_molecules:
                     line.startswith("HETATM")
                     and line[12:16].strip() == "O"
                     and line[17:20].strip() == resi
-                    and line[21] == chain_id
-                    and line[22:26].strip() == res_num
+                    and line[21].strip()    == chain_id
+                    and line[22:26].strip().zfill(4) == res_num
                 ):
                     temp_file.write(line)
 

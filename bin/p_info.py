@@ -253,28 +253,31 @@ def parse_pdb_chains(pdb_file : str) -> list:
 
 def count_ligands_by_chain(ligands, file_name, full_prot=False):
     
-    if full_prot == False:
+    if ligands: # only bother printing anything if the ligand set is non-empty
 
-        chain_ligands = defaultdict(lambda: defaultdict(int))
+        if full_prot == False:
 
-        for ligand, chain, _ in ligands:
-            chain_ligands[chain][ligand] += 1
+            chain_ligands = defaultdict(lambda: defaultdict(int))
+
+            for ligand, chain, _ in ligands:
+                chain_ligands[chain][ligand] += 1
+
+            # below portion should print ONLY if there are multiple chains.    
+            for chain, ligand_counts in chain_ligands.items():
+                print(f"\n      Ligand counts for chain {chain}, in {file_name}:")
+                for ligand, count in ligand_counts.items():
+                    print(f"          {ligand}: {count}")
     
-        for chain, ligand_counts in chain_ligands.items():
-            print(f"\n      Ligand counts for chain {chain}, in {file_name}:")
-            for ligand, count in ligand_counts.items():
-                print(f"          {ligand}: {count}")
-    
-    else: # print total count 
+        else: # print total count 
 
-        total_ligands = defaultdict(int)
+            total_ligands = defaultdict(int)
         
-        for ligand, _, __ in ligands:
-            total_ligands[ligand] += 1
+            for ligand, _, __ in ligands:
+                total_ligands[ligand] += 1
 
-        print(f"\n      Total ligand counts for {file_name}:")
-        for ligand, count in total_ligands.items():
-            print(f"          {ligand}: {count}")
+            print(f"\n      Total ligand counts for {file_name}:")
+            for ligand, count in total_ligands.items():
+                print(f"          {ligand}: {count}")
 
 
 def closer(): 
@@ -319,7 +322,7 @@ if __name__ == "__main__":
     ligand_mcce_count = len(ligand_mcce_names)
 
     print("\nNew ProtInfo by Jared Suchomel, with contributions by Marilyn Gunner, Cat Chenal, and Junjun Mao! It's still in progress!\n")
-    print("### For the input file " + input_file + " we find the following:\n")
+    print("### For the input " + input_file + ":\n")
 
     count_amino_acids(input_file)
 
@@ -331,7 +334,7 @@ if __name__ == "__main__":
     ]
 
     chains, chain_labels = parse_pdb_chains(input_file)
-    print(f"\n### The PDB file contains {len(chains)} chain(s).")
+    print(f"\n### The PDB file has {len(chains)} chain(s).")
 
     display_table(interior_data)
 
@@ -345,8 +348,6 @@ if __name__ == "__main__":
 
             HOH_chain_count, ligand_chain_count, aa_chain_count = line_counter(chain) 
             HOH_mcce_chain_count, ligand_mcce_chain_count, aa_mcce_chain_count = line_counter(mcce_chains[i - 1], source_mcce=True) # adjust to 0-indexed
-            # water count not happening properly for different chains for mcce_chains?
-
             # there has to be a better way to do this
             chain_data = [
                 [str(aa_chain_count), str(aa_mcce_chain_count), str(abs(aa_chain_count - aa_mcce_chain_count))],
@@ -357,6 +358,8 @@ if __name__ == "__main__":
 
     print("\nWaters and ions are stripped if 5% of their Surface Area is exposed to Solvent. The SAS percent exposure limit may be edited in the input ‘run.prm’ parameter (H2O_SASCUTOFF)") # appears to be 00always_needed.tpl, so give the pathway to it
 
+    # NEED TO DETAIL WHAT IONS SPECIFICALLY ARE STRIPPED, INCLUDE EXPLICIT LIST
+
     NTR_line, CTR_line, missing_atoms, how_many_atoms_change, rules, prox_ligands, err_top_files = parse_log_data(log_data)
  
     print("\nThese residues have been modified:")
@@ -364,9 +367,9 @@ if __name__ == "__main__":
     print(NTR_line + CTR_line)
     print(str(missing_atoms) + " missing atoms added. This number includes atoms relabeled as NTR, or CTR. See run1.log for full list.")
 
-    if not ligand_names: # if ligand name list is empty, skip ligands
+    if not ligand_mcce_names: # if ligand name list is empty, skip ligands
 
-        print("\nNo ligands detected.")
+        print("\nNo ligands detected in step1_out.")
         print("\nA list of all atoms that are modified can be found in run1.log.")
         print("\n" + str(how_many_atoms_change) + " atoms changed.")
         closer()
@@ -391,20 +394,17 @@ if __name__ == "__main__":
         print("\nA list of all atoms that are modified can be found in run1.log.\n")
 
     print(str(how_many_atoms_change) + " atoms changed.")
-    
 
-    all_ligand_names = ligand_names.union(ligand_mcce_names)
-    unique_ligand_names = [l[0] for l in all_ligand_names]    
-
+    unique_ligand_names = [l[0] for l in ligand_mcce_names]    
 
     # find shared ligands between list of ligands, ligands w/o topology files
-    ligand_sifter = set(unique_ligand_names) & set(err_top_files.split()) # re-do this
+    ligand_sifter = set(unique_ligand_names) & set(err_top_files.split()) # re-do this, need to make it so we're only examining ligands from step1_out. We don't care about ligands only in ori final
     ligand_top = set(unique_ligand_names) - ligand_sifter
 
     if ligand_top:
 
         print("\nWe have topology files for these ligands:")
-        print("\n      TPLFOUND: " + str(ligand_top))
+        print("\n      TPLFOUND: " + str(ligand_top)) # ONLY BOTHER WITH THIS IF WE HAVE LIGANDS
 
     if err_top_files:
 

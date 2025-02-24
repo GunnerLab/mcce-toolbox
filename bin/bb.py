@@ -14,10 +14,10 @@ step4.py --xts
 """
 
 # uses grafitti font from https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Bench%20Batch%20v.1
-ascii_art_open = """
+ascii_art_open = r"""
 __________                     .__      __________         __         .__               ____ 
 \______   \ ____   ____   ____ |  |__   \______   \_____ _/  |_  ____ |  |__   ___  __ /_   |
- |    |  _// __ \ /    \_/ ___\|  |  \   |    |  _/\__  \|_  __\/ ___\|  |  \  \  \/ /  |   |
+ |    |  _// __ \ /    \_/ ___\|  |  \   |    |  _/\__  \\_  __\/ ___\|  |  \  \  \/ /  |   |
  |    |   \  ___/|   |  \  \___|   Y  \  |    |   \ / __ \|  | \  \___|   Y  \  \   /   |   |
  |______  /\___  >___|  /\___  >___|  /  |______  /(____  /__|  \___  >___|  /   \_/ /\ |___|
         \/     \/     \/     \/     \/          \/      \/          \/     \/        \/      
@@ -49,17 +49,7 @@ def modify_script_for_runprm(script_path):
                     script_file.write(line)
                 else:
                     script_file.write(line) # hacky but will hopefully stop this function from wiping out the shell script
-    
-def cleanup(d):
-    """Used to delete occupied directories prior to running, to avoid confusion in case of errors and left-over data.
-    
-    Args:
-    d -- a protein file, from which we remove the ".pdb" portion to access its directory.
-    """
-
-    trash_file = Path(d).stem
-    shutil.rmtree(trash_file)
-
+   
 def process_protein_file(protein_path, script_path):
     """Executes MCCE scripts on dir containing a protein path.
     Makes sure all dirs contain their associated PDB file and run.prm.custom (if exists).
@@ -182,7 +172,7 @@ def main():
                 print("\nrun.prm.custom found! The given shell script will be overwritten to read from run.prm.custom.")
 
             # LIST ALL SETTINGS, run.prm, extra.tpl, shell script, directories to be used, etc.
-            response = input("Run MCCE with the current settings? (yes/y)").strip().lower() 
+            response = input("Run MCCE with the current settings? (yes/y/no)").strip().lower() 
             
             # should empty protein file prior to processing so mcce_stat works properly
 
@@ -195,9 +185,14 @@ def main():
                         
                         file_path = os.path.join(input_path, filename)
                         if os.path.isfile(file_path):
-                            # cleanup(file_path)
                             process_protein_file(file_path, script_path) # if so, process as usual
                             print("Processing " + file_path + "...")
+
+                print("\nBash script is being executed in each directory. You can double check processes are being executed by running command 'top', or by running 'current_progress.py'")
+            
+            else:
+                print("\nAborting MCCE")
+                sys.exit(1)
 
         else: 
             # write to the book list here
@@ -211,15 +206,16 @@ def main():
             if Path("run.prm.custom").is_file():
                 print("\nrun.prm.custom found! The given shell script will be overwritten to read from run.prm.custom.")
 
-            response = input("Run MCCE with the current settings? (yes/y)").strip().lower()
+            response = input("Run MCCE with the current settings? (yes/y/no)").strip().lower()
             if response == "yes" or response == "y":
                 modify_script_for_runprm(script_path)
                 for filename in os.listdir(input_path): # check if filename is also in book.txt 
                     file_path = os.path.join(input_path, filename)
                     if os.path.isfile(file_path):
-                        # cleanup(filename) # presents issues at present
                         process_protein_file(file_path, script_path)
                         print("Processing " + file_path + "...")
+
+                print("\nBash script is being executed in each directory. You can double check processes are being executed by running command 'top', or by running 'current_progress.py'")
             else:
                 print("\nAborting MCCE")
                 sys.exit(1)
@@ -228,8 +224,6 @@ def main():
 
         print(f"\nError: '{input_path}' is neither a file nor a directory.")
         sys.exit(1)
-
-    print("\nBash script is being executed in each directory. You can double check processes are being executed by running command 'top', or by running 'current_progress.py'")
 
 if __name__ == "__main__":
     main()

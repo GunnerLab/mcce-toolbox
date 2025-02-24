@@ -3,6 +3,11 @@ import requests
 import csv
 import os
 import time
+import json
+
+def get_script_directory():
+    print(os.path.dirname(os.path.abspath(__file__)))
+    return os.path.dirname(os.path.abspath(__file__))
 
 def fetch_protein_sequence(pdb_code):
     url = "https://data.rcsb.org/graphql"
@@ -79,7 +84,7 @@ def read_existing_results(filename):
             existing_data[row[0]] = row[1:]
     return existing_data
 
-def append_results(filename, protein_code, similar_codes):
+def append_results(filename, json_filename, protein_code, similar_codes):
     existing_data = read_existing_results(filename)
     if protein_code in existing_data:
         print(f"{protein_code} already processed. Skipping.")
@@ -91,13 +96,28 @@ def append_results(filename, protein_code, similar_codes):
             writer.writerow(["Protein Code", "Similar Structures"])
         writer.writerow([protein_code] + similar_codes)
 
+    json_data = {}
+    if os.path.exists(json_filename):
+        with open(json_filename, 'r') as json_file:
+            try:
+                json_data = json.load(json_file)
+            except json.JSONDecodeError:
+                json_data = {}
+    
+    json_data[protein_code] = similar_codes
+    with open(json_filename, 'w') as json_file:
+        json.dump(json_data, json_file, indent=4)    
+    
 def main():
+    script_dir = get_script_directory()
+    csv_filename = os.path.join(script_dir, "sim_structs.csv")
+    json_filename = os.path.join(script_dir, "sim_structs.json")
     protein_code = input("Enter a 4-letter protein code: ").strip().upper()
     print(f"Fetching similar structures for {protein_code}...")
     
     similar_codes = fetch_similar_structures(protein_code)
     if similar_codes:
-        append_results("sim_structs.csv", protein_code, similar_codes)
+        append_results(csv_filename, json_filename, protein_code, similar_codes)
         print(f"Results saved for {protein_code}.")
     else:
         print(f"No matches found for {protein_code}.")

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import sys
 import re
+import subprocess
 from datetime import datetime, timezone
 from collections import defaultdict
 
@@ -308,12 +309,31 @@ if __name__ == "__main__":
 
         with open('run1.log', 'r') as file:  # helps identify where changes have occurred
             log_data = file.read()
+        
+        print(f"\nFound {input_file}, its associated run1.log, and step1_out.pdb in the current directory.\n\n")
 
     except FileNotFoundError:
-        print(f"\nProtInfo requires {input_file}, its associated, run1.log, and step1_out.pdb in the current directory.\n")
-        raise SystemExit()
+        print(f"\nProtInfo requires {input_file}, its associated run1.log, and step1_out.pdb in the current directory.\n\nRunning step1.py...")
+        
+        script_path = subprocess.run(["which", "step1.py"], capture_output=True, text=True).stdout.strip()
+
+        with open("run1.log", "w") as log_file:
+            process = subprocess.run([script_path, input_file], stdout=log_file, stderr=subprocess.STDOUT, text=True)
 
     # print("\nOutputting protinfo to 'protinfo2_output.txt'.\n")
+
+    try:
+        with open(input_file, 'r') as file:  # for how many waters, ligands, aa's, were in protein file
+            data = file.read()
+
+        with open('step1_out.pdb', 'r') as file:  # for how many waters, ligands, aa's, post-processing
+            mcce_data = file.read()
+
+        with open('run1.log', 'r') as file:  # helps identify where changes have occurred
+            log_data = file.read()
+
+    except FileNotFoundError:
+        print("Step 1 failed! Check files and try again, or report an error.")
 
     # get HOH, ligand names, and amino acid counts
     HOH_count, ligand_names, aa_count = line_counter(data) 

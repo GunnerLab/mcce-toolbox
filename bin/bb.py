@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 import os
 import sys
+import requests
 import shutil
+import json
 from pathlib import Path
 
 default_script_content = """#!/bin/bash
@@ -50,6 +52,67 @@ def modify_script_for_runprm(script_path):
                 else:
                     script_file.write(line) # hacky but will hopefully stop this function from wiping out the shell script
    
+def fetch_protein(pdb_id):
+    """Fetches a protein file from rcsb.org, creates a directory named after the protein, and symbolically links it to prot.pdb.
+    
+    Args:
+    pdb_id -- four-character code corresponding to the protein in the database
+    """
+    pdb_id = pdb_id.lower()
+    
+    if len(pdb_id) == 4: # only make server request if pdb code is possible
+        url = f'https://files.rcsb.org/download/{pdb_id}.pdb'
+        response = requests.get(url)
+    else:
+        print("\nCode must be four letters!")
+        return False
+
+    if response.status_code == 200:
+        os.makedirs(pdb_id, exist_ok=True)
+        pdb_path = os.path.join(pdb_id, f'{pdb_id}.pdb')
+        with open(pdb_path, 'wb') as file:
+            file.write(response.content)
+        
+        link_path = os.path.join(pdb_id, 'prot.pdb')
+        if os.path.exists(link_path) or os.path.islink(link_path):
+            os.remove(link_path)
+        os.symlink(pdb_path, link_path)
+        
+        print(f"\nProtein {pdb_id.upper()} downloaded successfully.")
+        return True
+    else:
+        print(f"\nProtein {pdb_id.upper()} not found in RCSB database.")
+        return False
+
+def get_random_protein_codes(protein_code, num_samples=10):
+    """Returns up to `num_samples` random similar protein codes for a given entry in the JSON file.
+
+    Args: 
+    protein_code -- what protein code are we getting similar structs for
+    num_samples -- how many sim_structs do we want to compare against?
+    """
+
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    json_filename = os.path.join(script_dir, "sim_structs.json")
+
+    if not os.path.exists(json_filename):
+        print("Error: JSON file not found.")
+        return []
+
+    with open(json_filename, 'r') as json_file:
+        try:
+            data = json.load(json_file)
+        except json.JSONDecodeError:
+            print("Error: JSON file is corrupted or empty.")
+            return []
+
+    if protein_code not in data:
+        print(f"Protein code {protein_code} not found in the dataset.")
+        return []
+
+    similar_proteins = data[protein_code]
+    return random.sample(similar_proteins, min(num_samples, len(similar_proteins)))
+
 def process_protein_file(protein_path, script_path):
     """Executes MCCE scripts on dir containing a protein path.
     Makes sure all dirs contain their associated PDB file and run.prm.custom (if exists).
@@ -105,13 +168,35 @@ def main():
 
         print("\nBench Batch, or bb, accepts a file containing paths to protein files or a directory containing protein files. A shell script giving custom instructions for the bench batch may also be given. If custom instructions are not given, a default shell script will be created and executed.\n")
 
-        print("bb creates a file called book.txt listing working proteins. If book.txt exists prior to bb being executed, bb will read book.txt to know what runs to perform. In this way, a user may edit book.txt to run batches on a subset of desired proteins.\n")
+        print("bb creates a file called book.txt listing working proteins. If book.txt exists prior to bb being executed, bb will read book.txt to know what runs to perform. In this way, a user may edit book.txt to run batches on a subset of desired proteins. File corresponding to lines containing ' c' or ' x' will not be run during a bench batch.\n")
 
         print("Usage: bb.py <protein_files_or_directory> [<shell_script>]")
 
         sys.exit(1)
 
-    input_path = sys.argv[1]
+    if sys.argv[1] == "rcsb":
+
+        prot_code = input("Please input a four letter RCSB protein code (e.g. 4lzt): ").strip().lower()
+
+        # maybe add a portion here if 4lzt already exists in a directory?
+
+        if fetch_protein(prot_code):
+
+            print("Download successful!") # obv needs to be added to, can't stop here
+            
+            get_random_protein_codes(prot_code)
+
+            sys.exit(1) 
+
+        else:
+
+            print("\nCode not found at RCSB.org. Aborting.")
+            sys.exit(1)
+
+    else:
+
+        input_path = sys.argv[1]
+    
     script_path = sys.argv[2] if len(sys.argv) == 3 else create_default_script()
     
     # if file named custom.run.prm exists in the present working directory, make a symbolic link to it in each protein directory, and add "-load_rpm custom.run.prm" to each step. 
@@ -160,6 +245,7 @@ def main():
             for line in reference_book.split("\n"):
                 if " c" not in line and " x" not in line:
                     prots_to_run += line + "\n"
+                    print(line)
 
             if prots_to_run:
                 print("These proteins will be run:\n\n" + prots_to_run +  "Pre-existing directories for these proteins will be emptied and replaced with information from the new run. ")
@@ -184,7 +270,7 @@ def main():
                     if should_process_protein(filename[0:-4]) == True: # is filename minus ".pdb" in book.txt?
                         
                         file_path = os.path.join(input_path, filename)
-                        if os.path.isfile(file_path):
+                        if os.path.isfile(file_path) and filename.lower().endswith('.pdb'):
                             process_protein_file(file_path, script_path) # if so, process as usual
                             print("Processing " + file_path + "...")
 
@@ -211,7 +297,7 @@ def main():
                 modify_script_for_runprm(script_path)
                 for filename in os.listdir(input_path): # check if filename is also in book.txt 
                     file_path = os.path.join(input_path, filename)
-                    if os.path.isfile(file_path):
+                    if os.path.isfile(file_path) and filename.lower().endswith('.pdb'):
                         process_protein_file(file_path, script_path)
                         print("Processing " + file_path + "...")
 

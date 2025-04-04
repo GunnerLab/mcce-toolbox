@@ -15,8 +15,8 @@ import argparse
 # Argument parser for input directory and residue pair file
 parser = argparse.ArgumentParser(description="Process hydrogen bond graph networks from run_detect_hbond.py output.")
 parser.add_argument("-i",         type=str, default="pdb_output_mc_hbonds", help="Input directory containing hbond text files (default: pdb_output_mc_hbonds)")
-parser.add_argument("-resi_list", type=str, help="File containing entry and exit residues of interest (format: XXXCYYYY).")
-parser.add_argument("-node_min",  type=int, default=2,         help="Minimum number of nodes in the graph to process (default: 2)")
+parser.add_argument("-resi_list", type=str,                                 help="File containing entry and exit residues of interest (format: XXXCYYYY).")
+parser.add_argument("-node_min",  type=int, default=2,                      help="Minimum number of nodes in the graph to process (default: 2)")
 args = parser.parse_args()
 
 # Get the input directory and check if it exists
@@ -186,7 +186,7 @@ def build_graph(ENTRY, EXIT, nodes, edges, output_file):
 # Main function to process all files and build graphs
 def process_directory(directory, entry_residues, exit_residues):
     files = glob.glob(os.path.join(directory, "*.txt"))  # Only get .txt files
-    files = [f for f in files if not f.endswith("blocking_file.txt")]
+    files = [f for f in files if not f.endswith("blocking.txt")]
 
     if not files:
         print(f"No valid hydrogen bond files found in '{directory}'.")

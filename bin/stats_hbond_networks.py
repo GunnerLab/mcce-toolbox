@@ -165,7 +165,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "input_dir",
         nargs="?",
-        default="pdb_output_mc_hbonds_networks",
+        default="ms_pdb_output_hbonds_networks",
         help="Directory containing network files (default: ms_pdb_output_hbonds_networks)"
     )
     parser.add_argument(

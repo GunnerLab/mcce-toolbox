@@ -96,10 +96,11 @@ def process_hbond_graph(file_path, entry_residues, exit_residues):
         nodes.update([donor, acceptor])  # Create nodes
         edges.append((donor, acceptor))  # Create edges
 
-        donor_residue_info = donor.split('_')[0]  # Extract the part before the conformer info
-        acceptor_residue_info = acceptor.split('_')[0]
+        donor_residue_info    = donor.rsplit('_', 1)[0]     # Extract the part before the conformer info
+        acceptor_residue_info = acceptor.rsplit('_', 1)[0]  # Extract the part before the conformer info
+        print(f"donor: {donor_residue_info}, acceptor: {acceptor_residue_info}")
 
-        donor_residue_name, donor_chain_id, donor_residue_number = parse_donoracceptor_info(donor_residue_info)
+        donor_residue_name,    donor_chain_id,    donor_residue_number    = parse_donoracceptor_info(donor_residue_info)
         acceptor_residue_name, acceptor_chain_id, acceptor_residue_number = parse_donoracceptor_info(acceptor_residue_info)
 
         # Match donor and acceptor residues against entry/exit residues

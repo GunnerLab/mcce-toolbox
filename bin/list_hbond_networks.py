@@ -98,7 +98,6 @@ def process_hbond_graph(file_path, entry_residues, exit_residues):
 
         donor_residue_info    = donor.rsplit('_', 1)[0]     # Extract the part before the conformer info
         acceptor_residue_info = acceptor.rsplit('_', 1)[0]  # Extract the part before the conformer info
-        print(f"donor: {donor_residue_info}, acceptor: {acceptor_residue_info}")
 
         donor_residue_name,    donor_chain_id,    donor_residue_number    = parse_donoracceptor_info(donor_residue_info)
         acceptor_residue_name, acceptor_chain_id, acceptor_residue_number = parse_donoracceptor_info(acceptor_residue_info)

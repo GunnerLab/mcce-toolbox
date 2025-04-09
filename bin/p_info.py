@@ -376,7 +376,7 @@ if __name__ == "__main__":
             ]
             display_table(chain_data, graph_name="Chain " + str(chain_labels[i - 1])) # again, adjust to 0-indexed
 
-    print("\nWaters and ions are stripped if 5% of their Surface Area is exposed to Solvent. The SAS percent exposure limit may be edited in the input ‘run.prm’ parameter (H2O_SASCUTOFF)") # appears to be 00always_needed.tpl, so give the pathway to it
+    print("\nWaters and ions are stripped if 5% of their Surface Area is exposed to Solvent. To modify SAS percent exposure, edit ‘run.prm’ parameter (H2O_SASCUTOFF).") # appears to be 00always_needed.tpl, so give the pathway to it
 
     # NEED TO DETAIL WHAT IONS SPECIFICALLY ARE STRIPPED, INCLUDE EXPLICIT LIST
 

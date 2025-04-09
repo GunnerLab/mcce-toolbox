@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Check if a file was provided
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <input_file.txt>"
+    exit 1
+fi
+
+# Get the input filename and extract the stem
+input_file="$1"
+output_file="${input_file%.txt}.csv"
+
+# Convert spaces or tabs to commas and write to output file
+awk '{gsub(/[[:space:]]+/, ","); print}' "$input_file" > "$output_file"
+
+echo "Converted $input_file to $output_file"
+

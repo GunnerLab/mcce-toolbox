@@ -282,10 +282,15 @@ if __name__ == "__main__":
 
     try:
         input_file = sys.argv[1] # take the first terminal argument after the Python script is called. WHAT IF FILE NOT LOWERCASE? Include option to turn the .lower() off
-        if ".pdb" not in input_file: # will work whether or not the user includes .pdb
+        if input_file == "-h":
+            print("p_info summarizes useful information about .pdb files, including residue, water, amino acid, and ligand counts.\n")
+            print("p_info reads MCCE created files and the chosen PDB file. If the desired files do not exist for the desired pdb file at runtime, p_info will run step 1 and create the files, then run as usual.\n")
+            print("Use like 'p_info 4lzt.pdb'. p_info expects that the file to-be-run be in the present working directory.")
+            sys.exit(1)
+        elif ".pdb" not in input_file: # will work whether or not the user includes .pdb
             input_file = input_file + ".pdb"
     except IndexError:
-        print("\nPlease include the PDB file after the executable, e.g. 'p_info 4lzt.pdb'. This is case-sensitive.\n")
+        print("\nPlease include the PDB file after the executable, e.g. 'p_info 4lzt.pdb'. This is case-sensitive. Use command 'p_info -h' for more help.\n")
         sys.exit(1) # just quit the program
 
     # maybe include multiple model warning- MCCE expects 1 model pdb file

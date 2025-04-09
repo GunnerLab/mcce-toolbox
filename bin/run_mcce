@@ -2,9 +2,23 @@
 
 # Check if a file is provided
 if [ "$#" -lt 1 ]; then
-    echo "Usage: $0 <file.pdb> [-dry] [-l 2] [-d N] [-s ngpb|zap]"
+    echo "Usage: $0 <file.pdb> [-dry] [-l 2] [-d N] [-s ngpb|zap] [-h]"
     exit 1
 fi
+
+for arg in "$@"; do
+    if [ "$arg" == "-h" ]; then
+        echo "Usage: $0 <file.pdb> [-dry] [-l 2] [-d N] [-s ngpb|zap]"
+        echo "Options:"
+        echo "  -h              Shows this help message."
+	echo "  -l [2/3]        Specifies level of conformer creation (level 1 is default)."
+        echo "  -d              Choose dielectric constant. 4 and 8 are standard choices."
+	echo "  -s              Choose Poisson-Boltzmann solver (ngpb/zap). DelPhi is default."
+	echo "  -dry            Delete any waters in the protein file during mcce_run."
+        # Add more options as needed
+        exit 0
+    fi
+done
 
 # Extract the file argument
 PDB_FILE="$1"

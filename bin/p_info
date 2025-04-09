@@ -51,17 +51,14 @@ def line_counter(file_data : str, source_mcce : bool = False) -> tuple:
                 # Count standard amino acids based on residue name
                 non_aa += 1
 
-    # print("Non-amino acid residues are this many: " + str(non_aa))
-
     return waters, ligands, aa
 
-def display_table(data : list, graph_name : str = "Total", use_borders : bool = False) -> None:
+def display_table(data : list, graph_name : str = "Total") -> None:
     """Takes in a 3 x 3 list of data and outputs a nicely formatted table. Used to display amino acid, ligand, and water counts for the total PDB file and its chains.
 
     Args:
         data (3 x 3 list): Path to the PDB file.
         graph_name (string): what the top-left of the graph says, change it for files with multiple chains
-        use_borders (bool): whether we want a border drawn around the table, or not
 
     Returns:
         list: A list of strings, each containing the data for one chain."""
@@ -79,24 +76,12 @@ def display_table(data : list, graph_name : str = "Total", use_borders : bool = 
 
     # Determine column widths
     col_widths = [max(len(str(row[col])) for row in table_data) for col in range(len(table_data[0]))]
-    if use_borders:
-        # Create a separator line
-        separator = '+' + '+'.join('-' * (width + 2) for width in col_widths) + '+'
 
-        # Build the table
-        table = [separator]
-        for row in table_data:
-            row_line = '|' + '|'.join(f" {str(row[col]).ljust(col_widths[col])} " for col in range(len(row))) + '|'
-            table.append(row_line)
-            table.append(separator)
-
-    else:
-
-        # Build the table without borders
-        table = []
-        for row in table_data:
-            row_line = '     '.join(f"{str(row[col]).ljust(col_widths[col])}" for col in range(len(row)))
-            table.append(row_line)
+    # Build the table without borders
+    table = []
+    for row in table_data:
+        row_line = '     '.join(f"{str(row[col]).ljust(col_widths[col])}" for col in range(len(row)))
+        table.append(row_line)
 
     # Print the table
     print('\n'.join(table))
@@ -253,7 +238,12 @@ def parse_pdb_chains(pdb_file : str) -> list:
         return []
 
 def count_ligands_by_chain(ligands, file_name, full_prot=False):
-    
+    """Print the type of ligands and how many there are.
+
+    Args:
+        ligands (list): 
+        pdb_file (str): Path to the PDB file."""
+
     if ligands: # only bother printing anything if the ligand set is non-empty
 
         if full_prot == False:
@@ -282,11 +272,11 @@ def count_ligands_by_chain(ligands, file_name, full_prot=False):
 
 
 def closer(): 
-
+    '''Close out function, give the current time.'''
     utc_dt = datetime.now(timezone.utc)
-    print("\npinfo was run at local time {}".format(utc_dt.astimezone().strftime('%a %b %d %Y, %I:%M%p')))
+    print("\np_info was run at local time {}".format(utc_dt.astimezone().strftime('%a %b %d %Y, %I:%M%p')))
 
-    print("\nThanks for using protinfo! It's free!\n")
+    print("\nThanks for using p_info! It's free!\n")
 
 if __name__ == "__main__":
 
@@ -295,12 +285,12 @@ if __name__ == "__main__":
         if ".pdb" not in input_file: # will work whether or not the user includes .pdb
             input_file = input_file + ".pdb"
     except IndexError:
-        print("\nPlease include the PDB file after the executable, e.g. 'ProtInfo_J.py 4lzt.pdb'. This is case-sensitive.\n")
-        raise SystemExit() # just quit the program
+        print("\nPlease include the PDB file after the executable, e.g. 'p_info 4lzt.pdb'. This is case-sensitive.\n")
+        sys.exit(1) # just quit the program
 
     # maybe include multiple model warning- MCCE expects 1 model pdb file
 
-    try:
+    try: 
         with open(input_file, 'r') as file:  # for how many waters, ligands, aa's, were in protein file
             data = file.read()
 
@@ -312,15 +302,13 @@ if __name__ == "__main__":
         
         print(f"\nFound {input_file}, its associated run1.log, and step1_out.pdb in the current directory.\n\n")
 
-    except FileNotFoundError:
-        print(f"\nProtInfo requires {input_file}, its associated run1.log, and step1_out.pdb in the current directory.\n\nRunning step1.py...")
+    except FileNotFoundError: # run step1.py if we don't have its product files
+        print(f"\np_info requires {input_file}, its associated run1.log, and step1_out.pdb in the current directory.\n\nRunning step1.py...")
         
         script_path = subprocess.run(["which", "step1.py"], capture_output=True, text=True).stdout.strip()
 
         with open("run1.log", "w") as log_file:
             process = subprocess.run([script_path, input_file], stdout=log_file, stderr=subprocess.STDOUT, text=True)
-
-    # print("\nOutputting protinfo to 'protinfo2_output.txt'.\n")
 
     try:
         with open(input_file, 'r') as file:  # for how many waters, ligands, aa's, were in protein file
@@ -341,7 +329,7 @@ if __name__ == "__main__":
     ligand_count = len(ligand_names)
     ligand_mcce_count = len(ligand_mcce_names)
 
-    print("\nNew ProtInfo by Jared Suchomel, with contributions by Marilyn Gunner, Cat Chenal, and Junjun Mao! It's still in progress!\n")
+    print("\np_info by Jared Suchomel, with contributions by Marilyn Gunner, Cat Chenal, and Junjun Mao! It's still in progress!\n")
     print("### For the input " + input_file + ":\n")
 
     count_amino_acids(input_file)
@@ -364,7 +352,7 @@ if __name__ == "__main__":
 
         for i, chain in enumerate(chains, start=1):
         
-            print("") # formatting assistance
+            print("") # formatting
 
             HOH_chain_count, ligand_chain_count, aa_chain_count = line_counter(chain) 
             HOH_mcce_chain_count, ligand_mcce_chain_count, aa_mcce_chain_count = line_counter(mcce_chains[i - 1], source_mcce=True) # adjust to 0-indexed
@@ -397,8 +385,8 @@ if __name__ == "__main__":
 
     print("\n### LIGANDS:")
     
-    count_ligands_by_chain(ligand_names, input_file, full_prot=True)
-    count_ligands_by_chain(ligand_names, input_file)
+    #count_ligands_by_chain(ligand_names, input_file, full_prot=True)
+    #count_ligands_by_chain(ligand_names, input_file)
     count_ligands_by_chain(ligand_mcce_names, "step1_out.pdb", full_prot=True)
     count_ligands_by_chain(ligand_mcce_names, "step1_out.pdb")
     print("\n" + prox_ligands)
@@ -408,7 +396,7 @@ if __name__ == "__main__":
         print("      The rules for changes, and examples:\n")
 
         for rule, example in rules.items():
-            # print(f"Rule:\n{rule}")
+
             print(f"      {example[0]} -> {example[1]}")
 
         print("\nA list of all atoms that are modified can be found in run1.log.\n")
@@ -424,13 +412,13 @@ if __name__ == "__main__":
     if ligand_top:
 
         print("\nWe have topology files for these ligands:")
-        print("\n      TPLFOUND: " + str(ligand_top)) # ONLY BOTHER WITH THIS IF WE HAVE LIGANDS
+        print("\n      TPLFOUND: " + str(ligand_top))
 
     if err_top_files:
 
         print("\nWe do not have topology files for these ligands:")
         print("\n      NOTPL: ", end='')
-        print([line[-3:] for line in err_top_files.splitlines()]) # to be concise, only print the 3-char names of the residues
+        print([line[-3:] for line in err_top_files.splitlines()]) # only print the 3-char names of the residues
         print("\nYou can remove them from the input pdb file if desired, and \n      (1) Continue as is: Atoms for these ligands are set to have zero charge and zero vdw in new.tpl. \n      (2) Repeat step1 with ligands removed: Remove ligands from input pdb and redo step1. \n      (3) Repeat step1 after creating topology files for ligands.")
 
     closer()

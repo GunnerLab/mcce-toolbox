@@ -185,8 +185,8 @@ def build_graph(ENTRY, EXIT, nodes, edges, output_file):
 
 # Main function to process all files and build graphs
 def process_directory(directory, entry_residues, exit_residues):
-    files = glob.glob(os.path.join(directory, "*.txt"))  # Only get .txt files
-    files = [f for f in files if not f.endswith("blocking.txt")]
+    files = glob.glob(os.path.join(directory, "*_hah.txt"))  # Only get .txt files
+    #files = [f for f in files if not f.endswith("blocking.txt")]
 
     if not files:
         print(f"No valid hydrogen bond files found in '{directory}'.")

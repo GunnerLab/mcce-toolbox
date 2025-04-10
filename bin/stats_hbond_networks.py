@@ -11,7 +11,6 @@ import math
 from collections import Counter, defaultdict
 
 def parse_network_file(filepath, node_min):
-    """Extract all valid networks (as node lists) from a given file."""
     networks = []
     with open(filepath) as f:
         for line in f:
@@ -24,7 +23,6 @@ def parse_network_file(filepath, node_min):
     return networks
 
 def print_and_write(output_file, text):
-    """Print to console and write to file."""
     print(text)
     output_file.write(text + '\n')
 
@@ -65,17 +63,7 @@ def main(input_dir, topnets, node_min, A, output_file):
 
         for idx, (network, count) in enumerate(top_networks, start=1):
             nodes = network.split(" -> ")
-            arrows = ["->"] * (len(nodes) - 1)
-
-            # Build network string and collect arrow positions
-            parts = [nodes[0]]
-            arrow_starts = []
-            for i in range(len(arrows)):
-                parts.append(f" {arrows[i]} {nodes[i + 1]}")
-                arrow_start_pos = sum(len(p) for p in parts[:-1]) + 1
-                arrow_starts.append(arrow_start_pos)
-            network_str = ''.join(parts)
-
+            network_str = " -> ".join(nodes)
             network_percentage = (count / total_files) * 100
             ratio = count / total_files
             if ratio == 1:
@@ -89,25 +77,10 @@ def main(input_dir, topnets, node_min, A, output_file):
             print_and_write(out_file, f"Network Rate & Energy: k = {k:.2e} /sec, E = {E:.2e} kcal/mol")
             print_and_write(out_file, f"Network: {network_str}")
 
-            # Build PW % line
-            pw_percents = []
-            for i in range(len(nodes) - 1):
-                pair = (nodes[i], nodes[i + 1])
-                percent = len(all_pairwise_presence[pair]) / total_files * 100
-                pw_percents.append(f"{percent:6.2f}%")
-
-            pw_line = [' '] * len(network_str)
-            for start, percent in zip(arrow_starts, pw_percents):
-                for j, ch in enumerate(percent):
-                    if 0 <= start + j < len(pw_line):
-                        pw_line[start + j - 1] = ch
-            print_and_write(out_file, "PW %:    " + ''.join(pw_line))
-
-            # Build Subnet % line
+            # Subnet %
             subnet_percents = []
-            for i in range(1, len(nodes)):
-                subnet_nodes = nodes[:i+1]
-                subnet_str = " -> ".join(subnet_nodes)
+            for i in range(1, len(nodes) + 1):
+                subnet_str = " -> ".join(nodes[:i])
                 count_subnet = sum(
                     any(subnet_str in net for net in nets)
                     for nets in file_networks_dict.values()
@@ -115,14 +88,34 @@ def main(input_dir, topnets, node_min, A, output_file):
                 percent = count_subnet / total_files * 100
                 subnet_percents.append(f"{percent:6.2f}%")
 
-            subnet_line = [' '] * len(network_str)
-            for start, percent in zip(arrow_starts, subnet_percents):
-                for j, ch in enumerate(percent):
-                    if 0 <= start + j < len(subnet_line):
-                        subnet_line[start + j - 1] = ch
-            print_and_write(out_file, "Subnet %:" + ''.join(subnet_line))
+            # Build Subnet % aligned to the right under each final node (excluding first)
+            node_positions = []
+            cursor = 0
+            for i, node in enumerate(nodes):
+                start_idx = network_str.find(node, cursor)
+                end_idx = start_idx + len(node)
+                node_positions.append(end_idx)
+                cursor = end_idx
 
-            # File list
+            subnet_line = [" "] * len(network_str)
+            for i in range(1, len(nodes)):  # skip the first node
+                subnet_str = subnet_percents[i]
+                # Align the subnet % to the right under the current node
+                end = node_positions[i]
+                pos = end  # right-aligned at the end of the node
+                pos = max(0, min(pos - len(subnet_str), len(subnet_line) - len(subnet_str)))
+                for j, ch in enumerate(subnet_str):
+                    subnet_line[pos + j] = ch
+
+            print_and_write(out_file, "Subnet %:" + "".join(subnet_line))
+
+            # PW %
+            print_and_write(out_file, "PW %:")
+            for i in range(len(nodes) - 1):
+                pair = (nodes[i], nodes[i + 1])
+                percent = len(all_pairwise_presence[pair]) / total_files * 100
+                print_and_write(out_file, f"      {nodes[i]} -> {nodes[i + 1]} : {percent:6.2f}%")
+
             print_and_write(out_file, f"\nFound in files: {', '.join(sorted(network_file_map[network]))}")
             print_and_write(out_file, f"{'-' * 200}\n")
 

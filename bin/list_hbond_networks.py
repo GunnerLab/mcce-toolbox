@@ -55,26 +55,29 @@ def parse_donoracceptor_info(residue_info):
 # Function to parse ENTRY/EXIT residues in the resi_list
 def read_residue_pairs(file_path):
     entry_residues_i = set()
-    exit_residues_i = set()
+    exit_residues_i  = set()
+
     with open(file_path, 'r') as file:
         lines = file.readlines()
 
         # Skip the header row (first line)
-        for line in lines[1:]:     # Start from the second line
-            parts = line.strip().split()
-            if len(parts) == 1:    # Entry residue only
-                entry_residues_i.add(parts[0])
-            elif len(parts) == 2:  # Entry and Exit residue
-                entry_residues_i.add(parts[0])
-                exit_residues_i.add(parts[1])
+        for line in lines[1:]:  # Start from the second line
+            # Extract the entry and exit residues based on character positions
+            entry_residue = line[:8].strip()     # ENTRY occupies characters 1-8 (0-7 in 0-indexed)
+            exit_residue =  line[11:19].strip()  # EXIT occupies characters 12-19 (11-18 in 0-indexed)
 
-    # Parse entry and exit residues
+            # If both residues are not empty, add them to respective sets
+            if entry_residue:
+                entry_residues_i.add(entry_residue)
+            if exit_residue:
+                exit_residues_i.add(exit_residue)
+
+    # Parse entry and exit residues (if any parsing is required)
     entry_residues = {parse_entryexit_info(residue) for residue in entry_residues_i}
-    exit_residues = {parse_entryexit_info(residue) for residue in exit_residues_i}
+    exit_residues  = {parse_entryexit_info(residue) for residue in exit_residues_i}
 
     return entry_residues, exit_residues
 
-# Function to process an individual hydrogen bond network file
 # Function to process an individual hydrogen bond network file
 def process_hbond_graph(file_path, entry_residues, exit_residues):
     with open(file_path, 'r') as file:

@@ -23,15 +23,15 @@ def parse_network_file(filepath, node_min):
                 networks.append(nodes)
     return networks
 
-def print_and_write(output_file, *args, **kwargs):
-    """Print to the console and write to the file simultaneously."""
-    print(*args, **kwargs)
-    output_file.write(args[0] + '\n')
+def print_and_write(output_file, text):
+    """Print to console and write to file."""
+    print(text)
+    output_file.write(text + '\n')
 
 def main(input_dir, topnets, node_min, A, output_file):
     all_networks = []
     all_pairwise_presence = defaultdict(set)
-    network_file_map = defaultdict(list)  # Mapping of networks to filenames
+    network_file_map = defaultdict(set)
 
     filenames = [f for f in os.listdir(input_dir)
                  if f.startswith("Paths_ms_pdb_") and f.endswith("_Resi-EntryToExit.txt")]
@@ -41,16 +41,24 @@ def main(input_dir, topnets, node_min, A, output_file):
         print_and_write(out_file, f"\nTotal microstate PDBs analyzed: {total_files}\n")
         print_and_write(out_file, f"Top {topnets} networks (with at least {node_min} nodes):\n")
 
+        file_networks_dict = {}
+
         for filename in filenames:
             full_path = os.path.join(input_dir, filename)
             file_networks = parse_network_file(full_path, node_min)
+            file_networks_strs = []
+
             for path_nodes in file_networks:
                 network_str = " -> ".join(path_nodes)
+                file_networks_strs.append(network_str)
                 all_networks.append(network_str)
-                network_file_map[network_str].append(filename)
+                network_file_map[network_str].add(filename)
+
                 for i in range(len(path_nodes) - 1):
                     pair = (path_nodes[i], path_nodes[i + 1])
                     all_pairwise_presence[pair].add(filename)
+
+            file_networks_dict[filename] = file_networks_strs
 
         network_counts = Counter(all_networks)
         top_networks = network_counts.most_common(topnets)
@@ -59,35 +67,29 @@ def main(input_dir, topnets, node_min, A, output_file):
             nodes = network.split(" -> ")
             arrows = ["->"] * (len(nodes) - 1)
 
-            # Build the formatted network string and track start positions of each "->"
+            # Build network string and collect arrow positions
             parts = [nodes[0]]
             arrow_starts = []
             for i in range(len(arrows)):
                 parts.append(f" {arrows[i]} {nodes[i + 1]}")
-                # Track where each "->" starts in the string
-                arrow_start_pos = sum(len(p) for p in parts[:-1]) + 1  # 1 space before "->"
+                arrow_start_pos = sum(len(p) for p in parts[:-1]) + 1
                 arrow_starts.append(arrow_start_pos)
             network_str = ''.join(parts)
 
-            # Calculate the percentage of microstate PDBs that have this fully connected network
             network_percentage = (count / total_files) * 100
-
-            # Define Arrhenius Rate Equation [ k = A·e**(-E / R·T) = 1.364·probability]:
-            # Calculate ratio for Energy and Rate
             ratio = count / total_files
             if ratio == 1:
                 E = 0
                 k = A
             else:
                 E = -1.364 * math.log10(ratio)
-                k = A * 10**(-E / 1.364)
+                k = A * 10 ** (-E / 1.364)
 
-            # Print and write the Count, Network rate and Energy, the Network, and files containing the Network
             print_and_write(out_file, f"{idx}. Count: {count} microstate PDBs ({network_percentage:6.2f}%) have this fully connected network.")
             print_and_write(out_file, f"Network Rate & Energy: k = {k:.2e} /sec, E = {E:.2e} kcal/mol")
             print_and_write(out_file, f"Network: {network_str}")
 
-            # Build aligned PW% line under each "->"
+            # Build PW % line
             pw_percents = []
             for i in range(len(nodes) - 1):
                 pair = (nodes[i], nodes[i + 1])
@@ -98,23 +100,40 @@ def main(input_dir, topnets, node_min, A, output_file):
             for start, percent in zip(arrow_starts, pw_percents):
                 for j, ch in enumerate(percent):
                     if 0 <= start + j < len(pw_line):
-                        pw_line[start + j] = ch
+                        pw_line[start + j - 1] = ch
+            print_and_write(out_file, "PW %:    " + ''.join(pw_line))
 
-            # Align PW% line with print prefix
-            prefix = f"{idx}"
-            print_and_write(out_file, "PW %:" + " " * (len(prefix) + 2) + ''.join(pw_line))
-            print_and_write(out_file, f"\nFound in files: {', '.join(network_file_map[network])}")
+            # Build Subnet % line
+            subnet_percents = []
+            for i in range(1, len(nodes)):
+                subnet_nodes = nodes[:i+1]
+                subnet_str = " -> ".join(subnet_nodes)
+                count_subnet = sum(
+                    any(subnet_str in net for net in nets)
+                    for nets in file_networks_dict.values()
+                )
+                percent = count_subnet / total_files * 100
+                subnet_percents.append(f"{percent:6.2f}%")
+
+            subnet_line = [' '] * len(network_str)
+            for start, percent in zip(arrow_starts, subnet_percents):
+                for j, ch in enumerate(percent):
+                    if 0 <= start + j < len(subnet_line):
+                        subnet_line[start + j - 1] = ch
+            print_and_write(out_file, "Subnet %:" + ''.join(subnet_line))
+
+            # File list
+            print_and_write(out_file, f"\nFound in files: {', '.join(sorted(network_file_map[network]))}")
             print_and_write(out_file, f"{'-' * 200}\n")
 
-    # Print location of the output file
     print(f"Results saved to: {output_file}\n")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Analyze network similarities in microstate PDB-associated files.")
     parser.add_argument("-input_dir", type=str,   default="ms_pdb_output_hbonds_networks", help="Directory containing network files (default: %(default)s)")
-    parser.add_argument("-topnets",   type=int,   default=5,      help="Number of top networks to display (default: %(default)s)")
-    parser.add_argument("-node_min",  type=int,   default=5,      help="Minimum number of nodes for networks to be considered (default: %(default)s)")
-    parser.add_argument("-A",         type=float, default=10**13, help="Pre-exponential factor (default: %(default)s)")
+    parser.add_argument("-topnets",   type=int,   default=5,                               help="Number of top networks to display (default: %(default)s)")
+    parser.add_argument("-node_min",  type=int,   default=5,                               help="Minimum number of nodes for networks to be considered (default: %(default)s)")
+    parser.add_argument("-A",         type=float, default=10**13,                          help="Pre-exponential factor (default: %(default)s)")
     args = parser.parse_args()
 
     output_file_name = f"MCCE-ms_hbond_network_stats_nodemin{args.node_min}.txt"

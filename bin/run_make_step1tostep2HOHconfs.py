@@ -10,9 +10,9 @@ import shutil
 import subprocess
 import argparse
 
-parser = argparse.ArgumentParser(description="Generate water conformers for water oxygen atoms in a PDB file (default: MCCE step1_out.pdb).")
-parser.add_argument("-input_pdb", type=str, default="step1_out.pdb", help="The input PDB file containing water oxygen atoms (default: MCCE step1_out.pdb.")
-parser.add_argument("-N",         type=int, default=25, help="Number of water conformers to generate (default: 25).")
+parser = argparse.ArgumentParser(description="Generate water conformers for water oxygen atoms in a PDB file. (default: MCCE step1_out.pdb)")
+parser.add_argument("-input_pdb", type=str, default="step1_out.pdb", help="The input PDB file containing water oxygen atoms. (default: %(default)s) ")
+parser.add_argument("-N",         type=int, default=25,              help="Number of water conformers to generate. (default: %(default)s)")
 args = parser.parse_args()
 
 input_pdb = args.input_pdb 
